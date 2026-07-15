@@ -693,11 +693,11 @@
         const getAPIUrl = () => {
             // For Netlify production
             if (window.location.hostname.includes('netlify.app')) {
-                return 'https://tuavec-backend.onrender.com/api';  // ← UPDATE THIS WITH YOUR RENDER URL
+                return 'https://tuavec.onrender.com/api';  // ← UPDATE THIS WITH YOUR RENDER URL
             }
             // For custom domain production
             if (window.location.hostname === 'tuavec.com' || window.location.hostname === 'www.tuavec.com') {
-                return 'https://tuavec-backend.onrender.com/api';  // ← UPDATE THIS WITH YOUR RENDER URL
+                return 'https://tuavec.onrender.com/api';  // ← UPDATE THIS WITH YOUR RENDER URL
             }
             // For local development
             return 'http://localhost:5000/api';
