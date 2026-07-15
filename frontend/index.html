@@ -1,9 +1,11 @@
-﻿<html lang="en"><head>
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Tu Avec Blog - Discover Thailand's culture, travel tips, and premium imports">
     <title>Tu Avec</title>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&amp;family=Poppins:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <style>
         :root {
@@ -1515,6 +1517,216 @@
             margin-bottom: 20px;
         }
 
+        /* ========== COMPREHENSIVE MOBILE FIXES ========== */
+        @media (max-width: 768px) {
+            /* Sidebars go full-width on mobile */
+            .sidebar { width: 100vw !important; right: -100vw !important; }
+            .sidebar.active { right: 0 !important; }
+
+            /* Modals slide up from bottom on mobile */
+            .modal { align-items: flex-end !important; padding: 0 !important; }
+            .modal-content {
+                padding: 24px 16px !important;
+                border-radius: 20px 20px 0 0 !important;
+                max-height: 92vh !important;
+                width: 100% !important;
+                max-width: 100% !important;
+            }
+
+            /* Product cards: 2 columns on phone */
+            .posts-grid {
+                grid-template-columns: repeat(2, 1fr) !important;
+                gap: 10px !important;
+            }
+            .product-card-image img { height: 160px; object-fit: cover; }
+            .product-title { font-size: 13px !important; }
+            .product-price { font-size: 16px !important; }
+            .product-excerpt { display: none; }
+            .product-card-content { padding: 10px !important; }
+
+            /* Form grids collapse to 1 column */
+            .form-grid { grid-template-columns: 1fr !important; }
+
+            /* Product detail modal */
+            #productModalBody > div { grid-template-columns: 1fr !important; }
+
+            /* Hero carousel */
+            .hero { height: 260px !important; }
+            .hero-content h1 { font-size: 22px !important; }
+            .hero-content p  { font-size: 13px !important; margin-bottom: 16px; }
+            .h-btn { padding: 10px 18px !important; font-size: 13px !important; }
+            .hero-nav { display: none !important; }
+
+            /* Flash sale section */
+            .flash-zone-hd { flex-wrap: wrap !important; gap: 8px !important; }
+            .flash-countdown { margin-left: 0 !important; }
+
+            /* Category nav scroll */
+            .category-nav-content { gap: 2px !important; }
+            .category-nav-link { padding: 8px 10px !important; font-size: 12px !important; }
+
+            /* Voucher cards narrower */
+            .v-card { flex: 0 0 180px !important; }
+
+            /* Cart item image smaller */
+            .cart-img { width: 60px !important; height: 60px !important; }
+
+            /* Summary rows */
+            .summary-row { font-size: 13px !important; }
+            .summary-row.total { font-size: 18px !important; }
+
+            /* Chat full-width */
+            .chat-window {
+                width: calc(100vw - 20px) !important;
+                right: -6px !important;
+                height: 70vh !important;
+            }
+
+            /* Login modal tabs */
+            .auth-tab-row { gap: 8px !important; }
+        }
+
+        @media (max-width: 380px) {
+            .posts-grid { grid-template-columns: 1fr !important; }
+            .flash-scroll-row .flash-mini-card { flex: 0 0 130px !important; }
+        }
+
+        /* ========== NOTIFICATION PANEL ========== */
+        .notif-panel {
+            position: fixed;
+            top: 70px;
+            right: 16px;
+            width: 340px;
+            background: var(--bg-card);
+            border: 1px solid rgba(183,110,121,0.2);
+            border-radius: 16px;
+            box-shadow: 0 12px 40px rgba(0,0,0,0.4);
+            z-index: 1050;
+            display: none;
+            flex-direction: column;
+            overflow: hidden;
+            max-height: 480px;
+        }
+        .notif-panel.active { display: flex; }
+        .notif-panel-hd {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 16px 18px;
+            border-bottom: 1px solid rgba(183,110,121,0.15);
+        }
+        .notif-panel-hd h3 { font-size: 15px; margin: 0; }
+        .notif-list { overflow-y: auto; flex: 1; }
+        .notif-item {
+            display: flex;
+            gap: 12px;
+            padding: 14px 16px;
+            border-bottom: 1px solid rgba(183,110,121,0.08);
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        .notif-item:hover { background: rgba(183,110,121,0.07); }
+        .notif-item.unread { background: rgba(183,110,121,0.05); }
+        .notif-icon {
+            width: 38px; height: 38px; border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 16px; flex-shrink: 0;
+        }
+        .ni-order  { background: rgba(76,175,80,.15);   color: var(--success); }
+        .ni-promo  { background: rgba(183,110,121,.15); color: var(--rose-gold); }
+        .ni-system { background: rgba(33,150,243,.15);  color: var(--info); }
+        .ni-warn   { background: rgba(255,152,0,.15);   color: var(--warning); }
+        .notif-body strong { display: block; font-size: 13px; font-weight: 600; margin-bottom: 3px; }
+        .notif-body span   { font-size: 12px; color: var(--text-muted); line-height: 1.4; }
+        .notif-time        { font-size: 11px; color: var(--text-muted); margin-top: 4px; display: block; }
+        .unread-dot {
+            width: 8px; height: 8px; border-radius: 50%;
+            background: var(--rose-gold); flex-shrink: 0; margin-top: 6px;
+        }
+        .notif-panel-footer {
+            padding: 12px 16px; border-top: 1px solid rgba(183,110,121,0.12);
+            text-align: center; font-size: 13px; color: var(--rose-gold); cursor: pointer;
+        }
+        .notif-panel-footer:hover { text-decoration: underline; }
+
+        /* ========== MESSAGES PANEL ========== */
+        .msg-panel {
+            position: fixed;
+            top: 70px;
+            right: 16px;
+            width: 340px;
+            background: var(--bg-card);
+            border: 1px solid rgba(183,110,121,0.2);
+            border-radius: 16px;
+            box-shadow: 0 12px 40px rgba(0,0,0,0.4);
+            z-index: 1050;
+            display: none;
+            flex-direction: column;
+            overflow: hidden;
+            max-height: 480px;
+        }
+        .msg-panel.active { display: flex; }
+        .msg-panel-hd {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 16px 18px;
+            border-bottom: 1px solid rgba(183,110,121,0.15);
+        }
+        .msg-panel-hd h3 { font-size: 15px; margin: 0; }
+        .msg-list { overflow-y: auto; flex: 1; }
+        .msg-item {
+            display: flex;
+            gap: 12px;
+            padding: 14px 16px;
+            border-bottom: 1px solid rgba(183,110,121,0.08);
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        .msg-item:hover { background: rgba(183,110,121,0.07); }
+        .msg-avatar {
+            width: 40px; height: 40px; border-radius: 50%;
+            background: linear-gradient(135deg, var(--rose-gold), var(--gold));
+            display: flex; align-items: center; justify-content: center;
+            font-size: 16px; font-weight: 700; color: white; flex-shrink: 0;
+        }
+        .msg-content strong { display: block; font-size: 13px; font-weight: 600; }
+        .msg-content span   { font-size: 12px; color: var(--text-muted); line-height: 1.4; display: -webkit-box; line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+        .msg-meta { font-size: 11px; color: var(--text-muted); margin-top: 4px; display: block; }
+        .msg-panel-footer {
+            padding: 12px 16px; border-top: 1px solid rgba(183,110,121,0.12);
+            text-align: center; font-size: 13px; color: var(--rose-gold); cursor: pointer;
+        }
+
+        /* ========== COUPON DISCOUNT APPLIED ========== */
+        .coupon-applied-row {
+            display: flex; justify-content: space-between;
+            font-size: 14px; margin-bottom: 10px; color: var(--success);
+        }
+        .remove-coupon-btn {
+            background: none; border: none; color: var(--error);
+            cursor: pointer; font-size: 12px; margin-left: 8px;
+        }
+
+        /* ========== AUTH IMPROVEMENTS ========== */
+        .password-wrapper { position: relative; }
+        .password-wrapper .form-input { padding-right: 44px; }
+        .pw-toggle {
+            position: absolute; right: 12px; top: 50%;
+            transform: translateY(-50%);
+            background: none; border: none; color: var(--text-muted);
+            cursor: pointer; font-size: 16px;
+        }
+        .pw-toggle:hover { color: var(--rose-gold); }
+
+        /* ========== BOTTOM NAV 4 ITEMS ========== */
+        .bottom-nav-item {
+            min-height: 52px;
+            font-size: 10px;
+            padding: 6px 4px;
+        }
+        .bottom-nav-item i { font-size: 22px; }
+
         /* ========== SOCIAL MEDIA DESIGN ENHANCEMENTS ========== */
         .social-post {
             background: var(--bg-card);
@@ -2016,9 +2228,202 @@
             color: var(--text-muted);
             line-height: 1.4;
         }
+
+        /* ===== ANNOUNCEMENT BAR ===== */
+        .announcement-bar {
+            background: linear-gradient(90deg, var(--chocolate), #5d4037, var(--chocolate));
+            color: #fff; text-align: center; padding: 9px 40px; font-size: 13px;
+            display: flex; align-items: center; justify-content: center; gap: 14px;
+            position: relative;
+        }
+        .announcement-bar a { color: var(--gold); font-weight: 700; }
+        .announcement-bar .ann-dismiss {
+            position: absolute; right: 14px; top: 50%; transform: translateY(-50%);
+            background: none; border: none; color: #fff; opacity: .7; font-size: 18px; cursor: pointer;
+        }
+
+        /* ===== TRUST STRIP ===== */
+        .trust-strip {
+            background: linear-gradient(135deg, rgba(62,39,35,.55), rgba(34,34,34,.9));
+            border-bottom: 1px solid rgba(183,110,121,.15); padding: 13px 0;
+        }
+        .trust-row { display: flex; justify-content: space-around; flex-wrap: wrap; gap: 6px; }
+        .trust-item { display: flex; align-items: center; gap: 10px; padding: 6px 10px; }
+        .trust-item i { font-size: 22px; color: var(--rose-gold); flex-shrink: 0; }
+        .trust-item strong { display: block; font-weight: 600; font-size: 13px; color: var(--text-light); }
+        .trust-item span { font-size: 11px; color: var(--text-muted); }
+        @media (max-width: 600px) {
+            .trust-item { flex-direction: column; text-align: center; gap: 5px; flex: 1; }
+        }
+
+        /* ===== HERO CAROUSEL ===== */
+        .hero {
+            position: relative; overflow: hidden; height: 380px;
+            background: none !important;
+        }
+        .hero-slides { display: flex; height: 100%; transition: transform .65s cubic-bezier(.4,0,.2,1); }
+        .hero-slide {
+            flex: 0 0 100%; height: 100%; display: flex; align-items: center;
+            justify-content: center; position: relative;
+        }
+        .hs-1 { background: linear-gradient(135deg, var(--chocolate) 0%, #4e342e 45%, rgba(183,110,121,.3) 100%); }
+        .hs-2 { background: linear-gradient(135deg, #1a237e 0%, #283593 45%, rgba(183,110,121,.3) 100%); }
+        .hs-3 { background: linear-gradient(135deg, #1b5e20 0%, #2e7d32 45%, rgba(212,175,55,.25) 100%); }
+        .hero-content {
+            position: relative; z-index: 2; text-align: center; padding: 0 24px;
+            max-width: 720px; width: 100%;
+        }
+        .hero-tag {
+            display: inline-block; padding: 5px 14px; border-radius: 20px;
+            font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .6px;
+            margin-bottom: 16px;
+        }
+        .hero h1 {
+            font-family: 'Playfair Display', serif; font-size: 46px; font-weight: 700;
+            color: #fff; margin-bottom: 14px; line-height: 1.18;
+        }
+        .hero p { font-size: 15px; color: rgba(255,255,255,.85); margin-bottom: 28px; }
+        .hero-btns { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+        .hero-btns .h-btn {
+            padding: 13px 30px; border-radius: 30px; font-weight: 700; font-size: 14px;
+            border: none; cursor: pointer; transition: var(--transition);
+        }
+        .h-btn.primary { background: linear-gradient(135deg, var(--rose-gold), var(--gold)); color: #fff; }
+        .h-btn.outline { background: transparent; border: 2px solid rgba(255,255,255,.7); color: #fff; }
+        .h-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0,0,0,.3); }
+        .hero-prev, .hero-next {
+            position: absolute; top: 50%; transform: translateY(-50%); z-index: 4;
+            background: rgba(0,0,0,.4); border: none; color: #fff; width: 44px; height: 44px;
+            border-radius: 50%; font-size: 16px; cursor: pointer; transition: background .2s;
+        }
+        .hero-prev:hover, .hero-next:hover { background: var(--rose-gold); }
+        .hero-prev { left: 16px; } .hero-next { right: 16px; }
+        .hero-dots { position: absolute; bottom: 18px; left: 50%; transform: translateX(-50%); z-index: 4; display: flex; gap: 8px; }
+        .hdot { width: 8px; height: 8px; border-radius: 50%; background: rgba(255,255,255,.45); border: none; cursor: pointer; transition: all .3s; padding: 0; }
+        .hdot.active { background: #fff; width: 22px; border-radius: 4px; }
+
+        /* ===== FLASH SALE SECTION ===== */
+        .flash-sale-zone {
+            background: linear-gradient(135deg, rgba(62,39,35,.45), rgba(34,34,34,.85));
+            border-radius: 16px; padding: 20px 24px; margin: 24px 0 0;
+        }
+        .flash-zone-hd { display: flex; align-items: center; gap: 14px; margin-bottom: 16px; flex-wrap: wrap; }
+        .flash-pill {
+            background: var(--error); color: #fff; padding: 5px 14px; border-radius: 20px;
+            font-size: 11px; font-weight: 800; text-transform: uppercase; animation: pulse 1.5s infinite;
+        }
+        .flash-zone-hd h3 { font-family: 'Playfair Display', serif; font-size: 20px; color: var(--text-light); }
+        .flash-countdown { display: flex; gap: 7px; align-items: center; margin-left: auto; }
+        .cd-block {
+            background: var(--chocolate); color: var(--gold); padding: 6px 10px;
+            border-radius: 7px; text-align: center; min-width: 46px;
+        }
+        .cd-block .cd-n { font-size: 20px; font-weight: 800; line-height: 1; display: block; }
+        .cd-block .cd-l { font-size: 9px; text-transform: uppercase; opacity: .8; }
+        .cd-sep { color: var(--rose-gold); font-size: 18px; font-weight: 800; }
+        .flash-scroll-row {
+            display: flex; gap: 13px; overflow-x: auto; padding-bottom: 8px;
+            scrollbar-width: thin; scrollbar-color: var(--rose-gold) transparent;
+        }
+        .flash-scroll-row::-webkit-scrollbar { height: 4px; }
+        .flash-scroll-row::-webkit-scrollbar-thumb { background: var(--rose-gold); border-radius: 2px; }
+        .flash-mini-card {
+            flex: 0 0 155px; background: var(--bg-card); border-radius: 12px;
+            overflow: hidden; border: 1px solid rgba(183,110,121,.12); cursor: pointer;
+            transition: var(--transition); position: relative;
+        }
+        .flash-mini-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-lg); }
+        .flash-mini-card img { width: 100%; height: 115px; object-fit: cover; }
+        .flash-mini-body { padding: 10px; }
+        .flash-mini-name { font-size: 12px; font-weight: 500; color: var(--text-light); margin-bottom: 4px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+        .flash-mini-price { font-size: 14px; font-weight: 700; color: var(--gold); }
+        .flash-mini-tag { position: absolute; top: 8px; left: 8px; background: var(--error); color: #fff; font-size: 9px; font-weight: 800; padding: 3px 7px; border-radius: 4px; }
+
+        /* ===== VOUCHER STRIP ===== */
+        .voucher-zone {
+            background: var(--bg-card); border-radius: 16px;
+            border: 1px solid rgba(183,110,121,.12); padding: 18px 22px; margin: 18px 0 0;
+        }
+        .voucher-zone-hd { display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px; }
+        .voucher-zone-hd h3 { font-family: 'Playfair Display', serif; font-size: 18px; }
+        .voucher-zone-hd span { font-size: 12px; color: var(--text-muted); }
+        .voucher-scroll { display: flex; gap: 13px; overflow-x: auto; padding-bottom: 4px; scrollbar-width: none; }
+        .voucher-scroll::-webkit-scrollbar { display: none; }
+        .v-card {
+            flex: 0 0 215px; border-radius: 12px; padding: 15px; display: flex;
+            align-items: center; gap: 13px; cursor: pointer;
+            border: 1.5px dashed; transition: var(--transition);
+        }
+        .v-card:hover { transform: translateY(-2px); box-shadow: var(--shadow-sm); }
+        .v-card.vc1 { background: rgba(183,110,121,.07); border-color: var(--rose-gold); }
+        .v-card.vc2 { background: rgba(212,175,55,.07); border-color: var(--gold); }
+        .v-card.vc3 { background: rgba(76,175,80,.07); border-color: #4caf50; }
+        .v-icon {
+            width: 42px; height: 42px; border-radius: 50%; flex-shrink: 0;
+            display: flex; align-items: center; justify-content: center; font-size: 19px;
+        }
+        .vc1 .v-icon { background: rgba(183,110,121,.18); color: var(--rose-gold); }
+        .vc2 .v-icon { background: rgba(212,175,55,.18); color: var(--gold); }
+        .vc3 .v-icon { background: rgba(76,175,80,.18); color: #4caf50; }
+        .v-info strong { display: block; font-size: 15px; font-weight: 700; }
+        .v-info span { font-size: 11px; color: var(--text-muted); }
+        .v-code {
+            font-size: 11px; font-weight: 700; margin-top: 4px; padding: 2px 8px;
+            border-radius: 4px; display: inline-block;
+        }
+        .vc1 .v-code { background: rgba(183,110,121,.15); color: var(--rose-gold); }
+        .vc2 .v-code { background: rgba(212,175,55,.15); color: var(--gold); }
+        .vc3 .v-code { background: rgba(76,175,80,.15); color: #4caf50; }
+
+        /* ===== PRODUCT CARD ENHANCEMENTS (additive only) ===== */
+        .product-card-image { position: relative; overflow: hidden; aspect-ratio: 1; cursor: pointer; background: var(--bg-dark); }
+        .product-card-image img { width: 100%; height: 100%; object-fit: cover; transition: transform .4s; }
+        .product-card:hover .product-card-image img { transform: scale(1.06); }
+        .discount-badge {
+            position: absolute; top: 10px; left: 10px; background: var(--error);
+            color: #fff; font-size: 10px; font-weight: 800; padding: 3px 8px; border-radius: 4px;
+        }
+        .product-card-content { padding: 14px; }
+        .product-category { font-size: 11px; color: var(--rose-gold); text-transform: uppercase; font-weight: 700; margin-bottom: 5px; letter-spacing: .4px; }
+        .product-title { font-size: 14px; font-weight: 600; color: var(--text-light); margin-bottom: 5px; line-height: 1.4; height: 38px; overflow: hidden; display: -webkit-box; line-clamp: 2; -webkit-box-orient: vertical; }
+        .product-excerpt { font-size: 12px; color: var(--text-muted); line-height: 1.5; margin-bottom: 8px; display: -webkit-box; line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; height: 36px; }
+        .product-price-row { display: flex; align-items: baseline; gap: 8px; margin-bottom: 6px; }
+        .product-price { font-size: 18px; font-weight: 800; color: var(--gold); }
+        .product-compare { font-size: 12px; color: var(--text-muted); text-decoration: line-through; }
+        .product-details-row { display: flex; justify-content: space-between; align-items: center; font-size: 12px; color: var(--text-muted); margin-bottom: 8px; }
+        .product-actions { display: flex; gap: 7px; }
+        .post-action-btn {
+            flex: 1; padding: 9px 6px; background: rgba(183,110,121,.1);
+            border: 1px solid rgba(183,110,121,.25); color: var(--text-light);
+            border-radius: 8px; cursor: pointer; font-size: 12px; font-weight: 600;
+            transition: var(--transition); display: flex; align-items: center; justify-content: center; gap: 5px; min-height: 36px;
+        }
+        .post-action-btn:hover { background: var(--rose-gold); border-color: var(--rose-gold); color: #fff; }
+        .posts-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            gap: 16px;
+        }
+        .delivery-hint { font-size: 11px; color: var(--success); margin-bottom: 6px; display: flex; align-items: center; gap: 4px; }
+
+        /* ===== PAYMENT BADGES IN FOOTER ===== */
+        .payment-badge-row { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
+        .pay-badge {
+            background: var(--bg-dark); border: 1px solid rgba(183,110,121,.2);
+            border-radius: 6px; padding: 5px 10px; font-size: 12px; font-weight: 600;
+            display: flex; align-items: center; gap: 5px; color: var(--text-light);
+        }
+        .pay-badge i { color: var(--rose-gold); }
     </style>
 </head>
 <body>
+<!-- ANNOUNCEMENT BAR -->
+<div class="announcement-bar" id="annBar">
+    <i class="fas fa-bolt" style="color:var(--gold);"></i>
+    <span>🔥 Flash Sale Live! Use code <strong>FLASH20</strong> for 20% off — ends tonight!</span>
+    <a href="#flashZone">Shop Deals</a>
+    <button class="ann-dismiss" onclick="document.getElementById('annBar').style.display='none'" aria-label="Dismiss">✕</button>
+</div>
     <!-- TOP BAR -->
     <div class="top-bar">
         <div class="container">
@@ -2027,10 +2432,10 @@
                 <span><i class="fas fa-phone"></i> Contact: +880 1310-880044</span>
             </div>
             <div class="top-bar-right">
-                <span id="userGreeting">Welcome, Guest!</span>
+                <span id="userGreeting">Welcome to Tu Avec</span>
                 <button onclick="openOrdersModal()" class="nav-btn" style="padding: 4px 12px; border: none;"><i class="fas fa-box"></i> Orders</button>
                 <button id="logoutBtn" onclick="logout()" class="nav-btn" style="padding: 4px 12px; border: none; display:none;"><i class="fas fa-sign-out-alt"></i> Logout</button>
-                <button id="loginTopBtn" onclick="openLoginModal()" class="nav-btn" style="padding: 4px 12px; border-width: medium; border-style: none; border-color: currentcolor; border-image: initial; display: inline-flex;"><i class="fas fa-user"></i> Login</button>
+                <button id="loginTopBtn" onclick="openLoginModal()" class="nav-btn" style="padding: 4px 12px; border: none;"><i class="fas fa-user"></i> Login</button>
             </div>
         </div>
     </div>
@@ -2042,7 +2447,13 @@
                     <div class="logo">Tu Avec</div>
                     
                     <div class="search-container">
-                        <input type="text" class="search-box" id="searchInput" placeholder="Search products, brands, categories..." oninput="handleSearchInput()" onfocus="showAutocomplete()" onblur="hideAutocomplete()">
+                        <input type="text" 
+                            class="search-box" 
+                           id="searchInput" 
+                           placeholder="Search products, brands, categories..."
+                           oninput="handleSearchInput()"
+                           onfocus="showAutocomplete()"
+                           onblur="hideAutocomplete()">
                     <button class="search-btn" onclick="handleSearch()"><i class="fas fa-search"></i></button>
                     
                     <div class="search-autocomplete" id="searchAutocomplete"></div>
@@ -2054,7 +2465,7 @@
                     </button>
                     <button class="nav-btn" onclick="toggleCart()" aria-label="View cart">
                         <i class="fas fa-shopping-cart"></i>
-                        <span class="badge" id="cartBadge" style="display: none;">0</span>
+                        <span class="badge" id="cartBadge">0</span>
                     </button>
                     <button class="nav-btn" onclick="toggleNotifications()" aria-label="Notifications">
                         <i class="fas fa-bell"></i>
@@ -2064,7 +2475,7 @@
                         <i class="fas fa-envelope"></i>
                         <span class="badge" id="messageBadge" style="display: none;">2</span>
                     </button>
-                    <button id="loginNavBtn" class="nav-btn" onclick="openLoginModal()" aria-label="Account" style="display: inline-flex;">
+                    <button id="loginNavBtn" class="nav-btn" onclick="openLoginModal()" aria-label="Account">
                         <i class="fas fa-user"></i>
                     </button>
                 </div>
@@ -2086,24 +2497,119 @@
         </div>
     </nav>
 
-    <!-- MOBILE SEARCH BAR -->
-    <div class="mobile-search-bar">
-        <div class="search-container">
-            <input type="text" class="search-box" id="mobileSearchInput" placeholder="Search products, brands, categories..." oninput="handleSearchInput(this.value)" onkeypress="if(event.key==='Enter') handleSearch(this.value)">
-            <button class="search-btn" onclick="handleSearch(document.getElementById('mobileSearchInput').value)"><i class="fas fa-search"></i></button>
+    <!-- TRUST STRIP -->
+    <div class="trust-strip">
+        <div class="container">
+            <div class="trust-row">
+                <div class="trust-item"><i class="fas fa-certificate"></i><div><strong>100% Authentic</strong><span>Verified Thai imports</span></div></div>
+                <div class="trust-item"><i class="fas fa-undo-alt"></i><div><strong>Easy 7-Day Returns</strong><span>No questions asked</span></div></div>
+                <div class="trust-item"><i class="fas fa-shipping-fast"></i><div><strong>Fast Delivery</strong><span>Dhaka 1–3d · Nationwide 3–7d</span></div></div>
+                <div class="trust-item"><i class="fas fa-lock"></i><div><strong>Secure Payments</strong><span>bKash · Nagad · Rocket · COD</span></div></div>
+                <div class="trust-item"><i class="fas fa-headset"></i><div><strong>24/7 Support</strong><span>Chat or call anytime</span></div></div>
+            </div>
         </div>
     </div>
 
+    <!-- HERO SECTION (Carousel) -->
+    <section class="hero" role="banner" id="heroSection">
+        <div class="hero-slides" id="heroSlides">
+            <!-- Slide 1 -->
+            <div class="hero-slide hs-1">
+                <div class="hero-content">
+                    <div class="hero-tag" style="background:var(--rose-gold);color:#fff;">New Collection</div>
+                    <h1>Premium Thai Beauty &amp; Skincare</h1>
+                    <p>Authentic Bangkok formulas — certified, fresh, and delivered to your door in Bangladesh.</p>
+                    <div class="hero-btns">
+                        <button class="h-btn primary" onclick="filterCategory('Skincare');scrollToPosts()"><i class="fas fa-spa"></i> Shop Beauty</button>
+                        <button class="h-btn outline" onclick="scrollToPosts()">Browse All Products</button>
+                    </div>
+                </div>
+            </div>
+            <!-- Slide 2 -->
+            <div class="hero-slide hs-2">
+                <div class="hero-content">
+                    <div class="hero-tag" style="background:var(--info);color:#fff;">Fast Delivery</div>
+                    <h1>Nationwide Delivery — Every District in Bangladesh</h1>
+                    <p>Real tracking at every step. Dhaka in 1–3 days. Everywhere else in 3–7 days.</p>
+                    <div class="hero-btns">
+                        <button class="h-btn primary" onclick="scrollToPosts()"><i class="fas fa-shopping-bag"></i> Shop Now</button>
+                        <button class="h-btn outline" onclick="openOrdersModal()">Track My Order</button>
+                    </div>
+                </div>
+            </div>
+            <!-- Slide 3 -->
+            <div class="hero-slide hs-3">
+                <div class="hero-content">
+                    <div class="hero-tag" style="background:var(--gold);color:#222;">Flash Sale</div>
+                    <h1>Up to 30% Off Thai Food &amp; Snacks</h1>
+                    <p>Limited time. Use code <strong style="color:var(--gold);">FLASH20</strong> at checkout for an extra 20% off.</p>
+                    <div class="hero-btns">
+                        <button class="h-btn primary" onclick="filterCategory('Food');scrollToPosts()"><i class="fas fa-utensils"></i> Grab Deals</button>
+                        <button class="h-btn outline" onclick="collectVoucher('FLASH20')">Collect Coupon</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <button class="hero-prev" onclick="prevHeroSlide()" aria-label="Previous"><i class="fas fa-chevron-left"></i></button>
+        <button class="hero-next" onclick="nextHeroSlide()" aria-label="Next"><i class="fas fa-chevron-right"></i></button>
+        <div class="hero-dots" id="heroDots">
+            <button class="hdot active" onclick="goHeroSlide(0)"></button>
+            <button class="hdot" onclick="goHeroSlide(1)"></button>
+            <button class="hdot" onclick="goHeroSlide(2)"></button>
+        </div>
+    </section>
 
-    <!-- HERO SECTION -->
-    <section class="hero" role="banner">
-        <div class="hero-content">
-            <h1>Shop Premium Thai Imports with Fast Delivery</h1>
-            <p>Find authentic products, unbeatable offers, and secure checkout from the Tu Avec marketplace.</p>
-            <button class="btn btn-primary" onclick="scrollToPosts()" aria-label="Scroll to products">Shop Now</button>
-
-<!-- PRODUCT LIST SECTION -->
+    <!-- PRODUCT LIST SECTION -->
     <main class="container" role="main">
+
+        <!-- FLASH SALE ZONE -->
+        <div class="flash-sale-zone" id="flashZone">
+            <div class="flash-zone-hd">
+                <div class="flash-pill"><i class="fas fa-bolt"></i> Flash Sale</div>
+                <h3>Today's Top Deals</h3>
+                <div class="flash-countdown">
+                    <div class="cd-block"><span class="cd-n" id="cdH">00</span><span class="cd-l">hrs</span></div>
+                    <span class="cd-sep">:</span>
+                    <div class="cd-block"><span class="cd-n" id="cdM">00</span><span class="cd-l">min</span></div>
+                    <span class="cd-sep">:</span>
+                    <div class="cd-block"><span class="cd-n" id="cdS">00</span><span class="cd-l">sec</span></div>
+                </div>
+            </div>
+            <div class="flash-scroll-row" id="flashScrollRow">
+                <p style="color:var(--text-muted);font-size:13px;">Loading deals…</p>
+            </div>
+        </div>
+
+        <!-- VOUCHER ZONE -->
+        <div class="voucher-zone">
+            <div class="voucher-zone-hd">
+                <h3><i class="fas fa-ticket-alt" style="color:var(--rose-gold);"></i> Collect Your Vouchers</h3>
+                <span>Tap any card to copy code</span>
+            </div>
+            <div class="voucher-scroll">
+                <div class="v-card vc1" onclick="collectVoucher('WELCOME10')">
+                    <div class="v-icon"><i class="fas fa-gift"></i></div>
+                    <div class="v-info"><strong>10% Off</strong><span>New customer discount</span><div class="v-code">WELCOME10</div></div>
+                </div>
+                <div class="v-card vc2" onclick="collectVoucher('SAVE500')">
+                    <div class="v-icon"><i class="fas fa-tag"></i></div>
+                    <div class="v-info"><strong>৳500 Off</strong><span>On orders above ৳5000</span><div class="v-code">SAVE500</div></div>
+                </div>
+                <div class="v-card vc3" onclick="collectVoucher('FREESHIP')">
+                    <div class="v-icon"><i class="fas fa-truck"></i></div>
+                    <div class="v-info"><strong>Free Shipping</strong><span>On orders above ৳3000</span><div class="v-code">FREESHIP</div></div>
+                </div>
+                <div class="v-card vc1" onclick="collectVoucher('FLASH20')">
+                    <div class="v-icon"><i class="fas fa-bolt"></i></div>
+                    <div class="v-info"><strong>20% Flash Off</strong><span>Orders above ৳2000</span><div class="v-code">FLASH20</div></div>
+                </div>
+                <div class="v-card vc2" onclick="collectVoucher('BULK15')">
+                    <div class="v-icon"><i class="fas fa-layer-group"></i></div>
+                    <div class="v-info"><strong>15% Bulk</strong><span>3+ items in cart</span><div class="v-code">BULK15</div></div>
+                </div>
+            </div>
+        </div>
+
         <div class="blog-section">
             <div class="shop-layout">
                 <!-- MOBILE FILTER TOGGLE -->
@@ -2123,7 +2629,7 @@
                     <div class="active-filter-chips" id="activeFilterChips"></div>
 
                     <div class="filter-section">
-                        <div class="filter-section-title">Price Range (à§³)</div>
+                        <div class="filter-section-title">Price Range (৳)</div>
                         <div class="price-range-inputs">
                             <input type="number" class="price-input" id="filterMinPrice" placeholder="Min" min="0" onchange="applyFilters()">
                             <span>-</span>
@@ -2275,8 +2781,8 @@
                     <p><span id="pointsToNextTier">1000</span> points to Gold</p>
                 </div>
             </div>
-        </main></div>
-    
+        </div>
+    </main>
 
     <!-- NEW SEO-READY BLOG SECTION -->
     <div class="container" style="margin:80px 0;">
@@ -2297,23 +2803,13 @@
             <h2 class="sidebar-title"><i class="fas fa-shopping-bag"></i> Shopping Cart</h2>
             <button class="close-btn" onclick="toggleCart()"><i class="fas fa-times"></i></button>
         </div>
-        <div class="sidebar-content" id="cartItems">
-                    <div class="empty-state">
-                        <i class="fas fa-shopping-bag"></i>
-                        <h3>Your cart is empty</h3>
-                        <p>Add items to get started.</p>
-                    </div>
-                </div>
+        <div class="sidebar-content" id="cartItems"></div>
         <div class="sidebar-footer">
             <div class="coupon-input-container">
                 <input type="text" class="coupon-input" id="cartCouponInput" placeholder="Enter coupon code">
                 <button class="apply-coupon-btn" onclick="applyCoupon()"><i class="fas fa-tag"></i> Apply</button>
             </div>
-            <div id="cartSummary">
-                    <div class="summary-row"><span>Subtotal</span><span>à§³0</span></div>
-                    <div class="summary-row"><span>Shipping</span><span>à§³100</span></div>
-                    <div class="summary-row total"><span>Total</span><span>à§³100</span></div>
-                </div>
+            <div id="cartSummary"></div>
             <div id="cartFooter"></div>
         </div>
     </div>
@@ -2324,13 +2820,7 @@
             <h2 class="sidebar-title"><i class="fas fa-heart"></i> Wishlist</h2>
             <button class="close-btn" onclick="toggleWishlist()"><i class="fas fa-times"></i></button>
         </div>
-        <div class="sidebar-content" id="wishlistItems">
-                    <div class="empty-state">
-                        <i class="fas fa-heart"></i>
-                        <h3>Your wishlist is empty</h3>
-                        <p>Save products to view them later.</p>
-                    </div>
-                </div>
+        <div class="sidebar-content" id="wishlistItems"></div>
     </div>
 
     <!-- COMPARISON SIDEBAR -->
@@ -2358,11 +2848,11 @@
                 <div class="form-grid">
                     <div class="form-group">
                         <label class="form-label">Full Name *</label>
-                        <input type="text" class="form-input" id="customerName" required="">
+                        <input type="text" class="form-input" id="customerName" required>
                     </div>
                     <div class="form-group">
                         <label class="form-label">Phone Number *</label>
-                        <input type="tel" class="form-input" id="customerPhone" required="">
+                        <input type="tel" class="form-input" id="customerPhone" required>
                     </div>
                 </div>
                 <div class="form-group">
@@ -2373,7 +2863,7 @@
                 <h3 style="margin-top: 30px;">Shipping Address</h3>
                 <div class="form-group">
                     <label class="form-label">Region *</label>
-                    <select class="form-input" id="customerRegion" onchange="updateShipping()" required="">
+                    <select class="form-input" id="customerRegion" onchange="updateShipping()" required>
                         <option value="">Select Region</option>
                         <option value="Dhaka">Dhaka</option>
                         <option value="Chittagong">Chittagong</option>
@@ -2388,7 +2878,7 @@
                 <div class="form-grid">
                     <div class="form-group">
                         <label class="form-label">City *</label>
-                        <input type="text" class="form-input" id="customerCity" required="">
+                        <input type="text" class="form-input" id="customerCity" required>
                     </div>
                     <div class="form-group">
                         <label class="form-label">Area</label>
@@ -2397,12 +2887,12 @@
                 </div>
                 <div class="form-group">
                     <label class="form-label">Full Address *</label>
-                    <textarea class="form-input" id="customerAddress" rows="3" required=""></textarea>
+                    <textarea class="form-input" id="customerAddress" rows="3" required></textarea>
                 </div>
 
                 <h3 style="margin-top: 30px;">Payment Method</h3>
                 <div class="form-group">
-                    <select class="form-input" id="paymentMethod" required="">
+                    <select class="form-input" id="paymentMethod" required>
                         <option value="">Select Payment Method</option>
                         <option value="cod">Cash on Delivery (COD)</option>
                         <option value="bkash">bKash</option>
@@ -2473,30 +2963,36 @@
             <form id="loginForm" onsubmit="submitLogin(event)">
                 <div class="form-group">
                     <label class="form-label">Email or Phone</label>
-                    <input type="text" class="form-input" id="loginEmail" required="">
+                    <input type="text" class="form-input" id="loginEmail" required>
                 </div>
                 <div class="form-group">
                     <label class="form-label">Password</label>
-                    <input type="password" class="form-input" id="loginPassword" required="">
+                    <div class="password-wrapper">
+                        <input type="password" class="form-input" id="loginPassword" required autocomplete="current-password">
+                        <button type="button" class="pw-toggle" onclick="togglePw('loginPassword',this)" aria-label="Show password"><i class="fas fa-eye"></i></button>
+                    </div>
                 </div>
                 <button type="submit" class="btn btn-primary" style="width:100%;">Sign In</button>
             </form>
             <form id="signupForm" onsubmit="submitSignup(event)" style="display:none;">
                 <div class="form-group">
                     <label class="form-label">Full Name</label>
-                    <input type="text" class="form-input" id="signupName" required="">
+                    <input type="text" class="form-input" id="signupName" required>
                 </div>
                 <div class="form-group">
                     <label class="form-label">Email</label>
-                    <input type="email" class="form-input" id="signupEmail" required="">
+                    <input type="email" class="form-input" id="signupEmail" required>
                 </div>
                 <div class="form-group">
                     <label class="form-label">Phone</label>
-                    <input type="tel" class="form-input" id="signupPhone" required="">
+                    <input type="tel" class="form-input" id="signupPhone" required>
                 </div>
                 <div class="form-group">
                     <label class="form-label">Password</label>
-                    <input type="password" class="form-input" id="signupPassword" required="">
+                    <div class="password-wrapper">
+                        <input type="password" class="form-input" id="signupPassword" required autocomplete="new-password">
+                        <button type="button" class="pw-toggle" onclick="togglePw('signupPassword',this)" aria-label="Show password"><i class="fas fa-eye"></i></button>
+                    </div>
                 </div>
                 <button type="submit" class="btn btn-primary" style="width:100%;">Create Account</button>
             </form>
@@ -2527,38 +3023,128 @@
         </div>
     </div>
 
+    <!-- NOTIFICATIONS PANEL -->
+    <div class="notif-panel" id="notifPanel" role="dialog" aria-label="Notifications">
+        <div class="notif-panel-hd">
+            <h3><i class="fas fa-bell" style="color:var(--rose-gold);margin-right:8px;"></i> Notifications</h3>
+            <div style="display:flex;gap:10px;align-items:center;">
+                <button onclick="markAllNotifsRead()" style="font-size:12px;color:var(--rose-gold);background:none;border:none;cursor:pointer;">Mark all read</button>
+                <button onclick="closeNotifPanel()" style="background:none;border:none;color:var(--text-muted);font-size:18px;cursor:pointer;"><i class="fas fa-times"></i></button>
+            </div>
+        </div>
+        <div class="notif-list" id="notifList">
+            <div class="notif-item unread">
+                <div class="notif-icon ni-order"><i class="fas fa-box"></i></div>
+                <div class="notif-body">
+                    <strong>Order Shipped!</strong>
+                    <span>Your order #TA-2048 has been shipped via Pathao and is on its way.</span>
+                    <span class="notif-time">2 hours ago</span>
+                </div>
+                <div class="unread-dot"></div>
+            </div>
+            <div class="notif-item unread">
+                <div class="notif-icon ni-promo"><i class="fas fa-tag"></i></div>
+                <div class="notif-body">
+                    <strong>Flash Sale — 20% Off Today!</strong>
+                    <span>Use code FLASH20 on any order above ৳2000. Ends tonight!</span>
+                    <span class="notif-time">4 hours ago</span>
+                </div>
+                <div class="unread-dot"></div>
+            </div>
+            <div class="notif-item">
+                <div class="notif-icon ni-system"><i class="fas fa-star"></i></div>
+                <div class="notif-body">
+                    <strong>Rate Your Last Order</strong>
+                    <span>How was your experience? Your review helps other shoppers.</span>
+                    <span class="notif-time">Yesterday</span>
+                </div>
+            </div>
+            <div class="notif-item">
+                <div class="notif-icon ni-promo"><i class="fas fa-heart"></i></div>
+                <div class="notif-body">
+                    <strong>Wishlist Item on Sale!</strong>
+                    <span>Thai Jasmine Rice 5kg is now 15% off. Add it to cart before stock runs out.</span>
+                    <span class="notif-time">2 days ago</span>
+                </div>
+            </div>
+            <div class="notif-item">
+                <div class="notif-icon ni-warn"><i class="fas fa-truck"></i></div>
+                <div class="notif-body">
+                    <strong>Delivery Update</strong>
+                    <span>Order #TA-2031 was delivered. If you haven't received it, contact us immediately.</span>
+                    <span class="notif-time">3 days ago</span>
+                </div>
+            </div>
+        </div>
+        <div class="notif-panel-footer" onclick="openOrdersModal();closeNotifPanel();">View all notifications</div>
+    </div>
+
+    <!-- MESSAGES PANEL -->
+    <div class="msg-panel" id="msgPanel" role="dialog" aria-label="Messages">
+        <div class="msg-panel-hd">
+            <h3><i class="fas fa-envelope" style="color:var(--rose-gold);margin-right:8px;"></i> Messages</h3>
+            <button onclick="closeMsgPanel()" style="background:none;border:none;color:var(--text-muted);font-size:18px;cursor:pointer;"><i class="fas fa-times"></i></button>
+        </div>
+        <div class="msg-list">
+            <div class="msg-item">
+                <div class="msg-avatar">T</div>
+                <div class="msg-content">
+                    <strong>Tu Avec Support</strong>
+                    <span>Hi! Your order is being processed. We'll notify you once it ships.</span>
+                    <span class="msg-meta">2h ago · Support</span>
+                </div>
+            </div>
+            <div class="msg-item">
+                <div class="msg-avatar" style="background:linear-gradient(135deg,#2ecc71,#27ae60);">S</div>
+                <div class="msg-content">
+                    <strong>Seller: Thai Imports BD</strong>
+                    <span>Thank you for your order! We've dispatched it today. Tracking: PATH-8821.</span>
+                    <span class="msg-meta">Yesterday · Seller</span>
+                </div>
+            </div>
+            <div class="msg-item">
+                <div class="msg-avatar" style="background:linear-gradient(135deg,#3498db,#2980b9);">P</div>
+                <div class="msg-content">
+                    <strong>Pathao Delivery</strong>
+                    <span>Your package is out for delivery today between 2 PM – 6 PM.</span>
+                    <span class="msg-meta">3 days ago · Courier</span>
+                </div>
+            </div>
+        </div>
+        <div class="msg-panel-footer" onclick="toggleChat();closeMsgPanel();">Open live chat</div>
+    </div>
+
     <!-- OVERLAY -->
     <div class="overlay" id="overlay" onclick="closeAll()"></div>
 
-    <!-- BOTTOM NAV (MOBILE) -->
+    <!-- BOTTOM NAV (MOBILE) — 4 items -->
     <nav class="bottom-nav" aria-label="Mobile navigation">
         <div class="bottom-nav-content">
             <button class="bottom-nav-item active" onclick="setActiveBottomNav(this);scrollToTop()">
-                <i class="fas fa-home"></i> Home
+                <i class="fas fa-home"></i>
+                <span>Home</span>
             </button>
             <button class="bottom-nav-item" onclick="setActiveBottomNav(this);document.querySelector('.category-nav')?.scrollIntoView({behavior:'smooth'})">
-                <i class="fas fa-th-large"></i> Categories
-            </button>
-            <button class="bottom-nav-item" onclick="setActiveBottomNav(this);toggleMobileFilters()">
-                <i class="fas fa-search"></i> Search
-            </button>
-            <button class="bottom-nav-item" onclick="setActiveBottomNav(this);toggleWishlist()">
-                <i class="fas fa-heart"></i> Wishlist
-                <span class="badge" id="bottomWishlistBadge" style="display:none;">0</span>
+                <i class="fas fa-th-large"></i>
+                <span>Shop</span>
             </button>
             <button class="bottom-nav-item" onclick="setActiveBottomNav(this);toggleCart()">
-                <i class="fas fa-shopping-cart"></i> Cart
+                <i class="fas fa-shopping-cart"></i>
+                <span>Cart</span>
                 <span class="badge" id="bottomCartBadge" style="display:none;">0</span>
             </button>
-            <button class="bottom-nav-item" onclick="setActiveBottomNav(this);openLoginModal()">
-                <i class="fas fa-user"></i> Account
+            <button class="bottom-nav-item" id="bnAccountBtn" onclick="setActiveBottomNav(this);handleBnAccount()">
+                <i class="fas fa-user" id="bnAccountIcon"></i>
+                <span id="bnAccountLabel">Account</span>
             </button>
         </div>
     </nav>
 
 
     <!-- TOAST NOTIFICATION -->
-    <div class="toast error" id="toast" style="display: none;">Error loading posts: Failed to fetch</div>
+    <div class="toast" id="toast">
+        <span id="toastMessage"></span>
+    </div>
 
     <!-- PRODUCTION FOOTER -->
     <footer style="background:var(--bg-card);padding:50px 20px 30px;text-align:center;color:var(--text-muted);font-size:13px;border-top:1px solid rgba(183,110,121,0.2);margin-top:80px;">
@@ -2566,26 +3152,24 @@
             <div style="display:flex;justify-content:center;gap:30px;flex-wrap:wrap;margin-bottom:20px;">
                 <a href="#" style="color:var(--text-muted);text-decoration:none;">Privacy Policy</a>
                 <a href="#" style="color:var(--text-muted);text-decoration:none;">Terms of Service</a>
-                <a href="#" style="color:var(--text-muted);text-decoration:none;">Returns &amp; Refunds</a>
+                <a href="#" style="color:var(--text-muted);text-decoration:none;">Returns & Refunds</a>
                 <a href="#" style="color:var(--text-muted);text-decoration:none;">Track Order</a>
                 <a href="#" style="color:var(--text-muted);text-decoration:none;">Contact Us</a>
             </div>
-            <p>© 2026 Tu Avec. All rights reserved.</p>
+            <p>&copy; 2026 Tu Avec. All rights reserved.</p>
         </div>
     </footer>
 
     <script>
-        // ========== CONFIGURATION ==========
-        const LOCAL_API = 'http://localhost:5000/api';
-        const LIVE_API = 'https://tuavec.onrender.com/api';
+      const LOCAL_API = 'http://localhost:5000/api';
+const LIVE_API = 'https://tuavec.onrender.com/api';
 
-        const isLocal = window.location.protocol === 'file:' ||
-                        window.location.hostname === 'localhost' ||
-                        window.location.hostname === '127.0.0.1' ||
-                        window.location.hostname.startsWith('192.168.');
+const isLocal = window.location.protocol === 'file:' ||
+                window.location.hostname === 'localhost' ||
+                window.location.hostname === '127.0.0.1' ||
+                window.location.hostname.startsWith('192.168');
 
-        const API_URL = isLocal ? LOCAL_API : LIVE_API;
-
+const API_URL = LIVE_API;
         // ========== STATE MANAGEMENT ==========
         let posts = [];
         let loyaltyPoints = 0;
@@ -2619,7 +3203,7 @@
         const COUPONS = {
             'WELCOME10': { type: 'percentage', value: 10, minOrder: 0, description: '10% off for new customers' },
             'FREESHIP': { type: 'free_shipping', value: 0, minOrder: 3000, description: 'Free shipping' },
-            'SAVE500': { type: 'fixed', value: 500, minOrder: 5000, description: 'à§³500 off' },
+            'SAVE500': { type: 'fixed', value: 500, minOrder: 5000, description: '৳500 off' },
             'BULK15': { type: 'percentage', value: 15, minOrder: 0, minItems: 3, description: '15% off on 3+ items' },
             'FLASH20': { type: 'percentage', value: 20, minOrder: 2000, description: '20% flash sale discount' }
         };
@@ -2825,7 +3409,7 @@
             if (currentFilters.minPrice != null || currentFilters.maxPrice != null) {
                 const min = currentFilters.minPrice ?? 0;
                 const max = currentFilters.maxPrice ?? '∞';
-                chips.push({ label: `à§³${min} - à§³${max}`, clear: () => { currentFilters.minPrice = null; currentFilters.maxPrice = null; document.getElementById('filterMinPrice').value=''; document.getElementById('filterMaxPrice').value=''; } });
+                chips.push({ label: `৳${min} - ৳${max}`, clear: () => { currentFilters.minPrice = null; currentFilters.maxPrice = null; document.getElementById('filterMinPrice').value=''; document.getElementById('filterMaxPrice').value=''; } });
             }
             currentFilters.brands.forEach(brand => {
                 chips.push({ label: brand, clear: () => {
@@ -2872,7 +3456,7 @@
                         <img class="autocomplete-img" src="${getProductImage(product)}" alt="${product.title || product.name}" />
                         <div>
                             <strong>${product.title || product.name}</strong>
-                            <div style="font-size:12px;color:var(--text-muted);">à§³${product.price || 0}</div>
+                            <div style="font-size:12px;color:var(--text-muted);">৳${product.price || 0}</div>
                         </div>
                     </div>
                 `).join('');
@@ -2920,12 +3504,24 @@
                 }
             } catch (error) {
                 showToast('Error loading posts: ' + error.message, 'error');
+                
+                const container = document.getElementById('postsGrid');
+                if (container) {
+                    container.innerHTML = `
+                        <div class="empty-state">
+                            <i class="fas fa-exclamation-circle" style="color: var(--error);"></i>
+                            <h3>Sorry, we could not load the products at this time.</h3>
+                            <p>${error.message}</p>
+                        </div>
+                    `;
+                }
             }
         }
 
         // ========== POST RENDERING ==========
         function renderPosts() {
             const container = document.getElementById('postsGrid');
+            if(!container) return; // Add check here just in case
 
             let filtered = posts.filter(p => {
                 if (currentFilters.category && p.category !== currentFilters.category) return false;
@@ -3000,8 +3596,8 @@
                         <h3 class="product-title">${name}</h3>
                         <p class="product-excerpt">${product.shortDescription || (product.description ? product.description.substring(0, 120) + '...' : 'High-quality product from Tu Avec.')}</p>
                         <div class="product-price-row">
-                            <span class="product-price">à§³${price}</span>
-                            ${comparePrice > price ? `<span class="product-compare">à§³${comparePrice}</span>` : ''}
+                            <span class="product-price">৳${price}</span>
+                            ${comparePrice > price ? `<span class="product-compare">৳${comparePrice}</span>` : ''}
                         </div>
                         <div class="product-details-row">
                             <span>${stock > 0 ? 'In stock' : 'Out of stock'}</span>
@@ -3016,6 +3612,22 @@
                 `;
                 container.appendChild(productCard);
             });
+            
+             // Add delivery hints to each rendered card
+             document.querySelectorAll('.product-card').forEach(card => {
+                const content = card.querySelector('.product-card-content');
+                if (content && !content.querySelector('.delivery-hint')) {
+                    const row = content.querySelector('.product-details-row');
+                    if (row) {
+                        const hint = document.createElement('div');
+                        hint.className = 'delivery-hint';
+                        hint.innerHTML = `<i class="fas fa-truck"></i> Get it by ${getDeliveryHint()}`;
+                        content.insertBefore(hint, row);
+                    }
+                }
+            });
+            // Render flash products whenever product list refreshes
+            renderFlashProducts();
         }
 
         // ========== POST COUNT UPDATE ==========
@@ -3398,7 +4010,7 @@
                         <strong>Order #${order.orderNumber}</strong>
                         <span style="color:var(--rose-gold);font-weight:600;">${order.orderStatus || order.status}</span>
                     </div>
-                    <p style="margin:10px 0 6px;color:var(--text-muted);">${order.items?.length || 0} item(s) • Total: à§³${order.totalAmount || order.subtotal || 0}</p>
+                    <p style="margin:10px 0 6px;color:var(--text-muted);">${order.items?.length || 0} item(s) • Total: ৳${order.totalAmount || order.subtotal || 0}</p>
                     <p style="margin:0;font-size:14px;color:var(--text-muted);">Shipped to ${order.shippingAddress?.city || order.shippingAddress?.region || 'your region'}</p>
                 </div>
             `).join('');
@@ -3457,7 +4069,7 @@
                     <img src="${item.image}" class="cart-img" alt="${item.title}">
                     <div class="cart-info">
                         <div class="cart-title">${item.title}</div>
-                        <div class="cart-price">à§³${item.price}</div>
+                        <div class="cart-price">৳${item.price}</div>
                     </div>
                     <button class="remove-btn" onclick="toggleWishlistItem('${item.productId}')">Remove</button>
                 </div>
@@ -3532,15 +4144,54 @@
             showToast(`Coupon ${couponCode} applied successfully!`, 'success');
         }
 
-        function updateShipping() {
-            const region = document.getElementById('customerRegion').value;
-            const shippingCost = region ? 100 : 0;
-            const summary = document.getElementById('checkoutSummary');
-            if (summary) {
-                summary.innerHTML = `
-                    <div class="summary-row"><span>Shipping</span><span>à§³${shippingCost}</span></div>
-                `;
+        // ========== COUPON SYSTEM (FULLY WORKING) ==========
+        let appliedCoupon = null;
+
+        function applyCoupon() {
+            const input = document.getElementById('cartCouponInput');
+            const code  = (input?.value || '').trim().toUpperCase();
+            if (!code) { showToast('Please enter a coupon code.', 'warning'); return; }
+
+            const coupon = COUPONS[code];
+            if (!coupon) { showToast('Invalid coupon code. Try: WELCOME10, FLASH20, SAVE500', 'error'); return; }
+
+            const items    = window.cartState || [];
+            const subtotal = items.reduce((s, i) => s + (Number(i.price || 0) * (i.quantity || 1)), 0);
+
+            if (coupon.minOrder && subtotal < coupon.minOrder) {
+                showToast(`Minimum order ৳${coupon.minOrder} required for this coupon.`, 'warning'); return;
             }
+            if (coupon.minItems && items.length < coupon.minItems) {
+                showToast(`Add at least ${coupon.minItems} items to use this coupon.`, 'warning'); return;
+            }
+
+            appliedCoupon = { code, ...coupon };
+            showToast(`✅ "${code}" applied! ${coupon.description}`, 'success');
+            updateCartSummary();
+        }
+
+        function removeCoupon() {
+            appliedCoupon = null;
+            const input = document.getElementById('cartCouponInput');
+            if (input) input.value = '';
+            showToast('Coupon removed.', 'info');
+            updateCartSummary();
+        }
+
+        function calcDiscount(subtotal) {
+            if (!appliedCoupon) return 0;
+            if (appliedCoupon.type === 'percentage') return Math.round(subtotal * appliedCoupon.value / 100);
+            if (appliedCoupon.type === 'fixed')      return Math.min(appliedCoupon.value, subtotal);
+            return 0;
+        }
+
+        function calcShipping(region) {
+            if (appliedCoupon?.type === 'free_shipping') return 0;
+            return region ? 80 : 100;
+        }
+
+        function updateShipping() {
+            updateCartSummary();
         }
 
         function viewComparison() {
@@ -3549,35 +4200,26 @@
 
         // ========== CART / WISHLIST HELPERS ==========
         function saveCart() {
-            try {
-                localStorage.setItem('tuavec_cart', JSON.stringify(window.cartState || []));
-            } catch (e) { console.warn('Could not save cart', e); }
+            try { localStorage.setItem('tuavec_cart', JSON.stringify(window.cartState || [])); }
+            catch (e) { console.warn('Could not save cart', e); }
             renderCart();
         }
 
         function addToCart(productId, qty = 1) {
-            const id = productId || (this && this.dataset && this.dataset.id);
-            const product = posts.find(p => (p._id || p.id) == id);
+            const product = posts.find(p => (p._id || p.id) == productId);
             if (!product) return showToast('Product not found', 'error');
-
             const price = product.price || product.salePrice || 0;
-            const image = getProductImage(product);
-
             const existing = (window.cartState || []).find(i => i.productId == (product._id || product.id));
-            if (existing) {
-                existing.quantity = Math.max(1, existing.quantity + qty);
-            } else {
+            if (existing) { existing.quantity = Math.max(1, existing.quantity + qty); }
+            else {
                 (window.cartState = window.cartState || []).push({
                     productId: product._id || product.id,
-                    title: product.title,
-                    price: price,
-                    image: image,
-                    quantity: Math.max(1, qty)
+                    title: product.title || product.name,
+                    price, image: getProductImage(product), quantity: Math.max(1, qty)
                 });
             }
-
             saveCart();
-            showToast('Added to cart', 'success');
+            showToast('Added to cart 🛒', 'success');
             updateCartBadge();
         }
 
@@ -3586,7 +4228,7 @@
             if (!item) return;
             item.quantity = Math.max(0, item.quantity + delta);
             if (item.quantity === 0) removeFromCart(productId);
-            saveCart();
+            else saveCart();
         }
 
         function removeFromCart(productId) {
@@ -3597,63 +4239,52 @@
         }
 
         function updateCartSummary() {
-            const summary = document.getElementById('cartSummary');
-            const footer = document.getElementById('cartFooter');
-            const items = window.cartState || [];
+            const summary  = document.getElementById('cartSummary');
+            const footer   = document.getElementById('cartFooter');
+            const items    = window.cartState || [];
             const subtotal = items.reduce((s, it) => s + (Number(it.price || 0) * (it.quantity || 1)), 0);
+            const region   = document.getElementById('customerRegion')?.value || '';
+            const shipping = calcShipping(region);
+            const discount = calcDiscount(subtotal);
+            const total    = subtotal + shipping - discount;
+
             if (summary) {
                 summary.innerHTML = `
-                    <div class="summary-row"><span>Subtotal</span><span>à§³${subtotal}</span></div>
-                    <div class="summary-row"><span>Shipping</span><span>à§³100</span></div>
-                    <div class="summary-row total"><span>Total</span><span>à§³${subtotal + 100}</span></div>
+                    <div class="summary-row"><span>Subtotal (${items.length} item${items.length !== 1 ? 's' : ''})</span><span>৳${subtotal.toLocaleString()}</span></div>
+                    <div class="summary-row"><span>Shipping</span><span>${shipping === 0 ? '<span style="color:var(--success)">Free</span>' : '৳' + shipping}</span></div>
+                    ${discount > 0 ? `<div class="coupon-applied-row"><span>Coupon (${appliedCoupon.code})<button class="remove-coupon-btn" onclick="removeCoupon()">✕ Remove</button></span><span style="color:var(--success)">-৳${discount.toLocaleString()}</span></div>` : ''}
+                    <div class="summary-row total"><span>Total</span><span>৳${total.toLocaleString()}</span></div>
                 `;
             }
             if (footer) {
-                footer.innerHTML = items.length > 0 ? `<button class="btn btn-primary" onclick="document.getElementById('checkoutModal').classList.add('active');document.getElementById('overlay').classList.add('active');">Checkout</button>` : '';
+                footer.innerHTML = items.length > 0 ? `
+                    <button class="btn btn-primary" style="width:100%;font-size:15px;" onclick="document.getElementById('checkoutModal').classList.add('active');document.getElementById('overlay').classList.add('active');">
+                        <i class="fas fa-lock"></i> Secure Checkout
+                    </button>` : '';
             }
         }
 
         function updateCartBadge() {
             const count = (window.cartState || []).reduce((s, i) => s + (i.quantity || 0), 0);
-            const cartBadge = document.getElementById('cartBadge');
-            if (cartBadge) {
-                cartBadge.textContent = count;
-                cartBadge.style.display = count > 0 ? 'inline-flex' : 'none';
-            }
-            const bottomCartBadge = document.getElementById('bottomCartBadge');
-            if (bottomCartBadge) {
-                bottomCartBadge.textContent = count;
-                bottomCartBadge.style.display = count > 0 ? 'inline-flex' : 'none';
-            }
-            const userGreeting = document.getElementById('userGreeting');
-            if (userGreeting) {
-                const token = localStorage.getItem('tuavec_jwt');
-                if (token) {
-                    const email = localStorage.getItem('tuavec_user_email') || 'Member';
-                    userGreeting.textContent = `Hello, ${email}`;
-                } else {
-                    userGreeting.textContent = count > 0 ? `Cart: ${count} item${count !== 1 ? 's' : ''}` : 'Welcome, Guest!';
-                }
+            ['cartBadge', 'bottomCartBadge'].forEach(id => {
+                const el = document.getElementById(id);
+                if (el) { el.textContent = count; el.style.display = count > 0 ? 'inline-flex' : 'none'; }
+            });
+            const greeting = document.getElementById('userGreeting');
+            if (greeting && !currentUser) {
+                greeting.textContent = count > 0 ? `Cart: ${count} item${count !== 1 ? 's' : ''}` : 'Welcome, Guest!';
             }
         }
 
         function renderCart() {
             const container = document.getElementById('cartItems');
+            if (!container) return;
             container.innerHTML = '';
             const items = window.cartState || [];
-            if (!items || items.length === 0) {
-                container.innerHTML = `
-                    <div class="empty-state">
-                        <i class="fas fa-shopping-bag"></i>
-                        <h3>Your cart is empty</h3>
-                        <p>Add items to get started.</p>
-                    </div>
-                `;
-                updateCartSummary();
-                updateCartBadge();
-                return;
+            if (!items.length) {
+                container.innerHTML = `<div class="empty-state"><i class="fas fa-shopping-bag"></i><h3>Your cart is empty</h3><p>Add items to get started.</p></div>`;
+                updateCartSummary(); updateCartBadge(); return;
             }
-
             items.forEach(item => {
                 const el = document.createElement('div');
                 el.className = 'cart-item';
@@ -3661,30 +4292,179 @@
                     <img src="${item.image}" class="cart-img" alt="${item.title}">
                     <div class="cart-info">
                         <div class="cart-title">${item.title}</div>
-                        <div class="cart-variant">Quantity: <span class="quantity-display">${item.quantity}</span></div>
-                        <div class="cart-price">à§³${item.price}</div>
+                        <div class="cart-price">৳${(Number(item.price) * (item.quantity || 1)).toLocaleString()}</div>
+                        <div class="quantity-control" style="margin-top:8px;display:flex;align-items:center;gap:8px;">
+                            <button class="quantity-btn" onclick="changeQty('${item.productId}',-1)" style="width:28px;height:28px;border-radius:50%;background:var(--chocolate);border:none;color:white;font-size:14px;cursor:pointer;display:flex;align-items:center;justify-content:center;">−</button>
+                            <span style="font-weight:600;min-width:20px;text-align:center;">${item.quantity}</span>
+                            <button class="quantity-btn" onclick="changeQty('${item.productId}',1)" style="width:28px;height:28px;border-radius:50%;background:var(--chocolate);border:none;color:white;font-size:14px;cursor:pointer;display:flex;align-items:center;justify-content:center;">+</button>
+                        </div>
                     </div>
-                    <div style="display:flex;flex-direction:column;gap:8px;align-items:flex-end;">
-                        <button class="quantity-btn" onclick="changeQty('${item.productId}',1)">+</button>
-                        <button class="quantity-btn" onclick="changeQty('${item.productId}',-1)">-</button>
-                        <button class="remove-btn" onclick="removeFromCart('${item.productId}')">Remove</button>
-                    </div>
+                    <button class="remove-btn" onclick="removeFromCart('${item.productId}')" style="align-self:flex-start;background:var(--error);color:white;border:none;padding:6px 10px;border-radius:6px;cursor:pointer;font-size:12px;flex-shrink:0;"><i class="fas fa-trash"></i></button>
                 `;
                 container.appendChild(el);
             });
-
             updateCartSummary();
             updateCartBadge();
         }
 
-        // Initialize cart UI on load
-        document.addEventListener('DOMContentLoaded', () => {
-            try { renderCart(); updateCartBadge(); } catch (e) { console.warn(e); }
-        });
+        // ========== NOTIFICATIONS ==========
+        function toggleNotifications() {
+            const panel = document.getElementById('notifPanel');
+            const msgP  = document.getElementById('msgPanel');
+            if (!panel) return;
+            msgP?.classList.remove('active');
+            const isOpen = panel.classList.toggle('active');
+            if (isOpen) {
+                const badge = document.getElementById('notificationBadge');
+                if (badge) { badge.style.display = 'none'; badge.textContent = '0'; }
+                // close if clicking outside
+                setTimeout(() => document.addEventListener('click', _closeNotifOnOut, { once: true }), 50);
+            }
+        }
+        function _closeNotifOnOut(e) {
+            if (!document.getElementById('notifPanel')?.contains(e.target)) closeNotifPanel();
+        }
+        function closeNotifPanel() { document.getElementById('notifPanel')?.classList.remove('active'); }
+        function markAllNotifsRead() {
+            document.querySelectorAll('#notifPanel .notif-item.unread').forEach(el => {
+                el.classList.remove('unread');
+                el.querySelector('.unread-dot')?.remove();
+            });
+            showToast('All notifications marked as read', 'success');
+        }
+
+        // ========== MESSAGES ==========
+        function toggleMessages() {
+            const panel  = document.getElementById('msgPanel');
+            const notifP = document.getElementById('notifPanel');
+            if (!panel) return;
+            notifP?.classList.remove('active');
+            const isOpen = panel.classList.toggle('active');
+            if (isOpen) {
+                const badge = document.getElementById('messageBadge');
+                if (badge) { badge.style.display = 'none'; badge.textContent = '0'; }
+                setTimeout(() => document.addEventListener('click', _closeMsgOnOut, { once: true }), 50);
+            }
+        }
+        function _closeMsgOnOut(e) {
+            if (!document.getElementById('msgPanel')?.contains(e.target)) closeMsgPanel();
+        }
+        function closeMsgPanel() { document.getElementById('msgPanel')?.classList.remove('active'); }
+
+        // ========== CHAT BOT (SMART REPLIES) ==========
+        function toggleChat() {
+            const chatWindow = document.getElementById('chatWindow');
+            const isActive   = chatWindow.classList.toggle('active');
+            document.getElementById('overlay').classList.toggle('active', isActive);
+        }
+
+        function handleChatEnter(event) {
+            if (event.key === 'Enter') { event.preventDefault(); sendChatMessage(); }
+        }
+
+        function sendChatMessage() {
+            const input = document.getElementById('chatInput');
+            const value = input.value.trim();
+            if (!value) return;
+
+            const messages = document.getElementById('chatMessages');
+            const userMsg  = document.createElement('div');
+            userMsg.className   = 'chat-message user';
+            userMsg.textContent = value;
+            messages.appendChild(userMsg);
+            input.value = '';
+            messages.scrollTop = messages.scrollHeight;
+
+            // Typing indicator
+            const typing = document.createElement('div');
+            typing.className   = 'chat-message bot';
+            typing.textContent = '● ● ●';
+            typing.style.opacity = '0.5';
+            messages.appendChild(typing);
+            messages.scrollTop = messages.scrollHeight;
+
+            setTimeout(() => {
+                typing.remove();
+                const botMsg  = document.createElement('div');
+                botMsg.className   = 'chat-message bot';
+                botMsg.textContent = getBotReply(value);
+                messages.appendChild(botMsg);
+                messages.scrollTop = messages.scrollHeight;
+            }, 800);
+        }
+
+        function getBotReply(msg) {
+            const m = msg.toLowerCase();
+            if (m.includes('track') || m.includes('order status') || m.includes('where') || m.includes('status'))
+                return 'To track your order, go to My Orders in the top bar or call us at +880 1310-880044. You will also receive SMS updates from our courier.';
+            if (m.includes('return') || m.includes('refund') || m.includes('exchange'))
+                return 'We accept returns within 7 days of delivery. Contact us at support@tuavec.com or call +880 1310-880044. Refunds are processed within 3–5 business days.';
+            if (m.includes('deliver') || m.includes('shipping') || m.includes('how long') || m.includes('when'))
+                return 'Dhaka delivery: 1–3 business days. Outside Dhaka: 3–7 days. We use Pathao, Redx & Steadfast. You will get an SMS with tracking once shipped.';
+            if (m.includes('payment') || m.includes('bkash') || m.includes('nagad') || m.includes('pay'))
+                return 'We accept bKash, Nagad, Rocket, and Cash on Delivery (COD). All payments are fully secure.';
+            if (m.includes('coupon') || m.includes('discount') || m.includes('promo') || m.includes('code'))
+                return 'Current active codes: WELCOME10 (10% off), FLASH20 (20% off orders ৳2000+), SAVE500 (৳500 off orders ৳5000+), FREESHIP (free shipping orders ৳3000+), BULK15 (15% off 3+ items).';
+            if (m.includes('authentic') || m.includes('real') || m.includes('original') || m.includes('fake'))
+                return 'All products are directly sourced from verified Thai suppliers. We perform quality checks before dispatch. If you receive an inauthentic product, we\'ll replace it immediately at no cost.';
+            if (m.includes('cancel') || m.includes('cancell'))
+                return 'To cancel an order, contact us within 2 hours of placing it at +880 1310-880044. After dispatch, cancellation is not possible but you can return within 7 days.';
+            if (m.includes('hello') || m.includes('hi') || m.includes('hey') || m.includes('salam'))
+                return 'Hello! 👋 Welcome to Tu Avec. I\'m here to help. Ask me about delivery times, payments, returns, or our latest deals!';
+            if (m.includes('price') || m.includes('expensive') || m.includes('cheap'))
+                return 'Our prices are competitive for authentic Thai imports. Use coupon WELCOME10 for 10% off your first order. We price-match on request!';
+            return 'Thanks for reaching out! For urgent help, call +880 1310-880044 or email support@tuavec.com. Our team replies within 2 hours on business days.';
+        }
+
+        // ========== AUTH HELPERS ==========
+        function togglePw(inputId, btn) {
+            const input = document.getElementById(inputId);
+            if (!input) return;
+            const isHidden = input.type === 'password';
+            input.type = isHidden ? 'text' : 'password';
+            btn.innerHTML = isHidden ? '<i class="fas fa-eye-slash"></i>' : '<i class="fas fa-eye"></i>';
+        }
+
+        // ========== BOTTOM NAV ACCOUNT ==========
+        function handleBnAccount() {
+            const token = localStorage.getItem('tuavec_jwt');
+            if (token && currentUser) {
+                openOrdersModal();
+            } else {
+                openLoginModal();
+            }
+        }
+
+        function updateBnAccount() {
+            const btn   = document.getElementById('bnAccountBtn');
+            const icon  = document.getElementById('bnAccountIcon');
+            const label = document.getElementById('bnAccountLabel');
+            if (!btn) return;
+            if (currentUser) {
+                if (icon)  icon.className  = 'fas fa-user-check';
+                if (label) label.textContent = currentUser.name?.split(' ')[0] || 'Account';
+                btn.style.color = 'var(--rose-gold)';
+            } else {
+                if (icon)  icon.className  = 'fas fa-user';
+                if (label) label.textContent = 'Account';
+                btn.style.color = '';
+            }
+        }
+
+        // ========== CLOSE ALL (COMPLETE) ==========
+        function closeAll() {
+            document.getElementById('overlay').classList.remove('active');
+            document.querySelectorAll('.sidebar.active').forEach(s => s.classList.remove('active'));
+            ['checkoutModal','ordersModal','productModal','loginModal'].forEach(id =>
+                document.getElementById(id)?.classList.remove('active')
+            );
+            document.getElementById('chatWindow')?.classList.remove('active');
+            document.getElementById('notifPanel')?.classList.remove('active');
+            document.getElementById('msgPanel')?.classList.remove('active');
+            closeShareMenus();
+        }
 
         // ========== PRODUCT DETAIL MODAL ==========
-        // Insert product modal container
-        
 
         function closeCheckout() {
             document.getElementById('checkoutModal').classList.remove('active');
@@ -3846,8 +4626,8 @@
                     <div style="color:var(--text-light);">
                         <h3 style="margin-top:0;">${name}</h3>
                         <p style="color:var(--text-muted);">${product.category || 'General'}</p>
-                        <div style="font-size:22px;color:var(--gold);font-weight:700;margin:10px 0;">à§³${price}</div>
-                        ${comparePrice > price ? `<div style="font-size:14px;color:var(--text-muted);text-decoration:line-through;">à§³${comparePrice}</div>` : ''}
+                        <div style="font-size:22px;color:var(--gold);font-weight:700;margin:10px 0;">৳${price}</div>
+                        ${comparePrice > price ? `<div style="font-size:14px;color:var(--text-muted);text-decoration:line-through;">৳${comparePrice}</div>` : ''}
                         <p style="line-height:1.6;">${product.shortDescription || product.description || ''}</p>
                         <div style="margin-top:16px;display:flex;gap:12px;flex-wrap:wrap;align-items:center;">
                             <span style="font-size:14px;color:${stock > 0 ? '#4caf50' : '#f44336'};font-weight:600;">${stock > 0 ? 'In stock' : 'Out of stock'}</span>
@@ -3946,19 +4726,103 @@
             closeShareMenus();
         }
 
+        // ========== HERO CAROUSEL ==========
+        let heroIdx = 0, heroTimer;
+        function goHeroSlide(n) {
+            heroIdx = n;
+            document.getElementById('heroSlides').style.transform = `translateX(-${n * 100}%)`;
+            document.querySelectorAll('.hdot').forEach((d, i) => d.classList.toggle('active', i === n));
+        }
+        function nextHeroSlide() { goHeroSlide((heroIdx + 1) % 3); }
+        function prevHeroSlide() { goHeroSlide((heroIdx + 2) % 3); }
+        function startHeroAuto() { heroTimer = setInterval(nextHeroSlide, 5200); }
+        function stopHeroAuto()  { clearInterval(heroTimer); }
+        document.getElementById('heroSection')?.addEventListener('mouseenter', stopHeroAuto);
+        document.getElementById('heroSection')?.addEventListener('mouseleave', startHeroAuto);
+
+        // ========== FLASH COUNTDOWN ==========
+        function startFlashCountdown() {
+            const end = Date.now() + 8.5 * 3600 * 1000;
+            const pad = n => String(n).padStart(2, '0');
+            const tick = () => {
+                const d = end - Date.now();
+                if (d < 0) { document.getElementById('flashZone').style.display = 'none'; return; }
+                document.getElementById('cdH').textContent = pad(Math.floor(d / 3600000));
+                document.getElementById('cdM').textContent = pad(Math.floor((d % 3600000) / 60000));
+                document.getElementById('cdS').textContent = pad(Math.floor((d % 60000) / 1000));
+            };
+            tick();
+            setInterval(tick, 1000);
+        }
+
+        // ========== FLASH PRODUCT CARDS ==========
+        function renderFlashProducts() {
+            const sc = document.getElementById('flashScrollRow');
+            if (!sc || !posts.length) return;
+            const deals = posts.filter(p => (p.comparePrice || p.originalPrice || 0) > (p.price || p.salePrice || 0)).slice(0, 10);
+            if (!deals.length) {
+                // fallback: show newest 6 products if no deals found
+                const fallback = posts.slice(0, 6);
+                if (!fallback.length) { sc.innerHTML = '<p style="color:var(--text-muted);font-size:13px;">No deals right now. Check back soon!</p>'; return; }
+                sc.innerHTML = fallback.map(p => {
+                    const price = p.price || p.salePrice || 0;
+                    return `<div class="flash-mini-card" onclick="viewPost('${p.slug || p._id || p.id}')">
+                        <img src="${getProductImage(p)}" alt="${p.title || p.name}" loading="lazy">
+                        <div class="flash-mini-body">
+                            <div class="flash-mini-name">${p.title || p.name}</div>
+                            <div class="flash-mini-price">৳${price}</div>
+                        </div>
+                    </div>`;
+                }).join('');
+                return;
+            }
+            sc.innerHTML = deals.map(p => {
+                const price = p.price || p.salePrice || 0;
+                const cmp = p.comparePrice || p.originalPrice || 0;
+                const disc = Math.round(((cmp - price) / cmp) * 100);
+                return `<div class="flash-mini-card" onclick="viewPost('${p.slug || p._id || p.id}')">
+                    <span class="flash-mini-tag">${disc}% OFF</span>
+                    <img src="${getProductImage(p)}" alt="${p.title || p.name}" loading="lazy">
+                    <div class="flash-mini-body">
+                        <div class="flash-mini-name">${p.title || p.name}</div>
+                        <div class="flash-mini-price">৳${price}</div>
+                    </div>
+                </div>`;
+            }).join('');
+        }
+
+        // ========== VOUCHER COLLECT ==========
+        function collectVoucher(code) {
+            navigator.clipboard.writeText(code)
+                .then(() => showToast(`✅ Code "${code}" copied! Paste it at checkout.`, 'success'))
+                .catch(() => {
+                    const inp = document.getElementById('cartCouponInput');
+                    if (inp) { inp.value = code; toggleCart(); }
+                    showToast(`Code "${code}" ready in your cart coupon field!`, 'success');
+                });
+        }
+
+        // ========== DELIVERY DATE HINT ==========
+        function getDeliveryHint() {
+            const d = new Date();
+            d.setDate(d.getDate() + 2 + Math.floor(Math.random() * 2));
+            return d.toLocaleDateString('en-BD', { weekday: 'short', month: 'short', day: 'numeric' });
+        }
+
+
         // ========== INITIALIZATION ==========
         document.addEventListener('DOMContentLoaded', () => {
             loadData();
             loadPosts();
             renderWishlist();
             initFlashSale();
+            startHeroAuto();
+            startFlashCountdown();
         });
 
         document.addEventListener('keydown', (e) => {
             if (e.key === 'Escape') closeAll();
         });
     </script>
-
-</section>
 </body>
 </html>

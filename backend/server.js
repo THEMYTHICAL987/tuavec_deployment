@@ -107,12 +107,14 @@ const productRoutes  = require('./routes/products');
 const orderRoutes    = require('./routes/orders');
 const logisticsRoutes = require('./routes/logistics');
 const authRoutes     = require('./routes/auth');
+const paymentRoutes  = require('./routes/payment');
 
 app.use('/api/products',       productRoutes);
 app.use('/api/orders',         orderRoutes);
 app.use('/api/v1/orders',      orderRoutes);     // legacy alias
 app.use('/api/v1/logistics',   logisticsRoutes);
 app.use('/api/auth',           authRoutes);
+app.use('/api/payment',        paymentRoutes);
 
 // Optional routes — only mount if the file exists (avoids crash on missing file)
 const optionalRoutes = [

@@ -2046,6 +2046,127 @@
             .trust-item { flex-direction: column; text-align: center; gap: 5px; flex: 1; }
         }
 
+        /* ===== MOBILE: DARAZ-STYLE ADDITIONS ===== */
+        @media (max-width: 768px) {
+            .announcement-bar { padding: 8px 34px; font-size: 11px; gap: 8px; }
+            .announcement-bar span { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+            .announcement-bar a { flex-shrink: 0; }
+
+            .trust-row { justify-content: flex-start; overflow-x: auto; flex-wrap: nowrap; padding-bottom: 4px; }
+            .trust-item { flex-direction: row; flex: 0 0 auto; }
+
+            .hero { height: 240px; }
+            .hero-content { padding: 0 50px; }
+            .hero-tag { font-size: 10px; padding: 4px 10px; margin-bottom: 8px; }
+            .hero h1 { font-size: 22px; margin-bottom: 8px; line-height: 1.25; }
+            .hero p { font-size: 12px; margin-bottom: 14px; }
+            .hero-btns .h-btn { padding: 9px 16px; font-size: 12px; }
+            .hero-prev, .hero-next { width: 32px; height: 32px; font-size: 12px; }
+            .hero-prev { left: 6px; } .hero-next { right: 6px; }
+            .hero-dots { bottom: 10px; }
+
+            .flash-sale-zone { padding: 14px 14px; border-radius: 12px; }
+            .flash-zone-hd { gap: 8px; margin-bottom: 10px; }
+            .flash-zone-hd h3 { font-size: 15px; }
+            .flash-countdown { margin-left: 0; width: 100%; justify-content: flex-start; }
+            .cd-block { min-width: 38px; padding: 5px 7px; }
+            .cd-block .cd-n { font-size: 16px; }
+            .flash-mini-card { flex: 0 0 130px; }
+            .flash-mini-card img { height: 95px; }
+
+            .voucher-zone { padding: 14px 14px; }
+            .voucher-zone-hd h3 { font-size: 15px; }
+            .voucher-zone-hd span { display: none; }
+            .v-card { flex: 0 0 180px; padding: 12px; }
+            .v-icon { width: 36px; height: 36px; font-size: 16px; }
+        }
+
+        @media (max-width: 400px) {
+            .hero { height: 210px; }
+            .hero-content { padding: 0 40px; }
+            .hero h1 { font-size: 18px; }
+        }
+
+        /* ===== NOTIFICATION / MESSAGE PANELS ===== */
+        .nav-btn-wrap { position: relative; }
+
+        .dropdown-panel {
+            position: absolute;
+            top: calc(100% + 10px);
+            right: 0;
+            width: 340px;
+            max-width: 90vw;
+            background: var(--bg-card);
+            border: 1px solid rgba(183,110,121,0.2);
+            border-radius: 14px;
+            box-shadow: var(--shadow-lg);
+            z-index: 1050;
+            display: none;
+            overflow: hidden;
+        }
+
+        .dropdown-panel.active { display: block; }
+
+        .dropdown-panel-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 14px 18px;
+            border-bottom: 1px solid rgba(183,110,121,0.15);
+        }
+
+        .dropdown-panel-header h4 { font-size: 15px; font-weight: 700; }
+        .dropdown-panel-header button {
+            background: none; border: none; color: var(--rose-gold);
+            font-size: 12px; cursor: pointer; font-weight: 600;
+        }
+
+        .dropdown-panel-body { max-height: 360px; overflow-y: auto; }
+
+        .dropdown-item {
+            display: flex;
+            gap: 12px;
+            padding: 13px 18px;
+            border-bottom: 1px solid rgba(183,110,121,0.08);
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .dropdown-item:last-child { border-bottom: none; }
+        .dropdown-item:hover { background: rgba(183,110,121,0.06); }
+        .dropdown-item.unread { background: rgba(183,110,121,0.05); }
+
+        .dropdown-item-icon {
+            width: 38px; height: 38px; border-radius: 50%; flex-shrink: 0;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 15px; color: white;
+        }
+
+        .dropdown-item-icon.order { background: var(--success); }
+        .dropdown-item-icon.price { background: var(--gold); color: var(--chocolate); }
+        .dropdown-item-icon.promo { background: var(--rose-gold); }
+        .dropdown-item-icon.msg { background: var(--info); }
+
+        .dropdown-item-content { flex: 1; min-width: 0; }
+        .dropdown-item-title { font-size: 13px; font-weight: 600; margin-bottom: 2px; }
+        .dropdown-item-text { font-size: 12px; color: var(--text-muted); line-height: 1.4; }
+        .dropdown-item-time { font-size: 11px; color: var(--text-muted); margin-top: 4px; }
+
+        .dropdown-empty { text-align: center; padding: 40px 20px; color: var(--text-muted); font-size: 13px; }
+        .dropdown-empty i { font-size: 32px; display: block; margin-bottom: 10px; opacity: 0.5; }
+
+        @media (max-width: 768px) {
+            .dropdown-panel {
+                position: fixed;
+                top: auto;
+                bottom: 64px;
+                left: 12px;
+                right: 12px;
+                width: auto;
+                max-width: none;
+            }
+        }
+
         /* ===== HERO CAROUSEL ===== */
         .hero {
             position: relative; overflow: hidden; height: 380px;
@@ -2257,18 +2378,37 @@
                         <i class="fas fa-shopping-cart"></i>
                         <span class="badge" id="cartBadge">0</span>
                     </button>
-                    <button class="nav-btn" onclick="toggleNotifications()" aria-label="Notifications">
-                        <i class="fas fa-bell"></i>
-                        <span class="badge" id="notificationBadge" style="display: none;">3</span>
-                    </button>
-                    <button class="nav-btn" onclick="toggleMessages()" aria-label="Messages">
-                        <i class="fas fa-envelope"></i>
-                        <span class="badge" id="messageBadge" style="display: none;">2</span>
-                    </button>
+                    <div class="nav-btn-wrap">
+                        <button class="nav-btn" onclick="toggleNotifications()" aria-label="Notifications">
+                            <i class="fas fa-bell"></i>
+                            <span class="badge" id="notificationBadge" style="display: none;">3</span>
+                        </button>
+                        <div class="dropdown-panel" id="notificationPanel">
+                            <div class="dropdown-panel-header">
+                                <h4>Notifications</h4>
+                                <button onclick="markAllNotificationsRead()">Mark all read</button>
+                            </div>
+                            <div class="dropdown-panel-body" id="notificationList"></div>
+                        </div>
+                    </div>
+                    <div class="nav-btn-wrap">
+                        <button class="nav-btn" onclick="toggleMessages()" aria-label="Messages">
+                            <i class="fas fa-envelope"></i>
+                            <span class="badge" id="messageBadge" style="display: none;">2</span>
+                        </button>
+                        <div class="dropdown-panel" id="messagePanel">
+                            <div class="dropdown-panel-header">
+                                <h4>Messages</h4>
+                                <button onclick="toggleChat();closeDropdownPanels();">Open chat</button>
+                            </div>
+                            <div class="dropdown-panel-body" id="messageList"></div>
+                        </div>
+                    </div>
                     <button id="loginNavBtn" class="nav-btn" onclick="openLoginModal()" aria-label="Account">
                         <i class="fas fa-user"></i>
                     </button>
                 </div>
+
             </div>
         </div>
     </header>
@@ -2819,7 +2959,7 @@
             <button class="bottom-nav-item" onclick="setActiveBottomNav(this);document.querySelector('.category-nav')?.scrollIntoView({behavior:'smooth'})">
                 <i class="fas fa-th-large"></i> Categories
             </button>
-            <button class="bottom-nav-item" onclick="setActiveBottomNav(this);toggleMobileFilters()">
+            <button class="bottom-nav-item" onclick="setActiveBottomNav(this);focusMobileSearch()">
                 <i class="fas fa-search"></i> Search
             </button>
             <button class="bottom-nav-item" onclick="setActiveBottomNav(this);toggleWishlist()">
@@ -2830,8 +2970,8 @@
                 <i class="fas fa-shopping-cart"></i> Cart
                 <span class="badge" id="bottomCartBadge" style="display:none;">0</span>
             </button>
-            <button class="bottom-nav-item" onclick="setActiveBottomNav(this);openLoginModal()">
-                <i class="fas fa-user"></i> Account
+            <button class="bottom-nav-item" onclick="setActiveBottomNav(this);smartAccountAction()">
+                <i class="fas fa-user"></i> <span id="bottomAccountLabel">Account</span>
             </button>
         </div>
     </nav>
@@ -2857,14 +2997,13 @@
     </footer>
 
     <script>
-        // ========== CONFIGURATION ==========
-        const LOCAL_API = 'http://localhost:5000/api';
-        const LIVE_API = 'https://tuavec.onrender.com/api';
+      const LOCAL_API = 'http://localhost:5000/api';
+const LIVE_API = 'https://tuavec.onrender.com/api';
 
-        const isLocal = window.location.protocol === 'file:' ||
-                        window.location.hostname === 'localhost' ||
-                        window.location.hostname === '127.0.0.1' ||
-                        window.location.hostname.startsWith('192.168.');
+const isLocal = window.location.protocol === 'file:' ||
+                window.location.hostname === 'localhost' ||
+                window.location.hostname === '127.0.0.1' ||
+                window.location.hostname.startsWith('192.168');
 
 const API_URL = LIVE_API;
         // ========== STATE MANAGEMENT ==========
@@ -2900,7 +3039,7 @@ const API_URL = LIVE_API;
         const COUPONS = {
             'WELCOME10': { type: 'percentage', value: 10, minOrder: 0, description: '10% off for new customers' },
             'FREESHIP': { type: 'free_shipping', value: 0, minOrder: 3000, description: 'Free shipping' },
-            'SAVE500': { type: 'fixed', value: 500, minOrder: 5000, description: 'à§³500 off' },
+            'SAVE500': { type: 'fixed', value: 500, minOrder: 5000, description: '৳500 off' },
             'BULK15': { type: 'percentage', value: 15, minOrder: 0, minItems: 3, description: '15% off on 3+ items' },
             'FLASH20': { type: 'percentage', value: 20, minOrder: 2000, description: '20% flash sale discount' }
         };
@@ -3106,7 +3245,7 @@ const API_URL = LIVE_API;
             if (currentFilters.minPrice != null || currentFilters.maxPrice != null) {
                 const min = currentFilters.minPrice ?? 0;
                 const max = currentFilters.maxPrice ?? '∞';
-                chips.push({ label: `à§³${min} - à§³${max}`, clear: () => { currentFilters.minPrice = null; currentFilters.maxPrice = null; document.getElementById('filterMinPrice').value=''; document.getElementById('filterMaxPrice').value=''; } });
+                chips.push({ label: `৳${min} - ৳${max}`, clear: () => { currentFilters.minPrice = null; currentFilters.maxPrice = null; document.getElementById('filterMinPrice').value=''; document.getElementById('filterMaxPrice').value=''; } });
             }
             currentFilters.brands.forEach(brand => {
                 chips.push({ label: brand, clear: () => {
@@ -3153,7 +3292,7 @@ const API_URL = LIVE_API;
                         <img class="autocomplete-img" src="${getProductImage(product)}" alt="${product.title || product.name}" />
                         <div>
                             <strong>${product.title || product.name}</strong>
-                            <div style="font-size:12px;color:var(--text-muted);">à§³${product.price || 0}</div>
+                            <div style="font-size:12px;color:var(--text-muted);">৳${product.price || 0}</div>
                         </div>
                     </div>
                 `).join('');
@@ -3201,12 +3340,24 @@ const API_URL = LIVE_API;
                 }
             } catch (error) {
                 showToast('Error loading posts: ' + error.message, 'error');
+                
+                const container = document.getElementById('postsGrid');
+                if (container) {
+                    container.innerHTML = `
+                        <div class="empty-state">
+                            <i class="fas fa-exclamation-circle" style="color: var(--error);"></i>
+                            <h3>Sorry, we could not load the products at this time.</h3>
+                            <p>${error.message}</p>
+                        </div>
+                    `;
+                }
             }
         }
 
         // ========== POST RENDERING ==========
         function renderPosts() {
             const container = document.getElementById('postsGrid');
+            if(!container) return; // Add check here just in case
 
             let filtered = posts.filter(p => {
                 if (currentFilters.category && p.category !== currentFilters.category) return false;
@@ -3281,8 +3432,8 @@ const API_URL = LIVE_API;
                         <h3 class="product-title">${name}</h3>
                         <p class="product-excerpt">${product.shortDescription || (product.description ? product.description.substring(0, 120) + '...' : 'High-quality product from Tu Avec.')}</p>
                         <div class="product-price-row">
-                            <span class="product-price">à§³${price}</span>
-                            ${comparePrice > price ? `<span class="product-compare">à§³${comparePrice}</span>` : ''}
+                            <span class="product-price">৳${price}</span>
+                            ${comparePrice > price ? `<span class="product-compare">৳${comparePrice}</span>` : ''}
                         </div>
                         <div class="product-details-row">
                             <span>${stock > 0 ? 'In stock' : 'Out of stock'}</span>
@@ -3297,6 +3448,22 @@ const API_URL = LIVE_API;
                 `;
                 container.appendChild(productCard);
             });
+            
+             // Add delivery hints to each rendered card
+             document.querySelectorAll('.product-card').forEach(card => {
+                const content = card.querySelector('.product-card-content');
+                if (content && !content.querySelector('.delivery-hint')) {
+                    const row = content.querySelector('.product-details-row');
+                    if (row) {
+                        const hint = document.createElement('div');
+                        hint.className = 'delivery-hint';
+                        hint.innerHTML = `<i class="fas fa-truck"></i> Get it by ${getDeliveryHint()}`;
+                        content.insertBefore(hint, row);
+                    }
+                }
+            });
+            // Render flash products whenever product list refreshes
+            renderFlashProducts();
         }
 
         // ========== POST COUNT UPDATE ==========
@@ -3429,6 +3596,24 @@ const API_URL = LIVE_API;
             if (el) el.classList.add('active');
         }
 
+        function focusMobileSearch() {
+            const bar = document.querySelector('.mobile-search-bar');
+            const input = document.getElementById('mobileSearchInput');
+            if (bar) bar.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            // Wait for scroll to (roughly) finish before focusing, so the keyboard
+            // doesn't fight the scroll animation on slower phones.
+            setTimeout(() => input?.focus(), 350);
+        }
+
+        function smartAccountAction() {
+            const token = localStorage.getItem('tuavec_jwt');
+            if (token) {
+                openOrdersModal();
+            } else {
+                openLoginModal();
+            }
+        }
+
         // ========== UTILITY FUNCTIONS ==========
         function showToast(message, type = 'info') {
             const toast = document.getElementById('toast');
@@ -3517,7 +3702,10 @@ const API_URL = LIVE_API;
                 throw new Error('Login response missing token');
             } catch (err) {
                 console.error('Login error:', err);
-                showToast(err.message || 'Login failed', 'error');
+                const friendlyMessage = (err instanceof TypeError)
+                    ? 'Cannot reach the server right now. Please check your connection and try again.'
+                    : (err.message || 'Login failed');
+                showToast(friendlyMessage, 'error');
             }
         }
 
@@ -3577,17 +3765,20 @@ const API_URL = LIVE_API;
             const logoutBtn = document.getElementById('logoutBtn');
             const loginTopBtn = document.getElementById('loginTopBtn');
             const loginNavBtn = document.getElementById('loginNavBtn');
-            if (!userGreeting) return;
+            const bottomAccountLabel = document.getElementById('bottomAccountLabel');
+
             if (currentUser) {
-                userGreeting.textContent = `Hello, ${currentUser.name || currentUser.email || 'Member'}`;
+                if (userGreeting) userGreeting.textContent = `Hello, ${currentUser.name || currentUser.email || 'Member'}`;
                 if (logoutBtn) logoutBtn.style.display = 'inline-flex';
                 if (loginTopBtn) loginTopBtn.style.display = 'none';
                 if (loginNavBtn) loginNavBtn.style.display = 'none';
+                if (bottomAccountLabel) bottomAccountLabel.textContent = 'Orders';
             } else {
-                userGreeting.textContent = 'Welcome, Guest!';
+                if (userGreeting) userGreeting.textContent = 'Welcome, Guest!';
                 if (logoutBtn) logoutBtn.style.display = 'none';
                 if (loginTopBtn) loginTopBtn.style.display = 'inline-flex';
                 if (loginNavBtn) loginNavBtn.style.display = 'inline-flex';
+                if (bottomAccountLabel) bottomAccountLabel.textContent = 'Account';
             }
         }
 
@@ -3679,7 +3870,7 @@ const API_URL = LIVE_API;
                         <strong>Order #${order.orderNumber}</strong>
                         <span style="color:var(--rose-gold);font-weight:600;">${order.orderStatus || order.status}</span>
                     </div>
-                    <p style="margin:10px 0 6px;color:var(--text-muted);">${order.items?.length || 0} item(s) • Total: à§³${order.totalAmount || order.subtotal || 0}</p>
+                    <p style="margin:10px 0 6px;color:var(--text-muted);">${order.items?.length || 0} item(s) • Total: ৳${order.totalAmount || order.subtotal || 0}</p>
                     <p style="margin:0;font-size:14px;color:var(--text-muted);">Shipped to ${order.shippingAddress?.city || order.shippingAddress?.region || 'your region'}</p>
                 </div>
             `).join('');
@@ -3738,7 +3929,7 @@ const API_URL = LIVE_API;
                     <img src="${item.image}" class="cart-img" alt="${item.title}">
                     <div class="cart-info">
                         <div class="cart-title">${item.title}</div>
-                        <div class="cart-price">à§³${item.price}</div>
+                        <div class="cart-price">৳${item.price}</div>
                     </div>
                     <button class="remove-btn" onclick="toggleWishlistItem('${item.productId}')">Remove</button>
                 </div>
@@ -3749,19 +3940,158 @@ const API_URL = LIVE_API;
             openLoginModal();
         }
 
-        function toggleNotifications() {
+        // ========== NOTIFICATIONS ==========
+        // Backed by localStorage for now (client-only). Swap loadNotifications()
+        // to fetch from `${API_URL}/notifications` once that endpoint exists —
+        // the render/badge logic below will keep working unchanged.
+        function getStoredNotifications() {
+            try {
+                const stored = JSON.parse(localStorage.getItem('tuavec_notifications') || 'null');
+                if (stored) return stored;
+            } catch (e) { /* fall through to seed data */ }
+
+            // Seed with realistic starter notifications on first run
+            const seeded = [
+                { id: 'n1', type: 'order', title: 'Order confirmed', text: 'Your order #TA-10234 has been confirmed and is being packed.', time: '2 hours ago', read: false },
+                { id: 'n2', type: 'price', title: 'Price drop alert', text: 'An item in your wishlist just dropped by ৳150.', time: '1 day ago', read: false },
+                { id: 'n3', type: 'promo', title: 'Flash Sale live now', text: 'Get 20% off with code FLASH20 — ends tonight.', time: '2 days ago', read: true }
+            ];
+            localStorage.setItem('tuavec_notifications', JSON.stringify(seeded));
+            return seeded;
+        }
+
+        function saveNotifications(list) {
+            localStorage.setItem('tuavec_notifications', JSON.stringify(list));
+        }
+
+        function renderNotifications() {
+            const list = getStoredNotifications();
+            const container = document.getElementById('notificationList');
             const badge = document.getElementById('notificationBadge');
-            const isHidden = badge.style.display === 'none';
-            badge.style.display = isHidden ? 'inline-flex' : 'none';
-            showToast('Notifications toggled', 'info');
+            const unreadCount = list.filter(n => !n.read).length;
+
+            if (badge) {
+                badge.textContent = unreadCount;
+                badge.style.display = unreadCount > 0 ? 'inline-flex' : 'none';
+            }
+
+            if (!container) return;
+
+            if (!list.length) {
+                container.innerHTML = `<div class="dropdown-empty"><i class="fas fa-bell-slash"></i>No notifications yet</div>`;
+                return;
+            }
+
+            const iconMap = { order: 'fa-box', price: 'fa-tag', promo: 'fa-bolt' };
+            container.innerHTML = list.map(n => `
+                <div class="dropdown-item ${n.read ? '' : 'unread'}" onclick="markNotificationRead('${n.id}')">
+                    <div class="dropdown-item-icon ${n.type}"><i class="fas ${iconMap[n.type] || 'fa-bell'}"></i></div>
+                    <div class="dropdown-item-content">
+                        <div class="dropdown-item-title">${n.title}</div>
+                        <div class="dropdown-item-text">${n.text}</div>
+                        <div class="dropdown-item-time">${n.time}</div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function markNotificationRead(id) {
+            const list = getStoredNotifications().map(n => n.id === id ? { ...n, read: true } : n);
+            saveNotifications(list);
+            renderNotifications();
+        }
+
+        function markAllNotificationsRead() {
+            const list = getStoredNotifications().map(n => ({ ...n, read: true }));
+            saveNotifications(list);
+            renderNotifications();
+            showToast('All notifications marked as read', 'info');
+        }
+
+        function toggleNotifications() {
+            const panel = document.getElementById('notificationPanel');
+            const wasActive = panel.classList.contains('active');
+            closeDropdownPanels();
+            if (!wasActive) {
+                renderNotifications();
+                panel.classList.add('active');
+            }
+        }
+
+        // ========== MESSAGES ==========
+        function getStoredMessages() {
+            try {
+                const stored = JSON.parse(localStorage.getItem('tuavec_messages') || 'null');
+                if (stored) return stored;
+            } catch (e) { /* fall through to seed data */ }
+
+            const seeded = [
+                { id: 'm1', title: 'Tu Avec Support', text: 'Your delivery is on the way! Track it anytime from My Orders.', time: '3 hours ago', read: false },
+                { id: 'm2', title: 'Tu Avec Support', text: 'Thanks for your recent order — let us know if you need anything.', time: '3 days ago', read: true }
+            ];
+            localStorage.setItem('tuavec_messages', JSON.stringify(seeded));
+            return seeded;
+        }
+
+        function saveMessages(list) {
+            localStorage.setItem('tuavec_messages', JSON.stringify(list));
+        }
+
+        function renderMessages() {
+            const list = getStoredMessages();
+            const container = document.getElementById('messageList');
+            const badge = document.getElementById('messageBadge');
+            const unreadCount = list.filter(m => !m.read).length;
+
+            if (badge) {
+                badge.textContent = unreadCount;
+                badge.style.display = unreadCount > 0 ? 'inline-flex' : 'none';
+            }
+
+            if (!container) return;
+
+            if (!list.length) {
+                container.innerHTML = `<div class="dropdown-empty"><i class="fas fa-envelope-open"></i>No messages yet</div>`;
+                return;
+            }
+
+            container.innerHTML = list.map(m => `
+                <div class="dropdown-item ${m.read ? '' : 'unread'}" onclick="markMessageRead('${m.id}')">
+                    <div class="dropdown-item-icon msg"><i class="fas fa-headset"></i></div>
+                    <div class="dropdown-item-content">
+                        <div class="dropdown-item-title">${m.title}</div>
+                        <div class="dropdown-item-text">${m.text}</div>
+                        <div class="dropdown-item-time">${m.time}</div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function markMessageRead(id) {
+            const list = getStoredMessages().map(m => m.id === id ? { ...m, read: true } : m);
+            saveMessages(list);
+            renderMessages();
         }
 
         function toggleMessages() {
-            const badge = document.getElementById('messageBadge');
-            const isHidden = badge.style.display === 'none';
-            badge.style.display = isHidden ? 'inline-flex' : 'none';
-            showToast('Messages toggled', 'info');
+            const panel = document.getElementById('messagePanel');
+            const wasActive = panel.classList.contains('active');
+            closeDropdownPanels();
+            if (!wasActive) {
+                renderMessages();
+                panel.classList.add('active');
+            }
         }
+
+        function closeDropdownPanels() {
+            document.getElementById('notificationPanel')?.classList.remove('active');
+            document.getElementById('messagePanel')?.classList.remove('active');
+        }
+
+        // Close dropdown panels when clicking outside them
+        document.addEventListener('click', (e) => {
+            if (!e.target.closest('.nav-btn-wrap')) closeDropdownPanels();
+        });
 
         function openSidebar(sidebarId) {
             const sidebar = document.getElementById(sidebarId);
@@ -3810,18 +4140,60 @@ const API_URL = LIVE_API;
                 return;
             }
 
-            showToast(`Coupon ${couponCode} applied successfully!`, 'success');
+            const items = window.cartState || [];
+            const subtotal = items.reduce((s, it) => s + (Number(it.price || 0) * (it.quantity || 1)), 0);
+            const itemCount = items.reduce((s, it) => s + (it.quantity || 1), 0);
+
+            if (coupon.minOrder && subtotal < coupon.minOrder) {
+                showToast(`This code needs a minimum order of ৳${coupon.minOrder}.`, 'warning');
+                return;
+            }
+            if (coupon.minItems && itemCount < coupon.minItems) {
+                showToast(`This code needs at least ${coupon.minItems} items in your cart.`, 'warning');
+                return;
+            }
+
+            window.appliedCoupon = { code: couponCode, ...coupon };
+            updateCartSummary();
+            showToast(`Coupon ${couponCode} applied — ${coupon.description}`, 'success');
+        }
+
+        function removeCoupon() {
+            window.appliedCoupon = null;
+            const input = document.getElementById('cartCouponInput');
+            if (input) input.value = '';
+            updateCartSummary();
+            showToast('Coupon removed', 'info');
         }
 
         function updateShipping() {
             const region = document.getElementById('customerRegion').value;
-            const shippingCost = region ? 100 : 0;
+            const shippingBase = region ? 100 : 0;
             const summary = document.getElementById('checkoutSummary');
-            if (summary) {
-                summary.innerHTML = `
-                    <div class="summary-row"><span>Shipping</span><span>à§³${shippingCost}</span></div>
-                `;
+            if (!summary) return;
+
+            const items = window.cartState || [];
+            const subtotal = items.reduce((s, it) => s + (Number(it.price || 0) * (it.quantity || 1)), 0);
+            const coupon = window.appliedCoupon;
+            let shipping = shippingBase;
+            let discount = 0;
+
+            if (coupon && items.length > 0) {
+                if (coupon.type === 'percentage') discount = Math.round(subtotal * (coupon.value / 100));
+                else if (coupon.type === 'fixed') discount = Math.min(coupon.value, subtotal);
+                else if (coupon.type === 'free_shipping') shipping = 0;
             }
+
+            const total = Math.max(0, subtotal - discount + shipping);
+
+            summary.innerHTML = `
+                <div class="cart-summary">
+                    <div class="summary-row"><span>Subtotal (${items.length} item${items.length !== 1 ? 's' : ''})</span><span>৳${subtotal}</span></div>
+                    ${coupon ? `<div class="summary-row discount-applied"><span><i class="fas fa-tag"></i> ${coupon.code}</span><span>${discount > 0 ? `−৳${discount}` : 'Free shipping'}</span></div>` : ''}
+                    <div class="summary-row"><span>Shipping${region ? ` to ${region}` : ''}</span><span>${shipping === 0 ? 'FREE' : region ? `৳${shipping}` : 'Select region'}</span></div>
+                    <div class="summary-row total"><span>Total</span><span>৳${total}</span></div>
+                </div>
+            `;
         }
 
         function viewComparison() {
@@ -3882,15 +4254,38 @@ const API_URL = LIVE_API;
             const footer = document.getElementById('cartFooter');
             const items = window.cartState || [];
             const subtotal = items.reduce((s, it) => s + (Number(it.price || 0) * (it.quantity || 1)), 0);
+
+            let shipping = 100;
+            let discount = 0;
+            const coupon = window.appliedCoupon;
+
+            if (coupon && items.length > 0) {
+                if (coupon.type === 'percentage') {
+                    discount = Math.round(subtotal * (coupon.value / 100));
+                } else if (coupon.type === 'fixed') {
+                    discount = Math.min(coupon.value, subtotal);
+                } else if (coupon.type === 'free_shipping') {
+                    shipping = 0;
+                }
+            }
+
+            const total = Math.max(0, subtotal - discount + shipping);
+
             if (summary) {
                 summary.innerHTML = `
-                    <div class="summary-row"><span>Subtotal</span><span>à§³${subtotal}</span></div>
-                    <div class="summary-row"><span>Shipping</span><span>à§³100</span></div>
-                    <div class="summary-row total"><span>Total</span><span>à§³${subtotal + 100}</span></div>
+                    <div class="summary-row"><span>Subtotal</span><span>৳${subtotal}</span></div>
+                    ${coupon ? `
+                        <div class="summary-row discount-applied">
+                            <span><i class="fas fa-tag"></i> ${coupon.code} ${discount > 0 ? `(−৳${discount})` : '(free shipping)'}</span>
+                            <span style="cursor:pointer;color:var(--error);" onclick="removeCoupon()"><i class="fas fa-times-circle"></i></span>
+                        </div>
+                    ` : ''}
+                    <div class="summary-row"><span>Shipping</span><span>${shipping === 0 ? 'FREE' : `৳${shipping}`}</span></div>
+                    <div class="summary-row total"><span>Total</span><span>৳${total}</span></div>
                 `;
             }
             if (footer) {
-                footer.innerHTML = items.length > 0 ? `<button class="btn btn-primary" onclick="document.getElementById('checkoutModal').classList.add('active');document.getElementById('overlay').classList.add('active');">Checkout</button>` : '';
+                footer.innerHTML = items.length > 0 ? `<button class="btn btn-primary" onclick="document.getElementById('checkoutModal').classList.add('active');document.getElementById('overlay').classList.add('active');updateShipping();">Checkout</button>` : '';
             }
         }
 
@@ -3943,7 +4338,7 @@ const API_URL = LIVE_API;
                     <div class="cart-info">
                         <div class="cart-title">${item.title}</div>
                         <div class="cart-variant">Quantity: <span class="quantity-display">${item.quantity}</span></div>
-                        <div class="cart-price">à§³${item.price}</div>
+                        <div class="cart-price">৳${item.price}</div>
                     </div>
                     <div style="display:flex;flex-direction:column;gap:8px;align-items:flex-end;">
                         <button class="quantity-btn" onclick="changeQty('${item.productId}',1)">+</button>
@@ -3964,8 +4359,6 @@ const API_URL = LIVE_API;
         });
 
         // ========== PRODUCT DETAIL MODAL ==========
-        // Insert product modal container
-        
 
         function closeCheckout() {
             document.getElementById('checkoutModal').classList.remove('active');
@@ -4022,7 +4415,8 @@ const API_URL = LIVE_API;
                 items: orderItems,
                 paymentMethod,
                 notes,
-                giftWrap
+                giftWrap,
+                couponCode: window.appliedCoupon ? window.appliedCoupon.code : null
             };
 
             try {
@@ -4051,6 +4445,7 @@ const API_URL = LIVE_API;
                 if (data && data.success) {
                     showToast('Order created successfully!', 'success');
                     window.cartState = [];
+                    window.appliedCoupon = null;
                     saveCart();
                     closeCheckout();
                 } else {
@@ -4090,13 +4485,55 @@ const API_URL = LIVE_API;
             input.value = '';
             messages.scrollTop = messages.scrollHeight;
 
+            // Log this as a "message" so the bell/message badge stays consistent
+            const msgList = getStoredMessages();
+            msgList.unshift({ id: 'm' + Date.now(), title: 'You', text: value, time: 'Just now', read: true });
+            saveMessages(msgList.slice(0, 20));
+
             setTimeout(() => {
                 const botMessage = document.createElement('div');
                 botMessage.className = 'chat-message bot';
-                botMessage.textContent = 'Thanks for your message! Our support team will reply soon.';
+                botMessage.textContent = getChatBotReply(value);
                 messages.appendChild(botMessage);
                 messages.scrollTop = messages.scrollHeight;
             }, 500);
+        }
+
+        // Simple intent-matching bot for common Bangladeshi e-commerce questions.
+        // Replace with a real support backend/ticketing system when ready —
+        // this keeps the chat widget useful in the meantime.
+        function getChatBotReply(message) {
+            const msg = message.toLowerCase();
+
+            if (msg.includes('track') || msg.includes('order status') || msg.includes('where is my')) {
+                return 'You can track your order anytime from "My Orders" at the top of the page. If it hasn\'t updated in 24 hours, message us your order number and we\'ll check with the courier directly.';
+            }
+            if (msg.includes('return') || msg.includes('refund') || msg.includes('exchange')) {
+                return 'We accept returns within 7 days of delivery for unused items in original packaging. For refunds, it takes 3–5 business days once we receive the item back. Want me to start a return request?';
+            }
+            if (msg.includes('deliver') || msg.includes('shipping') || msg.includes('when will')) {
+                return 'Delivery usually takes 1–3 days inside Dhaka and 3–7 days for other districts. You\'ll get an SMS with a tracking link as soon as your order ships.';
+            }
+            if (msg.includes('payment') || msg.includes('bkash') || msg.includes('nagad') || msg.includes('rocket') || msg.includes('cod')) {
+                return 'We accept bKash, Nagad, Rocket, and Cash on Delivery (COD). You can choose any of these at checkout — no extra fees for COD.';
+            }
+            if (msg.includes('coupon') || msg.includes('discount') || msg.includes('code')) {
+                return 'Active codes right now: WELCOME10 (10% off), FREESHIP (free shipping over ৳3000), and FLASH20 during our flash sale. Enter them in the cart before checkout.';
+            }
+            if (msg.includes('damage') || msg.includes('broken') || msg.includes('wrong item')) {
+                return 'So sorry to hear that! Please reply with your order number and a photo if possible — we\'ll arrange a free replacement or refund right away, no return shipping cost to you.';
+            }
+            if (msg.includes('cancel')) {
+                return 'You can cancel an order before it ships from "My Orders". If it has already shipped, let us know your order number and we\'ll help arrange a return instead.';
+            }
+            if (msg.includes('hi') || msg.includes('hello') || msg.includes('hey')) {
+                return 'Hi there! 👋 I can help with order tracking, returns, delivery times, payment options, or active discount codes — what do you need?';
+            }
+            if (msg.includes('human') || msg.includes('agent') || msg.includes('call') || msg.includes('phone')) {
+                return 'Of course — you can reach our team directly at +880 1310-880044, or leave your number here and we\'ll call you back within the hour.';
+            }
+
+            return 'Thanks for your message! I can help with order tracking, returns, delivery times, or payment questions — or a team member will follow up here shortly.';
         }
 
         function viewPost(postSlug) {
@@ -4127,8 +4564,8 @@ const API_URL = LIVE_API;
                     <div style="color:var(--text-light);">
                         <h3 style="margin-top:0;">${name}</h3>
                         <p style="color:var(--text-muted);">${product.category || 'General'}</p>
-                        <div style="font-size:22px;color:var(--gold);font-weight:700;margin:10px 0;">à§³${price}</div>
-                        ${comparePrice > price ? `<div style="font-size:14px;color:var(--text-muted);text-decoration:line-through;">à§³${comparePrice}</div>` : ''}
+                        <div style="font-size:22px;color:var(--gold);font-weight:700;margin:10px 0;">৳${price}</div>
+                        ${comparePrice > price ? `<div style="font-size:14px;color:var(--text-muted);text-decoration:line-through;">৳${comparePrice}</div>` : ''}
                         <p style="line-height:1.6;">${product.shortDescription || product.description || ''}</p>
                         <div style="margin-top:16px;display:flex;gap:12px;flex-wrap:wrap;align-items:center;">
                             <span style="font-size:14px;color:${stock > 0 ? '#4caf50' : '#f44336'};font-weight:600;">${stock > 0 ? 'In stock' : 'Out of stock'}</span>
@@ -4310,26 +4747,6 @@ const API_URL = LIVE_API;
             return d.toLocaleDateString('en-BD', { weekday: 'short', month: 'short', day: 'numeric' });
         }
 
-        // ========== PATCH renderPosts to add delivery hint + payment badges in footer ==========
-        const _origRenderPosts = renderPosts;
-        function renderPosts() {
-            _origRenderPosts();
-            // Add delivery hints to each rendered card
-            document.querySelectorAll('.product-card').forEach(card => {
-                const content = card.querySelector('.product-card-content');
-                if (content && !content.querySelector('.delivery-hint')) {
-                    const row = content.querySelector('.product-details-row');
-                    if (row) {
-                        const hint = document.createElement('div');
-                        hint.className = 'delivery-hint';
-                        hint.innerHTML = `<i class="fas fa-truck"></i> Get it by ${getDeliveryHint()}`;
-                        content.insertBefore(hint, row);
-                    }
-                }
-            });
-            // Render flash products whenever product list refreshes
-            renderFlashProducts();
-        }
 
         // ========== INITIALIZATION ==========
         document.addEventListener('DOMContentLoaded', () => {
@@ -4339,6 +4756,8 @@ const API_URL = LIVE_API;
             initFlashSale();
             startHeroAuto();
             startFlashCountdown();
+            renderNotifications();
+            renderMessages();
         });
 
         document.addEventListener('keydown', (e) => {
