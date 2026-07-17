@@ -1172,6 +1172,140 @@
             border-radius: 12px;
         }
 
+        /* ========== VENDOR MARKETPLACE ========== */
+        .marketplace-section {
+            background: var(--bg-card);
+            border: 1px solid rgba(183,110,121,0.15);
+            border-radius: 16px;
+            padding: 32px;
+            margin: 30px 0;
+        }
+
+        .marketplace-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 16px;
+            margin-bottom: 24px;
+        }
+
+        .marketplace-header h2 { display: flex; align-items: center; gap: 10px; }
+
+        .marketplace-tagline { font-size: 13px; color: var(--text-muted); max-width: 480px; }
+
+        .marketplace-stats-row {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+            margin-bottom: 28px;
+        }
+
+        .mstat-card {
+            background: var(--bg-dark);
+            border: 1px solid rgba(183,110,121,0.15);
+            border-radius: 12px;
+            padding: 18px;
+            text-align: center;
+        }
+
+        .mstat-card .mstat-value {
+            font-size: 30px;
+            font-weight: 700;
+            color: var(--gold);
+            margin-bottom: 4px;
+        }
+
+        .mstat-card .mstat-label { font-size: 12px; color: var(--text-muted); }
+
+        .marketplace-share-bar {
+            display: flex;
+            height: 10px;
+            border-radius: 6px;
+            overflow: hidden;
+            margin: 6px 0 26px;
+            background: var(--bg-dark);
+        }
+
+        .share-owner { background: linear-gradient(90deg, var(--rose-gold), var(--gold)); }
+        .share-vendor { background: rgba(255,255,255,0.15); }
+
+        .marketplace-share-legend {
+            display: flex;
+            justify-content: center;
+            gap: 24px;
+            font-size: 12px;
+            color: var(--text-muted);
+            margin-top: -18px;
+            margin-bottom: 26px;
+        }
+
+        .legend-dot { width: 9px; height: 9px; border-radius: 50%; display: inline-block; margin-right: 6px; }
+
+        .marketplace-grid {
+            display: grid;
+            grid-template-columns: 1.15fr 0.85fr;
+            gap: 24px;
+        }
+
+        @media (max-width: 900px) {
+            .marketplace-grid { grid-template-columns: 1fr; }
+            .marketplace-stats-row { grid-template-columns: 1fr; }
+        }
+
+        .vendor-list-panel h3, .vendor-form-panel h3 {
+            font-size: 15px;
+            margin-bottom: 14px;
+        }
+
+        .vendor-list { display: flex; flex-direction: column; gap: 10px; max-height: 360px; overflow-y: auto; }
+
+        .vendor-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: var(--bg-dark);
+            border: 1px solid rgba(183,110,121,0.1);
+            border-radius: 10px;
+            padding: 12px 16px;
+            gap: 10px;
+        }
+
+        .vendor-row-name { font-weight: 600; font-size: 14px; }
+        .vendor-row-meta { font-size: 12px; color: var(--text-muted); }
+
+        .vendor-status {
+            font-size: 11px;
+            font-weight: 700;
+            padding: 3px 10px;
+            border-radius: 20px;
+            text-transform: capitalize;
+            flex-shrink: 0;
+        }
+
+        .vendor-status.approved { background: rgba(76,175,80,0.15); color: var(--success); }
+        .vendor-status.pending { background: rgba(255,152,0,0.15); color: var(--warning); }
+
+        .vendor-form-panel {
+            background: var(--bg-dark);
+            border: 1px solid rgba(183,110,121,0.1);
+            border-radius: 12px;
+            padding: 20px;
+        }
+
+        .vendor-form-panel .form-group { margin-bottom: 14px; }
+
+        .commission-note {
+            font-size: 12px;
+            color: var(--text-muted);
+            background: rgba(183,110,121,0.06);
+            border: 1px solid rgba(183,110,121,0.15);
+            border-radius: 8px;
+            padding: 10px 12px;
+            margin-top: 14px;
+            line-height: 1.5;
+        }
+
         /* ========== RECENTLY VIEWED ========== */
         .recently-viewed {
             margin: 40px 0;
@@ -1516,216 +1650,6 @@
             color: var(--text-muted);
             margin-bottom: 20px;
         }
-
-        /* ========== COMPREHENSIVE MOBILE FIXES ========== */
-        @media (max-width: 768px) {
-            /* Sidebars go full-width on mobile */
-            .sidebar { width: 100vw !important; right: -100vw !important; }
-            .sidebar.active { right: 0 !important; }
-
-            /* Modals slide up from bottom on mobile */
-            .modal { align-items: flex-end !important; padding: 0 !important; }
-            .modal-content {
-                padding: 24px 16px !important;
-                border-radius: 20px 20px 0 0 !important;
-                max-height: 92vh !important;
-                width: 100% !important;
-                max-width: 100% !important;
-            }
-
-            /* Product cards: 2 columns on phone */
-            .posts-grid {
-                grid-template-columns: repeat(2, 1fr) !important;
-                gap: 10px !important;
-            }
-            .product-card-image img { height: 160px; object-fit: cover; }
-            .product-title { font-size: 13px !important; }
-            .product-price { font-size: 16px !important; }
-            .product-excerpt { display: none; }
-            .product-card-content { padding: 10px !important; }
-
-            /* Form grids collapse to 1 column */
-            .form-grid { grid-template-columns: 1fr !important; }
-
-            /* Product detail modal */
-            #productModalBody > div { grid-template-columns: 1fr !important; }
-
-            /* Hero carousel */
-            .hero { height: 260px !important; }
-            .hero-content h1 { font-size: 22px !important; }
-            .hero-content p  { font-size: 13px !important; margin-bottom: 16px; }
-            .h-btn { padding: 10px 18px !important; font-size: 13px !important; }
-            .hero-nav { display: none !important; }
-
-            /* Flash sale section */
-            .flash-zone-hd { flex-wrap: wrap !important; gap: 8px !important; }
-            .flash-countdown { margin-left: 0 !important; }
-
-            /* Category nav scroll */
-            .category-nav-content { gap: 2px !important; }
-            .category-nav-link { padding: 8px 10px !important; font-size: 12px !important; }
-
-            /* Voucher cards narrower */
-            .v-card { flex: 0 0 180px !important; }
-
-            /* Cart item image smaller */
-            .cart-img { width: 60px !important; height: 60px !important; }
-
-            /* Summary rows */
-            .summary-row { font-size: 13px !important; }
-            .summary-row.total { font-size: 18px !important; }
-
-            /* Chat full-width */
-            .chat-window {
-                width: calc(100vw - 20px) !important;
-                right: -6px !important;
-                height: 70vh !important;
-            }
-
-            /* Login modal tabs */
-            .auth-tab-row { gap: 8px !important; }
-        }
-
-        @media (max-width: 380px) {
-            .posts-grid { grid-template-columns: 1fr !important; }
-            .flash-scroll-row .flash-mini-card { flex: 0 0 130px !important; }
-        }
-
-        /* ========== NOTIFICATION PANEL ========== */
-        .notif-panel {
-            position: fixed;
-            top: 70px;
-            right: 16px;
-            width: 340px;
-            background: var(--bg-card);
-            border: 1px solid rgba(183,110,121,0.2);
-            border-radius: 16px;
-            box-shadow: 0 12px 40px rgba(0,0,0,0.4);
-            z-index: 1050;
-            display: none;
-            flex-direction: column;
-            overflow: hidden;
-            max-height: 480px;
-        }
-        .notif-panel.active { display: flex; }
-        .notif-panel-hd {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 16px 18px;
-            border-bottom: 1px solid rgba(183,110,121,0.15);
-        }
-        .notif-panel-hd h3 { font-size: 15px; margin: 0; }
-        .notif-list { overflow-y: auto; flex: 1; }
-        .notif-item {
-            display: flex;
-            gap: 12px;
-            padding: 14px 16px;
-            border-bottom: 1px solid rgba(183,110,121,0.08);
-            cursor: pointer;
-            transition: background 0.2s;
-        }
-        .notif-item:hover { background: rgba(183,110,121,0.07); }
-        .notif-item.unread { background: rgba(183,110,121,0.05); }
-        .notif-icon {
-            width: 38px; height: 38px; border-radius: 50%;
-            display: flex; align-items: center; justify-content: center;
-            font-size: 16px; flex-shrink: 0;
-        }
-        .ni-order  { background: rgba(76,175,80,.15);   color: var(--success); }
-        .ni-promo  { background: rgba(183,110,121,.15); color: var(--rose-gold); }
-        .ni-system { background: rgba(33,150,243,.15);  color: var(--info); }
-        .ni-warn   { background: rgba(255,152,0,.15);   color: var(--warning); }
-        .notif-body strong { display: block; font-size: 13px; font-weight: 600; margin-bottom: 3px; }
-        .notif-body span   { font-size: 12px; color: var(--text-muted); line-height: 1.4; }
-        .notif-time        { font-size: 11px; color: var(--text-muted); margin-top: 4px; display: block; }
-        .unread-dot {
-            width: 8px; height: 8px; border-radius: 50%;
-            background: var(--rose-gold); flex-shrink: 0; margin-top: 6px;
-        }
-        .notif-panel-footer {
-            padding: 12px 16px; border-top: 1px solid rgba(183,110,121,0.12);
-            text-align: center; font-size: 13px; color: var(--rose-gold); cursor: pointer;
-        }
-        .notif-panel-footer:hover { text-decoration: underline; }
-
-        /* ========== MESSAGES PANEL ========== */
-        .msg-panel {
-            position: fixed;
-            top: 70px;
-            right: 16px;
-            width: 340px;
-            background: var(--bg-card);
-            border: 1px solid rgba(183,110,121,0.2);
-            border-radius: 16px;
-            box-shadow: 0 12px 40px rgba(0,0,0,0.4);
-            z-index: 1050;
-            display: none;
-            flex-direction: column;
-            overflow: hidden;
-            max-height: 480px;
-        }
-        .msg-panel.active { display: flex; }
-        .msg-panel-hd {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 16px 18px;
-            border-bottom: 1px solid rgba(183,110,121,0.15);
-        }
-        .msg-panel-hd h3 { font-size: 15px; margin: 0; }
-        .msg-list { overflow-y: auto; flex: 1; }
-        .msg-item {
-            display: flex;
-            gap: 12px;
-            padding: 14px 16px;
-            border-bottom: 1px solid rgba(183,110,121,0.08);
-            cursor: pointer;
-            transition: background 0.2s;
-        }
-        .msg-item:hover { background: rgba(183,110,121,0.07); }
-        .msg-avatar {
-            width: 40px; height: 40px; border-radius: 50%;
-            background: linear-gradient(135deg, var(--rose-gold), var(--gold));
-            display: flex; align-items: center; justify-content: center;
-            font-size: 16px; font-weight: 700; color: white; flex-shrink: 0;
-        }
-        .msg-content strong { display: block; font-size: 13px; font-weight: 600; }
-        .msg-content span   { font-size: 12px; color: var(--text-muted); line-height: 1.4; display: -webkit-box; line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
-        .msg-meta { font-size: 11px; color: var(--text-muted); margin-top: 4px; display: block; }
-        .msg-panel-footer {
-            padding: 12px 16px; border-top: 1px solid rgba(183,110,121,0.12);
-            text-align: center; font-size: 13px; color: var(--rose-gold); cursor: pointer;
-        }
-
-        /* ========== COUPON DISCOUNT APPLIED ========== */
-        .coupon-applied-row {
-            display: flex; justify-content: space-between;
-            font-size: 14px; margin-bottom: 10px; color: var(--success);
-        }
-        .remove-coupon-btn {
-            background: none; border: none; color: var(--error);
-            cursor: pointer; font-size: 12px; margin-left: 8px;
-        }
-
-        /* ========== AUTH IMPROVEMENTS ========== */
-        .password-wrapper { position: relative; }
-        .password-wrapper .form-input { padding-right: 44px; }
-        .pw-toggle {
-            position: absolute; right: 12px; top: 50%;
-            transform: translateY(-50%);
-            background: none; border: none; color: var(--text-muted);
-            cursor: pointer; font-size: 16px;
-        }
-        .pw-toggle:hover { color: var(--rose-gold); }
-
-        /* ========== BOTTOM NAV 4 ITEMS ========== */
-        .bottom-nav-item {
-            min-height: 52px;
-            font-size: 10px;
-            padding: 6px 4px;
-        }
-        .bottom-nav-item i { font-size: 22px; }
 
         /* ========== SOCIAL MEDIA DESIGN ENHANCEMENTS ========== */
         .social-post {
@@ -2256,6 +2180,127 @@
             .trust-item { flex-direction: column; text-align: center; gap: 5px; flex: 1; }
         }
 
+        /* ===== MOBILE: DARAZ-STYLE ADDITIONS ===== */
+        @media (max-width: 768px) {
+            .announcement-bar { padding: 8px 34px; font-size: 11px; gap: 8px; }
+            .announcement-bar span { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+            .announcement-bar a { flex-shrink: 0; }
+
+            .trust-row { justify-content: flex-start; overflow-x: auto; flex-wrap: nowrap; padding-bottom: 4px; }
+            .trust-item { flex-direction: row; flex: 0 0 auto; }
+
+            .hero { height: 240px; }
+            .hero-content { padding: 0 50px; }
+            .hero-tag { font-size: 10px; padding: 4px 10px; margin-bottom: 8px; }
+            .hero h1 { font-size: 22px; margin-bottom: 8px; line-height: 1.25; }
+            .hero p { font-size: 12px; margin-bottom: 14px; }
+            .hero-btns .h-btn { padding: 9px 16px; font-size: 12px; }
+            .hero-prev, .hero-next { width: 32px; height: 32px; font-size: 12px; }
+            .hero-prev { left: 6px; } .hero-next { right: 6px; }
+            .hero-dots { bottom: 10px; }
+
+            .flash-sale-zone { padding: 14px 14px; border-radius: 12px; }
+            .flash-zone-hd { gap: 8px; margin-bottom: 10px; }
+            .flash-zone-hd h3 { font-size: 15px; }
+            .flash-countdown { margin-left: 0; width: 100%; justify-content: flex-start; }
+            .cd-block { min-width: 38px; padding: 5px 7px; }
+            .cd-block .cd-n { font-size: 16px; }
+            .flash-mini-card { flex: 0 0 130px; }
+            .flash-mini-card img { height: 95px; }
+
+            .voucher-zone { padding: 14px 14px; }
+            .voucher-zone-hd h3 { font-size: 15px; }
+            .voucher-zone-hd span { display: none; }
+            .v-card { flex: 0 0 180px; padding: 12px; }
+            .v-icon { width: 36px; height: 36px; font-size: 16px; }
+        }
+
+        @media (max-width: 400px) {
+            .hero { height: 210px; }
+            .hero-content { padding: 0 40px; }
+            .hero h1 { font-size: 18px; }
+        }
+
+        /* ===== NOTIFICATION / MESSAGE PANELS ===== */
+        .nav-btn-wrap { position: relative; }
+
+        .dropdown-panel {
+            position: absolute;
+            top: calc(100% + 10px);
+            right: 0;
+            width: 340px;
+            max-width: 90vw;
+            background: var(--bg-card);
+            border: 1px solid rgba(183,110,121,0.2);
+            border-radius: 14px;
+            box-shadow: var(--shadow-lg);
+            z-index: 1050;
+            display: none;
+            overflow: hidden;
+        }
+
+        .dropdown-panel.active { display: block; }
+
+        .dropdown-panel-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 14px 18px;
+            border-bottom: 1px solid rgba(183,110,121,0.15);
+        }
+
+        .dropdown-panel-header h4 { font-size: 15px; font-weight: 700; }
+        .dropdown-panel-header button {
+            background: none; border: none; color: var(--rose-gold);
+            font-size: 12px; cursor: pointer; font-weight: 600;
+        }
+
+        .dropdown-panel-body { max-height: 360px; overflow-y: auto; }
+
+        .dropdown-item {
+            display: flex;
+            gap: 12px;
+            padding: 13px 18px;
+            border-bottom: 1px solid rgba(183,110,121,0.08);
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .dropdown-item:last-child { border-bottom: none; }
+        .dropdown-item:hover { background: rgba(183,110,121,0.06); }
+        .dropdown-item.unread { background: rgba(183,110,121,0.05); }
+
+        .dropdown-item-icon {
+            width: 38px; height: 38px; border-radius: 50%; flex-shrink: 0;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 15px; color: white;
+        }
+
+        .dropdown-item-icon.order { background: var(--success); }
+        .dropdown-item-icon.price { background: var(--gold); color: var(--chocolate); }
+        .dropdown-item-icon.promo { background: var(--rose-gold); }
+        .dropdown-item-icon.msg { background: var(--info); }
+
+        .dropdown-item-content { flex: 1; min-width: 0; }
+        .dropdown-item-title { font-size: 13px; font-weight: 600; margin-bottom: 2px; }
+        .dropdown-item-text { font-size: 12px; color: var(--text-muted); line-height: 1.4; }
+        .dropdown-item-time { font-size: 11px; color: var(--text-muted); margin-top: 4px; }
+
+        .dropdown-empty { text-align: center; padding: 40px 20px; color: var(--text-muted); font-size: 13px; }
+        .dropdown-empty i { font-size: 32px; display: block; margin-bottom: 10px; opacity: 0.5; }
+
+        @media (max-width: 768px) {
+            .dropdown-panel {
+                position: fixed;
+                top: auto;
+                bottom: 64px;
+                left: 12px;
+                right: 12px;
+                width: auto;
+                max-width: none;
+            }
+        }
+
         /* ===== HERO CAROUSEL ===== */
         .hero {
             position: relative; overflow: hidden; height: 380px;
@@ -2467,18 +2512,37 @@
                         <i class="fas fa-shopping-cart"></i>
                         <span class="badge" id="cartBadge">0</span>
                     </button>
-                    <button class="nav-btn" onclick="toggleNotifications()" aria-label="Notifications">
-                        <i class="fas fa-bell"></i>
-                        <span class="badge" id="notificationBadge" style="display: none;">3</span>
-                    </button>
-                    <button class="nav-btn" onclick="toggleMessages()" aria-label="Messages">
-                        <i class="fas fa-envelope"></i>
-                        <span class="badge" id="messageBadge" style="display: none;">2</span>
-                    </button>
+                    <div class="nav-btn-wrap">
+                        <button class="nav-btn" onclick="toggleNotifications()" aria-label="Notifications">
+                            <i class="fas fa-bell"></i>
+                            <span class="badge" id="notificationBadge" style="display: none;">3</span>
+                        </button>
+                        <div class="dropdown-panel" id="notificationPanel">
+                            <div class="dropdown-panel-header">
+                                <h4>Notifications</h4>
+                                <button onclick="markAllNotificationsRead()">Mark all read</button>
+                            </div>
+                            <div class="dropdown-panel-body" id="notificationList"></div>
+                        </div>
+                    </div>
+                    <div class="nav-btn-wrap">
+                        <button class="nav-btn" onclick="toggleMessages()" aria-label="Messages">
+                            <i class="fas fa-envelope"></i>
+                            <span class="badge" id="messageBadge" style="display: none;">2</span>
+                        </button>
+                        <div class="dropdown-panel" id="messagePanel">
+                            <div class="dropdown-panel-header">
+                                <h4>Messages</h4>
+                                <button onclick="toggleChat();closeDropdownPanels();">Open chat</button>
+                            </div>
+                            <div class="dropdown-panel-body" id="messageList"></div>
+                        </div>
+                    </div>
                     <button id="loginNavBtn" class="nav-btn" onclick="openLoginModal()" aria-label="Account">
                         <i class="fas fa-user"></i>
                     </button>
                 </div>
+
             </div>
         </div>
     </header>
@@ -2770,11 +2834,11 @@
             <div class="points-info">
                 <div class="points-card">
                     <h4>Earn Points</h4>
-                    <p>à§³100 spent = 10 points</p>
+                    <p>৳100 spent = 10 points</p>
                 </div>
                 <div class="points-card">
                     <h4>Redeem Rewards</h4>
-                    <p>1000 points = à§³500 off</p>
+                    <p>1000 points = ৳500 off</p>
                 </div>
                 <div class="points-card">
                     <h4>Next Tier</h4>
@@ -2782,6 +2846,91 @@
                 </div>
             </div>
         </div>
+
+        <!-- ========== VENDOR MARKETPLACE ========== -->
+        <section class="marketplace-section" id="marketplaceSection" aria-labelledby="marketplace-heading">
+            <div class="marketplace-header">
+                <div>
+                    <h2 id="marketplace-heading"><i class="fas fa-store" aria-hidden="true"></i> Tu Avec Marketplace</h2>
+                    <p class="marketplace-tagline">Tu Avec is opening up to trusted local and international vendors. You keep browsing one site — every seller is verified and every order still ships through Tu Avec's tracked delivery.</p>
+                </div>
+                <button class="btn btn-primary" onclick="scrollToVendorForm()">
+                    <i class="fas fa-handshake"></i> Become a Vendor
+                </button>
+            </div>
+
+            <div class="marketplace-stats-row">
+                <div class="mstat-card">
+                    <div class="mstat-value" id="merchantCountStat">0</div>
+                    <div class="mstat-label">Active Vendors</div>
+                </div>
+                <div class="mstat-card">
+                    <div class="mstat-value" id="ownerShareStat">100%</div>
+                    <div class="mstat-label">Tu Avec's Own Products</div>
+                </div>
+                <div class="mstat-card">
+                    <div class="mstat-value" id="vendorShareStat">0%</div>
+                    <div class="mstat-label">Vendor Products</div>
+                </div>
+            </div>
+
+            <div class="marketplace-share-bar" role="img" aria-label="Catalog share between Tu Avec and vendors">
+                <div class="share-owner" id="shareOwnerBar" style="width:100%;"></div>
+                <div class="share-vendor" id="shareVendorBar" style="width:0%;"></div>
+            </div>
+            <div class="marketplace-share-legend">
+                <span><span class="legend-dot" style="background:var(--rose-gold);"></span>Tu Avec listings</span>
+                <span><span class="legend-dot" style="background:rgba(255,255,255,0.3);"></span>Vendor listings</span>
+            </div>
+
+            <div class="marketplace-grid">
+                <div class="vendor-list-panel">
+                    <h3><i class="fas fa-shop"></i> Vendors on Tu Avec</h3>
+                    <div class="vendor-list" id="vendorList">
+                        <p style="color:var(--text-muted);font-size:13px;text-align:center;padding:20px;">No vendors yet — be the first to apply!</p>
+                    </div>
+                </div>
+
+                <div class="vendor-form-panel" id="vendorFormPanel">
+                    <h3><i class="fas fa-file-signature"></i> Apply as a Vendor</h3>
+                    <form id="vendorApplicationForm" onsubmit="submitVendorApplication(event)">
+                        <div class="form-group">
+                            <label class="form-label" for="vendorName">Business / Vendor Name</label>
+                            <input type="text" class="form-input" id="vendorName" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label" for="vendorCountry">Country</label>
+                            <input type="text" class="form-input" id="vendorCountry" placeholder="e.g. Thailand, Bangladesh" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label" for="vendorEmail">Contact Email</label>
+                            <input type="email" class="form-input" id="vendorEmail" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label" for="vendorCategory">Product Category</label>
+                            <input type="text" class="form-input" id="vendorCategory" placeholder="e.g. Skincare, Snacks, Accessories" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label" for="commissionRate">Commission Tier</label>
+                            <select class="form-input" id="commissionRate" required>
+                                <option value="10">10% commission — standard tier</option>
+                                <option value="12">12% commission — includes featured placement</option>
+                                <option value="15">15% commission — includes homepage promotion</option>
+                            </select>
+                        </div>
+                        <button type="submit" class="btn btn-primary" style="width:100%;">
+                            <i class="fas fa-paper-plane"></i> Submit Application
+                        </button>
+                    </form>
+                    <p class="commission-note">
+                        <i class="fas fa-info-circle"></i>
+                        Tu Avec charges a commission per sale — vendors set nothing else up.
+                        We handle payment collection, buyer trust, and customer support;
+                        you handle stock and fulfillment (or ship to our warehouse first).
+                    </p>
+                </div>
+            </div>
+        </section>
     </main>
 
     <!-- NEW SEO-READY BLOG SECTION -->
@@ -2904,7 +3053,7 @@
                 <div class="form-group">
                     <label>
                         <input type="checkbox" id="giftWrap"> 
-                        Add gift wrapping (+à§³50)
+                        Add gift wrapping (+৳50)
                     </label>
                 </div>
 
@@ -2967,10 +3116,7 @@
                 </div>
                 <div class="form-group">
                     <label class="form-label">Password</label>
-                    <div class="password-wrapper">
-                        <input type="password" class="form-input" id="loginPassword" required autocomplete="current-password">
-                        <button type="button" class="pw-toggle" onclick="togglePw('loginPassword',this)" aria-label="Show password"><i class="fas fa-eye"></i></button>
-                    </div>
+                    <input type="password" class="form-input" id="loginPassword" required>
                 </div>
                 <button type="submit" class="btn btn-primary" style="width:100%;">Sign In</button>
             </form>
@@ -2989,10 +3135,7 @@
                 </div>
                 <div class="form-group">
                     <label class="form-label">Password</label>
-                    <div class="password-wrapper">
-                        <input type="password" class="form-input" id="signupPassword" required autocomplete="new-password">
-                        <button type="button" class="pw-toggle" onclick="togglePw('signupPassword',this)" aria-label="Show password"><i class="fas fa-eye"></i></button>
-                    </div>
+                    <input type="password" class="form-input" id="signupPassword" required>
                 </div>
                 <button type="submit" class="btn btn-primary" style="width:100%;">Create Account</button>
             </form>
@@ -3023,119 +3166,31 @@
         </div>
     </div>
 
-    <!-- NOTIFICATIONS PANEL -->
-    <div class="notif-panel" id="notifPanel" role="dialog" aria-label="Notifications">
-        <div class="notif-panel-hd">
-            <h3><i class="fas fa-bell" style="color:var(--rose-gold);margin-right:8px;"></i> Notifications</h3>
-            <div style="display:flex;gap:10px;align-items:center;">
-                <button onclick="markAllNotifsRead()" style="font-size:12px;color:var(--rose-gold);background:none;border:none;cursor:pointer;">Mark all read</button>
-                <button onclick="closeNotifPanel()" style="background:none;border:none;color:var(--text-muted);font-size:18px;cursor:pointer;"><i class="fas fa-times"></i></button>
-            </div>
-        </div>
-        <div class="notif-list" id="notifList">
-            <div class="notif-item unread">
-                <div class="notif-icon ni-order"><i class="fas fa-box"></i></div>
-                <div class="notif-body">
-                    <strong>Order Shipped!</strong>
-                    <span>Your order #TA-2048 has been shipped via Pathao and is on its way.</span>
-                    <span class="notif-time">2 hours ago</span>
-                </div>
-                <div class="unread-dot"></div>
-            </div>
-            <div class="notif-item unread">
-                <div class="notif-icon ni-promo"><i class="fas fa-tag"></i></div>
-                <div class="notif-body">
-                    <strong>Flash Sale — 20% Off Today!</strong>
-                    <span>Use code FLASH20 on any order above ৳2000. Ends tonight!</span>
-                    <span class="notif-time">4 hours ago</span>
-                </div>
-                <div class="unread-dot"></div>
-            </div>
-            <div class="notif-item">
-                <div class="notif-icon ni-system"><i class="fas fa-star"></i></div>
-                <div class="notif-body">
-                    <strong>Rate Your Last Order</strong>
-                    <span>How was your experience? Your review helps other shoppers.</span>
-                    <span class="notif-time">Yesterday</span>
-                </div>
-            </div>
-            <div class="notif-item">
-                <div class="notif-icon ni-promo"><i class="fas fa-heart"></i></div>
-                <div class="notif-body">
-                    <strong>Wishlist Item on Sale!</strong>
-                    <span>Thai Jasmine Rice 5kg is now 15% off. Add it to cart before stock runs out.</span>
-                    <span class="notif-time">2 days ago</span>
-                </div>
-            </div>
-            <div class="notif-item">
-                <div class="notif-icon ni-warn"><i class="fas fa-truck"></i></div>
-                <div class="notif-body">
-                    <strong>Delivery Update</strong>
-                    <span>Order #TA-2031 was delivered. If you haven't received it, contact us immediately.</span>
-                    <span class="notif-time">3 days ago</span>
-                </div>
-            </div>
-        </div>
-        <div class="notif-panel-footer" onclick="openOrdersModal();closeNotifPanel();">View all notifications</div>
-    </div>
-
-    <!-- MESSAGES PANEL -->
-    <div class="msg-panel" id="msgPanel" role="dialog" aria-label="Messages">
-        <div class="msg-panel-hd">
-            <h3><i class="fas fa-envelope" style="color:var(--rose-gold);margin-right:8px;"></i> Messages</h3>
-            <button onclick="closeMsgPanel()" style="background:none;border:none;color:var(--text-muted);font-size:18px;cursor:pointer;"><i class="fas fa-times"></i></button>
-        </div>
-        <div class="msg-list">
-            <div class="msg-item">
-                <div class="msg-avatar">T</div>
-                <div class="msg-content">
-                    <strong>Tu Avec Support</strong>
-                    <span>Hi! Your order is being processed. We'll notify you once it ships.</span>
-                    <span class="msg-meta">2h ago · Support</span>
-                </div>
-            </div>
-            <div class="msg-item">
-                <div class="msg-avatar" style="background:linear-gradient(135deg,#2ecc71,#27ae60);">S</div>
-                <div class="msg-content">
-                    <strong>Seller: Thai Imports BD</strong>
-                    <span>Thank you for your order! We've dispatched it today. Tracking: PATH-8821.</span>
-                    <span class="msg-meta">Yesterday · Seller</span>
-                </div>
-            </div>
-            <div class="msg-item">
-                <div class="msg-avatar" style="background:linear-gradient(135deg,#3498db,#2980b9);">P</div>
-                <div class="msg-content">
-                    <strong>Pathao Delivery</strong>
-                    <span>Your package is out for delivery today between 2 PM – 6 PM.</span>
-                    <span class="msg-meta">3 days ago · Courier</span>
-                </div>
-            </div>
-        </div>
-        <div class="msg-panel-footer" onclick="toggleChat();closeMsgPanel();">Open live chat</div>
-    </div>
-
     <!-- OVERLAY -->
     <div class="overlay" id="overlay" onclick="closeAll()"></div>
 
-    <!-- BOTTOM NAV (MOBILE) — 4 items -->
+    <!-- BOTTOM NAV (MOBILE) -->
     <nav class="bottom-nav" aria-label="Mobile navigation">
         <div class="bottom-nav-content">
             <button class="bottom-nav-item active" onclick="setActiveBottomNav(this);scrollToTop()">
-                <i class="fas fa-home"></i>
-                <span>Home</span>
+                <i class="fas fa-home"></i> Home
             </button>
             <button class="bottom-nav-item" onclick="setActiveBottomNav(this);document.querySelector('.category-nav')?.scrollIntoView({behavior:'smooth'})">
-                <i class="fas fa-th-large"></i>
-                <span>Shop</span>
+                <i class="fas fa-th-large"></i> Categories
+            </button>
+            <button class="bottom-nav-item" onclick="setActiveBottomNav(this);focusMobileSearch()">
+                <i class="fas fa-search"></i> Search
+            </button>
+            <button class="bottom-nav-item" onclick="setActiveBottomNav(this);toggleWishlist()">
+                <i class="fas fa-heart"></i> Wishlist
+                <span class="badge" id="bottomWishlistBadge" style="display:none;">0</span>
             </button>
             <button class="bottom-nav-item" onclick="setActiveBottomNav(this);toggleCart()">
-                <i class="fas fa-shopping-cart"></i>
-                <span>Cart</span>
+                <i class="fas fa-shopping-cart"></i> Cart
                 <span class="badge" id="bottomCartBadge" style="display:none;">0</span>
             </button>
-            <button class="bottom-nav-item" id="bnAccountBtn" onclick="setActiveBottomNav(this);handleBnAccount()">
-                <i class="fas fa-user" id="bnAccountIcon"></i>
-                <span id="bnAccountLabel">Account</span>
+            <button class="bottom-nav-item" onclick="setActiveBottomNav(this);smartAccountAction()">
+                <i class="fas fa-user"></i> <span id="bottomAccountLabel">Account</span>
             </button>
         </div>
     </nav>
@@ -3760,6 +3815,24 @@ const API_URL = LIVE_API;
             if (el) el.classList.add('active');
         }
 
+        function focusMobileSearch() {
+            const bar = document.querySelector('.mobile-search-bar');
+            const input = document.getElementById('mobileSearchInput');
+            if (bar) bar.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            // Wait for scroll to (roughly) finish before focusing, so the keyboard
+            // doesn't fight the scroll animation on slower phones.
+            setTimeout(() => input?.focus(), 350);
+        }
+
+        function smartAccountAction() {
+            const token = localStorage.getItem('tuavec_jwt');
+            if (token) {
+                openOrdersModal();
+            } else {
+                openLoginModal();
+            }
+        }
+
         // ========== UTILITY FUNCTIONS ==========
         function showToast(message, type = 'info') {
             const toast = document.getElementById('toast');
@@ -3848,7 +3921,10 @@ const API_URL = LIVE_API;
                 throw new Error('Login response missing token');
             } catch (err) {
                 console.error('Login error:', err);
-                showToast(err.message || 'Login failed', 'error');
+                const friendlyMessage = (err instanceof TypeError)
+                    ? 'Cannot reach the server right now. Please check your connection and try again.'
+                    : (err.message || 'Login failed');
+                showToast(friendlyMessage, 'error');
             }
         }
 
@@ -3908,17 +3984,20 @@ const API_URL = LIVE_API;
             const logoutBtn = document.getElementById('logoutBtn');
             const loginTopBtn = document.getElementById('loginTopBtn');
             const loginNavBtn = document.getElementById('loginNavBtn');
-            if (!userGreeting) return;
+            const bottomAccountLabel = document.getElementById('bottomAccountLabel');
+
             if (currentUser) {
-                userGreeting.textContent = `Hello, ${currentUser.name || currentUser.email || 'Member'}`;
+                if (userGreeting) userGreeting.textContent = `Hello, ${currentUser.name || currentUser.email || 'Member'}`;
                 if (logoutBtn) logoutBtn.style.display = 'inline-flex';
                 if (loginTopBtn) loginTopBtn.style.display = 'none';
                 if (loginNavBtn) loginNavBtn.style.display = 'none';
+                if (bottomAccountLabel) bottomAccountLabel.textContent = 'Orders';
             } else {
-                userGreeting.textContent = 'Welcome, Guest!';
+                if (userGreeting) userGreeting.textContent = 'Welcome, Guest!';
                 if (logoutBtn) logoutBtn.style.display = 'none';
                 if (loginTopBtn) loginTopBtn.style.display = 'inline-flex';
                 if (loginNavBtn) loginNavBtn.style.display = 'inline-flex';
+                if (bottomAccountLabel) bottomAccountLabel.textContent = 'Account';
             }
         }
 
@@ -4080,19 +4159,158 @@ const API_URL = LIVE_API;
             openLoginModal();
         }
 
-        function toggleNotifications() {
+        // ========== NOTIFICATIONS ==========
+        // Backed by localStorage for now (client-only). Swap loadNotifications()
+        // to fetch from `${API_URL}/notifications` once that endpoint exists —
+        // the render/badge logic below will keep working unchanged.
+        function getStoredNotifications() {
+            try {
+                const stored = JSON.parse(localStorage.getItem('tuavec_notifications') || 'null');
+                if (stored) return stored;
+            } catch (e) { /* fall through to seed data */ }
+
+            // Seed with realistic starter notifications on first run
+            const seeded = [
+                { id: 'n1', type: 'order', title: 'Order confirmed', text: 'Your order #TA-10234 has been confirmed and is being packed.', time: '2 hours ago', read: false },
+                { id: 'n2', type: 'price', title: 'Price drop alert', text: 'An item in your wishlist just dropped by ৳150.', time: '1 day ago', read: false },
+                { id: 'n3', type: 'promo', title: 'Flash Sale live now', text: 'Get 20% off with code FLASH20 — ends tonight.', time: '2 days ago', read: true }
+            ];
+            localStorage.setItem('tuavec_notifications', JSON.stringify(seeded));
+            return seeded;
+        }
+
+        function saveNotifications(list) {
+            localStorage.setItem('tuavec_notifications', JSON.stringify(list));
+        }
+
+        function renderNotifications() {
+            const list = getStoredNotifications();
+            const container = document.getElementById('notificationList');
             const badge = document.getElementById('notificationBadge');
-            const isHidden = badge.style.display === 'none';
-            badge.style.display = isHidden ? 'inline-flex' : 'none';
-            showToast('Notifications toggled', 'info');
+            const unreadCount = list.filter(n => !n.read).length;
+
+            if (badge) {
+                badge.textContent = unreadCount;
+                badge.style.display = unreadCount > 0 ? 'inline-flex' : 'none';
+            }
+
+            if (!container) return;
+
+            if (!list.length) {
+                container.innerHTML = `<div class="dropdown-empty"><i class="fas fa-bell-slash"></i>No notifications yet</div>`;
+                return;
+            }
+
+            const iconMap = { order: 'fa-box', price: 'fa-tag', promo: 'fa-bolt' };
+            container.innerHTML = list.map(n => `
+                <div class="dropdown-item ${n.read ? '' : 'unread'}" onclick="markNotificationRead('${n.id}')">
+                    <div class="dropdown-item-icon ${n.type}"><i class="fas ${iconMap[n.type] || 'fa-bell'}"></i></div>
+                    <div class="dropdown-item-content">
+                        <div class="dropdown-item-title">${n.title}</div>
+                        <div class="dropdown-item-text">${n.text}</div>
+                        <div class="dropdown-item-time">${n.time}</div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function markNotificationRead(id) {
+            const list = getStoredNotifications().map(n => n.id === id ? { ...n, read: true } : n);
+            saveNotifications(list);
+            renderNotifications();
+        }
+
+        function markAllNotificationsRead() {
+            const list = getStoredNotifications().map(n => ({ ...n, read: true }));
+            saveNotifications(list);
+            renderNotifications();
+            showToast('All notifications marked as read', 'info');
+        }
+
+        function toggleNotifications() {
+            const panel = document.getElementById('notificationPanel');
+            const wasActive = panel.classList.contains('active');
+            closeDropdownPanels();
+            if (!wasActive) {
+                renderNotifications();
+                panel.classList.add('active');
+            }
+        }
+
+        // ========== MESSAGES ==========
+        function getStoredMessages() {
+            try {
+                const stored = JSON.parse(localStorage.getItem('tuavec_messages') || 'null');
+                if (stored) return stored;
+            } catch (e) { /* fall through to seed data */ }
+
+            const seeded = [
+                { id: 'm1', title: 'Tu Avec Support', text: 'Your delivery is on the way! Track it anytime from My Orders.', time: '3 hours ago', read: false },
+                { id: 'm2', title: 'Tu Avec Support', text: 'Thanks for your recent order — let us know if you need anything.', time: '3 days ago', read: true }
+            ];
+            localStorage.setItem('tuavec_messages', JSON.stringify(seeded));
+            return seeded;
+        }
+
+        function saveMessages(list) {
+            localStorage.setItem('tuavec_messages', JSON.stringify(list));
+        }
+
+        function renderMessages() {
+            const list = getStoredMessages();
+            const container = document.getElementById('messageList');
+            const badge = document.getElementById('messageBadge');
+            const unreadCount = list.filter(m => !m.read).length;
+
+            if (badge) {
+                badge.textContent = unreadCount;
+                badge.style.display = unreadCount > 0 ? 'inline-flex' : 'none';
+            }
+
+            if (!container) return;
+
+            if (!list.length) {
+                container.innerHTML = `<div class="dropdown-empty"><i class="fas fa-envelope-open"></i>No messages yet</div>`;
+                return;
+            }
+
+            container.innerHTML = list.map(m => `
+                <div class="dropdown-item ${m.read ? '' : 'unread'}" onclick="markMessageRead('${m.id}')">
+                    <div class="dropdown-item-icon msg"><i class="fas fa-headset"></i></div>
+                    <div class="dropdown-item-content">
+                        <div class="dropdown-item-title">${m.title}</div>
+                        <div class="dropdown-item-text">${m.text}</div>
+                        <div class="dropdown-item-time">${m.time}</div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function markMessageRead(id) {
+            const list = getStoredMessages().map(m => m.id === id ? { ...m, read: true } : m);
+            saveMessages(list);
+            renderMessages();
         }
 
         function toggleMessages() {
-            const badge = document.getElementById('messageBadge');
-            const isHidden = badge.style.display === 'none';
-            badge.style.display = isHidden ? 'inline-flex' : 'none';
-            showToast('Messages toggled', 'info');
+            const panel = document.getElementById('messagePanel');
+            const wasActive = panel.classList.contains('active');
+            closeDropdownPanels();
+            if (!wasActive) {
+                renderMessages();
+                panel.classList.add('active');
+            }
         }
+
+        function closeDropdownPanels() {
+            document.getElementById('notificationPanel')?.classList.remove('active');
+            document.getElementById('messagePanel')?.classList.remove('active');
+        }
+
+        // Close dropdown panels when clicking outside them
+        document.addEventListener('click', (e) => {
+            if (!e.target.closest('.nav-btn-wrap')) closeDropdownPanels();
+        });
 
         function openSidebar(sidebarId) {
             const sidebar = document.getElementById(sidebarId);
@@ -4141,57 +4359,60 @@ const API_URL = LIVE_API;
                 return;
             }
 
-            showToast(`Coupon ${couponCode} applied successfully!`, 'success');
-        }
-
-        // ========== COUPON SYSTEM (FULLY WORKING) ==========
-        let appliedCoupon = null;
-
-        function applyCoupon() {
-            const input = document.getElementById('cartCouponInput');
-            const code  = (input?.value || '').trim().toUpperCase();
-            if (!code) { showToast('Please enter a coupon code.', 'warning'); return; }
-
-            const coupon = COUPONS[code];
-            if (!coupon) { showToast('Invalid coupon code. Try: WELCOME10, FLASH20, SAVE500', 'error'); return; }
-
-            const items    = window.cartState || [];
-            const subtotal = items.reduce((s, i) => s + (Number(i.price || 0) * (i.quantity || 1)), 0);
+            const items = window.cartState || [];
+            const subtotal = items.reduce((s, it) => s + (Number(it.price || 0) * (it.quantity || 1)), 0);
+            const itemCount = items.reduce((s, it) => s + (it.quantity || 1), 0);
 
             if (coupon.minOrder && subtotal < coupon.minOrder) {
-                showToast(`Minimum order ৳${coupon.minOrder} required for this coupon.`, 'warning'); return;
+                showToast(`This code needs a minimum order of ৳${coupon.minOrder}.`, 'warning');
+                return;
             }
-            if (coupon.minItems && items.length < coupon.minItems) {
-                showToast(`Add at least ${coupon.minItems} items to use this coupon.`, 'warning'); return;
+            if (coupon.minItems && itemCount < coupon.minItems) {
+                showToast(`This code needs at least ${coupon.minItems} items in your cart.`, 'warning');
+                return;
             }
 
-            appliedCoupon = { code, ...coupon };
-            showToast(`✅ "${code}" applied! ${coupon.description}`, 'success');
+            window.appliedCoupon = { code: couponCode, ...coupon };
             updateCartSummary();
+            showToast(`Coupon ${couponCode} applied — ${coupon.description}`, 'success');
         }
 
         function removeCoupon() {
-            appliedCoupon = null;
+            window.appliedCoupon = null;
             const input = document.getElementById('cartCouponInput');
             if (input) input.value = '';
-            showToast('Coupon removed.', 'info');
             updateCartSummary();
-        }
-
-        function calcDiscount(subtotal) {
-            if (!appliedCoupon) return 0;
-            if (appliedCoupon.type === 'percentage') return Math.round(subtotal * appliedCoupon.value / 100);
-            if (appliedCoupon.type === 'fixed')      return Math.min(appliedCoupon.value, subtotal);
-            return 0;
-        }
-
-        function calcShipping(region) {
-            if (appliedCoupon?.type === 'free_shipping') return 0;
-            return region ? 80 : 100;
+            showToast('Coupon removed', 'info');
         }
 
         function updateShipping() {
-            updateCartSummary();
+            const region = document.getElementById('customerRegion').value;
+            const shippingBase = region ? 100 : 0;
+            const summary = document.getElementById('checkoutSummary');
+            if (!summary) return;
+
+            const items = window.cartState || [];
+            const subtotal = items.reduce((s, it) => s + (Number(it.price || 0) * (it.quantity || 1)), 0);
+            const coupon = window.appliedCoupon;
+            let shipping = shippingBase;
+            let discount = 0;
+
+            if (coupon && items.length > 0) {
+                if (coupon.type === 'percentage') discount = Math.round(subtotal * (coupon.value / 100));
+                else if (coupon.type === 'fixed') discount = Math.min(coupon.value, subtotal);
+                else if (coupon.type === 'free_shipping') shipping = 0;
+            }
+
+            const total = Math.max(0, subtotal - discount + shipping);
+
+            summary.innerHTML = `
+                <div class="cart-summary">
+                    <div class="summary-row"><span>Subtotal (${items.length} item${items.length !== 1 ? 's' : ''})</span><span>৳${subtotal}</span></div>
+                    ${coupon ? `<div class="summary-row discount-applied"><span><i class="fas fa-tag"></i> ${coupon.code}</span><span>${discount > 0 ? `−৳${discount}` : 'Free shipping'}</span></div>` : ''}
+                    <div class="summary-row"><span>Shipping${region ? ` to ${region}` : ''}</span><span>${shipping === 0 ? 'FREE' : region ? `৳${shipping}` : 'Select region'}</span></div>
+                    <div class="summary-row total"><span>Total</span><span>৳${total}</span></div>
+                </div>
+            `;
         }
 
         function viewComparison() {
@@ -4200,26 +4421,35 @@ const API_URL = LIVE_API;
 
         // ========== CART / WISHLIST HELPERS ==========
         function saveCart() {
-            try { localStorage.setItem('tuavec_cart', JSON.stringify(window.cartState || [])); }
-            catch (e) { console.warn('Could not save cart', e); }
+            try {
+                localStorage.setItem('tuavec_cart', JSON.stringify(window.cartState || []));
+            } catch (e) { console.warn('Could not save cart', e); }
             renderCart();
         }
 
         function addToCart(productId, qty = 1) {
-            const product = posts.find(p => (p._id || p.id) == productId);
+            const id = productId || (this && this.dataset && this.dataset.id);
+            const product = posts.find(p => (p._id || p.id) == id);
             if (!product) return showToast('Product not found', 'error');
+
             const price = product.price || product.salePrice || 0;
+            const image = getProductImage(product);
+
             const existing = (window.cartState || []).find(i => i.productId == (product._id || product.id));
-            if (existing) { existing.quantity = Math.max(1, existing.quantity + qty); }
-            else {
+            if (existing) {
+                existing.quantity = Math.max(1, existing.quantity + qty);
+            } else {
                 (window.cartState = window.cartState || []).push({
                     productId: product._id || product.id,
-                    title: product.title || product.name,
-                    price, image: getProductImage(product), quantity: Math.max(1, qty)
+                    title: product.title,
+                    price: price,
+                    image: image,
+                    quantity: Math.max(1, qty)
                 });
             }
+
             saveCart();
-            showToast('Added to cart 🛒', 'success');
+            showToast('Added to cart', 'success');
             updateCartBadge();
         }
 
@@ -4228,7 +4458,7 @@ const API_URL = LIVE_API;
             if (!item) return;
             item.quantity = Math.max(0, item.quantity + delta);
             if (item.quantity === 0) removeFromCart(productId);
-            else saveCart();
+            saveCart();
         }
 
         function removeFromCart(productId) {
@@ -4239,52 +4469,86 @@ const API_URL = LIVE_API;
         }
 
         function updateCartSummary() {
-            const summary  = document.getElementById('cartSummary');
-            const footer   = document.getElementById('cartFooter');
-            const items    = window.cartState || [];
+            const summary = document.getElementById('cartSummary');
+            const footer = document.getElementById('cartFooter');
+            const items = window.cartState || [];
             const subtotal = items.reduce((s, it) => s + (Number(it.price || 0) * (it.quantity || 1)), 0);
-            const region   = document.getElementById('customerRegion')?.value || '';
-            const shipping = calcShipping(region);
-            const discount = calcDiscount(subtotal);
-            const total    = subtotal + shipping - discount;
+
+            let shipping = 100;
+            let discount = 0;
+            const coupon = window.appliedCoupon;
+
+            if (coupon && items.length > 0) {
+                if (coupon.type === 'percentage') {
+                    discount = Math.round(subtotal * (coupon.value / 100));
+                } else if (coupon.type === 'fixed') {
+                    discount = Math.min(coupon.value, subtotal);
+                } else if (coupon.type === 'free_shipping') {
+                    shipping = 0;
+                }
+            }
+
+            const total = Math.max(0, subtotal - discount + shipping);
 
             if (summary) {
                 summary.innerHTML = `
-                    <div class="summary-row"><span>Subtotal (${items.length} item${items.length !== 1 ? 's' : ''})</span><span>৳${subtotal.toLocaleString()}</span></div>
-                    <div class="summary-row"><span>Shipping</span><span>${shipping === 0 ? '<span style="color:var(--success)">Free</span>' : '৳' + shipping}</span></div>
-                    ${discount > 0 ? `<div class="coupon-applied-row"><span>Coupon (${appliedCoupon.code})<button class="remove-coupon-btn" onclick="removeCoupon()">✕ Remove</button></span><span style="color:var(--success)">-৳${discount.toLocaleString()}</span></div>` : ''}
-                    <div class="summary-row total"><span>Total</span><span>৳${total.toLocaleString()}</span></div>
+                    <div class="summary-row"><span>Subtotal</span><span>৳${subtotal}</span></div>
+                    ${coupon ? `
+                        <div class="summary-row discount-applied">
+                            <span><i class="fas fa-tag"></i> ${coupon.code} ${discount > 0 ? `(−৳${discount})` : '(free shipping)'}</span>
+                            <span style="cursor:pointer;color:var(--error);" onclick="removeCoupon()"><i class="fas fa-times-circle"></i></span>
+                        </div>
+                    ` : ''}
+                    <div class="summary-row"><span>Shipping</span><span>${shipping === 0 ? 'FREE' : `৳${shipping}`}</span></div>
+                    <div class="summary-row total"><span>Total</span><span>৳${total}</span></div>
                 `;
             }
             if (footer) {
-                footer.innerHTML = items.length > 0 ? `
-                    <button class="btn btn-primary" style="width:100%;font-size:15px;" onclick="document.getElementById('checkoutModal').classList.add('active');document.getElementById('overlay').classList.add('active');">
-                        <i class="fas fa-lock"></i> Secure Checkout
-                    </button>` : '';
+                footer.innerHTML = items.length > 0 ? `<button class="btn btn-primary" onclick="document.getElementById('checkoutModal').classList.add('active');document.getElementById('overlay').classList.add('active');updateShipping();">Checkout</button>` : '';
             }
         }
 
         function updateCartBadge() {
             const count = (window.cartState || []).reduce((s, i) => s + (i.quantity || 0), 0);
-            ['cartBadge', 'bottomCartBadge'].forEach(id => {
-                const el = document.getElementById(id);
-                if (el) { el.textContent = count; el.style.display = count > 0 ? 'inline-flex' : 'none'; }
-            });
-            const greeting = document.getElementById('userGreeting');
-            if (greeting && !currentUser) {
-                greeting.textContent = count > 0 ? `Cart: ${count} item${count !== 1 ? 's' : ''}` : 'Welcome, Guest!';
+            const cartBadge = document.getElementById('cartBadge');
+            if (cartBadge) {
+                cartBadge.textContent = count;
+                cartBadge.style.display = count > 0 ? 'inline-flex' : 'none';
+            }
+            const bottomCartBadge = document.getElementById('bottomCartBadge');
+            if (bottomCartBadge) {
+                bottomCartBadge.textContent = count;
+                bottomCartBadge.style.display = count > 0 ? 'inline-flex' : 'none';
+            }
+            const userGreeting = document.getElementById('userGreeting');
+            if (userGreeting) {
+                const token = localStorage.getItem('tuavec_jwt');
+                if (token) {
+                    const email = localStorage.getItem('tuavec_user_email') || 'Member';
+                    userGreeting.textContent = `Hello, ${email}`;
+                } else {
+                    userGreeting.textContent = count > 0 ? `Cart: ${count} item${count !== 1 ? 's' : ''}` : 'Welcome, Guest!';
+                }
             }
         }
 
         function renderCart() {
             const container = document.getElementById('cartItems');
-            if (!container) return;
             container.innerHTML = '';
             const items = window.cartState || [];
-            if (!items.length) {
-                container.innerHTML = `<div class="empty-state"><i class="fas fa-shopping-bag"></i><h3>Your cart is empty</h3><p>Add items to get started.</p></div>`;
-                updateCartSummary(); updateCartBadge(); return;
+            if (!items || items.length === 0) {
+                container.innerHTML = `
+                    <div class="empty-state">
+                        <i class="fas fa-shopping-bag"></i>
+                        <h3>Your cart is empty</h3>
+                        <p>Add items to get started.</p>
+                    </div>
+                `;
+                updateCartSummary();
+                updateCartBadge();
+                return;
             }
+
             items.forEach(item => {
                 const el = document.createElement('div');
                 el.className = 'cart-item';
@@ -4292,177 +4556,26 @@ const API_URL = LIVE_API;
                     <img src="${item.image}" class="cart-img" alt="${item.title}">
                     <div class="cart-info">
                         <div class="cart-title">${item.title}</div>
-                        <div class="cart-price">৳${(Number(item.price) * (item.quantity || 1)).toLocaleString()}</div>
-                        <div class="quantity-control" style="margin-top:8px;display:flex;align-items:center;gap:8px;">
-                            <button class="quantity-btn" onclick="changeQty('${item.productId}',-1)" style="width:28px;height:28px;border-radius:50%;background:var(--chocolate);border:none;color:white;font-size:14px;cursor:pointer;display:flex;align-items:center;justify-content:center;">−</button>
-                            <span style="font-weight:600;min-width:20px;text-align:center;">${item.quantity}</span>
-                            <button class="quantity-btn" onclick="changeQty('${item.productId}',1)" style="width:28px;height:28px;border-radius:50%;background:var(--chocolate);border:none;color:white;font-size:14px;cursor:pointer;display:flex;align-items:center;justify-content:center;">+</button>
-                        </div>
+                        <div class="cart-variant">Quantity: <span class="quantity-display">${item.quantity}</span></div>
+                        <div class="cart-price">৳${item.price}</div>
                     </div>
-                    <button class="remove-btn" onclick="removeFromCart('${item.productId}')" style="align-self:flex-start;background:var(--error);color:white;border:none;padding:6px 10px;border-radius:6px;cursor:pointer;font-size:12px;flex-shrink:0;"><i class="fas fa-trash"></i></button>
+                    <div style="display:flex;flex-direction:column;gap:8px;align-items:flex-end;">
+                        <button class="quantity-btn" onclick="changeQty('${item.productId}',1)">+</button>
+                        <button class="quantity-btn" onclick="changeQty('${item.productId}',-1)">-</button>
+                        <button class="remove-btn" onclick="removeFromCart('${item.productId}')">Remove</button>
+                    </div>
                 `;
                 container.appendChild(el);
             });
+
             updateCartSummary();
             updateCartBadge();
         }
 
-        // ========== NOTIFICATIONS ==========
-        function toggleNotifications() {
-            const panel = document.getElementById('notifPanel');
-            const msgP  = document.getElementById('msgPanel');
-            if (!panel) return;
-            msgP?.classList.remove('active');
-            const isOpen = panel.classList.toggle('active');
-            if (isOpen) {
-                const badge = document.getElementById('notificationBadge');
-                if (badge) { badge.style.display = 'none'; badge.textContent = '0'; }
-                // close if clicking outside
-                setTimeout(() => document.addEventListener('click', _closeNotifOnOut, { once: true }), 50);
-            }
-        }
-        function _closeNotifOnOut(e) {
-            if (!document.getElementById('notifPanel')?.contains(e.target)) closeNotifPanel();
-        }
-        function closeNotifPanel() { document.getElementById('notifPanel')?.classList.remove('active'); }
-        function markAllNotifsRead() {
-            document.querySelectorAll('#notifPanel .notif-item.unread').forEach(el => {
-                el.classList.remove('unread');
-                el.querySelector('.unread-dot')?.remove();
-            });
-            showToast('All notifications marked as read', 'success');
-        }
-
-        // ========== MESSAGES ==========
-        function toggleMessages() {
-            const panel  = document.getElementById('msgPanel');
-            const notifP = document.getElementById('notifPanel');
-            if (!panel) return;
-            notifP?.classList.remove('active');
-            const isOpen = panel.classList.toggle('active');
-            if (isOpen) {
-                const badge = document.getElementById('messageBadge');
-                if (badge) { badge.style.display = 'none'; badge.textContent = '0'; }
-                setTimeout(() => document.addEventListener('click', _closeMsgOnOut, { once: true }), 50);
-            }
-        }
-        function _closeMsgOnOut(e) {
-            if (!document.getElementById('msgPanel')?.contains(e.target)) closeMsgPanel();
-        }
-        function closeMsgPanel() { document.getElementById('msgPanel')?.classList.remove('active'); }
-
-        // ========== CHAT BOT (SMART REPLIES) ==========
-        function toggleChat() {
-            const chatWindow = document.getElementById('chatWindow');
-            const isActive   = chatWindow.classList.toggle('active');
-            document.getElementById('overlay').classList.toggle('active', isActive);
-        }
-
-        function handleChatEnter(event) {
-            if (event.key === 'Enter') { event.preventDefault(); sendChatMessage(); }
-        }
-
-        function sendChatMessage() {
-            const input = document.getElementById('chatInput');
-            const value = input.value.trim();
-            if (!value) return;
-
-            const messages = document.getElementById('chatMessages');
-            const userMsg  = document.createElement('div');
-            userMsg.className   = 'chat-message user';
-            userMsg.textContent = value;
-            messages.appendChild(userMsg);
-            input.value = '';
-            messages.scrollTop = messages.scrollHeight;
-
-            // Typing indicator
-            const typing = document.createElement('div');
-            typing.className   = 'chat-message bot';
-            typing.textContent = '● ● ●';
-            typing.style.opacity = '0.5';
-            messages.appendChild(typing);
-            messages.scrollTop = messages.scrollHeight;
-
-            setTimeout(() => {
-                typing.remove();
-                const botMsg  = document.createElement('div');
-                botMsg.className   = 'chat-message bot';
-                botMsg.textContent = getBotReply(value);
-                messages.appendChild(botMsg);
-                messages.scrollTop = messages.scrollHeight;
-            }, 800);
-        }
-
-        function getBotReply(msg) {
-            const m = msg.toLowerCase();
-            if (m.includes('track') || m.includes('order status') || m.includes('where') || m.includes('status'))
-                return 'To track your order, go to My Orders in the top bar or call us at +880 1310-880044. You will also receive SMS updates from our courier.';
-            if (m.includes('return') || m.includes('refund') || m.includes('exchange'))
-                return 'We accept returns within 7 days of delivery. Contact us at support@tuavec.com or call +880 1310-880044. Refunds are processed within 3–5 business days.';
-            if (m.includes('deliver') || m.includes('shipping') || m.includes('how long') || m.includes('when'))
-                return 'Dhaka delivery: 1–3 business days. Outside Dhaka: 3–7 days. We use Pathao, Redx & Steadfast. You will get an SMS with tracking once shipped.';
-            if (m.includes('payment') || m.includes('bkash') || m.includes('nagad') || m.includes('pay'))
-                return 'We accept bKash, Nagad, Rocket, and Cash on Delivery (COD). All payments are fully secure.';
-            if (m.includes('coupon') || m.includes('discount') || m.includes('promo') || m.includes('code'))
-                return 'Current active codes: WELCOME10 (10% off), FLASH20 (20% off orders ৳2000+), SAVE500 (৳500 off orders ৳5000+), FREESHIP (free shipping orders ৳3000+), BULK15 (15% off 3+ items).';
-            if (m.includes('authentic') || m.includes('real') || m.includes('original') || m.includes('fake'))
-                return 'All products are directly sourced from verified Thai suppliers. We perform quality checks before dispatch. If you receive an inauthentic product, we\'ll replace it immediately at no cost.';
-            if (m.includes('cancel') || m.includes('cancell'))
-                return 'To cancel an order, contact us within 2 hours of placing it at +880 1310-880044. After dispatch, cancellation is not possible but you can return within 7 days.';
-            if (m.includes('hello') || m.includes('hi') || m.includes('hey') || m.includes('salam'))
-                return 'Hello! 👋 Welcome to Tu Avec. I\'m here to help. Ask me about delivery times, payments, returns, or our latest deals!';
-            if (m.includes('price') || m.includes('expensive') || m.includes('cheap'))
-                return 'Our prices are competitive for authentic Thai imports. Use coupon WELCOME10 for 10% off your first order. We price-match on request!';
-            return 'Thanks for reaching out! For urgent help, call +880 1310-880044 or email support@tuavec.com. Our team replies within 2 hours on business days.';
-        }
-
-        // ========== AUTH HELPERS ==========
-        function togglePw(inputId, btn) {
-            const input = document.getElementById(inputId);
-            if (!input) return;
-            const isHidden = input.type === 'password';
-            input.type = isHidden ? 'text' : 'password';
-            btn.innerHTML = isHidden ? '<i class="fas fa-eye-slash"></i>' : '<i class="fas fa-eye"></i>';
-        }
-
-        // ========== BOTTOM NAV ACCOUNT ==========
-        function handleBnAccount() {
-            const token = localStorage.getItem('tuavec_jwt');
-            if (token && currentUser) {
-                openOrdersModal();
-            } else {
-                openLoginModal();
-            }
-        }
-
-        function updateBnAccount() {
-            const btn   = document.getElementById('bnAccountBtn');
-            const icon  = document.getElementById('bnAccountIcon');
-            const label = document.getElementById('bnAccountLabel');
-            if (!btn) return;
-            if (currentUser) {
-                if (icon)  icon.className  = 'fas fa-user-check';
-                if (label) label.textContent = currentUser.name?.split(' ')[0] || 'Account';
-                btn.style.color = 'var(--rose-gold)';
-            } else {
-                if (icon)  icon.className  = 'fas fa-user';
-                if (label) label.textContent = 'Account';
-                btn.style.color = '';
-            }
-        }
-
-        // ========== CLOSE ALL (COMPLETE) ==========
-        function closeAll() {
-            document.getElementById('overlay').classList.remove('active');
-            document.querySelectorAll('.sidebar.active').forEach(s => s.classList.remove('active'));
-            ['checkoutModal','ordersModal','productModal','loginModal'].forEach(id =>
-                document.getElementById(id)?.classList.remove('active')
-            );
-            document.getElementById('chatWindow')?.classList.remove('active');
-            document.getElementById('notifPanel')?.classList.remove('active');
-            document.getElementById('msgPanel')?.classList.remove('active');
-            closeShareMenus();
-        }
+        // Initialize cart UI on load
+        document.addEventListener('DOMContentLoaded', () => {
+            try { renderCart(); updateCartBadge(); } catch (e) { console.warn(e); }
+        });
 
         // ========== PRODUCT DETAIL MODAL ==========
 
@@ -4521,7 +4634,8 @@ const API_URL = LIVE_API;
                 items: orderItems,
                 paymentMethod,
                 notes,
-                giftWrap
+                giftWrap,
+                couponCode: window.appliedCoupon ? window.appliedCoupon.code : null
             };
 
             try {
@@ -4550,6 +4664,7 @@ const API_URL = LIVE_API;
                 if (data && data.success) {
                     showToast('Order created successfully!', 'success');
                     window.cartState = [];
+                    window.appliedCoupon = null;
                     saveCart();
                     closeCheckout();
                 } else {
@@ -4589,13 +4704,55 @@ const API_URL = LIVE_API;
             input.value = '';
             messages.scrollTop = messages.scrollHeight;
 
+            // Log this as a "message" so the bell/message badge stays consistent
+            const msgList = getStoredMessages();
+            msgList.unshift({ id: 'm' + Date.now(), title: 'You', text: value, time: 'Just now', read: true });
+            saveMessages(msgList.slice(0, 20));
+
             setTimeout(() => {
                 const botMessage = document.createElement('div');
                 botMessage.className = 'chat-message bot';
-                botMessage.textContent = 'Thanks for your message! Our support team will reply soon.';
+                botMessage.textContent = getChatBotReply(value);
                 messages.appendChild(botMessage);
                 messages.scrollTop = messages.scrollHeight;
             }, 500);
+        }
+
+        // Simple intent-matching bot for common Bangladeshi e-commerce questions.
+        // Replace with a real support backend/ticketing system when ready —
+        // this keeps the chat widget useful in the meantime.
+        function getChatBotReply(message) {
+            const msg = message.toLowerCase();
+
+            if (msg.includes('track') || msg.includes('order status') || msg.includes('where is my')) {
+                return 'You can track your order anytime from "My Orders" at the top of the page. If it hasn\'t updated in 24 hours, message us your order number and we\'ll check with the courier directly.';
+            }
+            if (msg.includes('return') || msg.includes('refund') || msg.includes('exchange')) {
+                return 'We accept returns within 7 days of delivery for unused items in original packaging. For refunds, it takes 3–5 business days once we receive the item back. Want me to start a return request?';
+            }
+            if (msg.includes('deliver') || msg.includes('shipping') || msg.includes('when will')) {
+                return 'Delivery usually takes 1–3 days inside Dhaka and 3–7 days for other districts. You\'ll get an SMS with a tracking link as soon as your order ships.';
+            }
+            if (msg.includes('payment') || msg.includes('bkash') || msg.includes('nagad') || msg.includes('rocket') || msg.includes('cod')) {
+                return 'We accept bKash, Nagad, Rocket, and Cash on Delivery (COD). You can choose any of these at checkout — no extra fees for COD.';
+            }
+            if (msg.includes('coupon') || msg.includes('discount') || msg.includes('code')) {
+                return 'Active codes right now: WELCOME10 (10% off), FREESHIP (free shipping over ৳3000), and FLASH20 during our flash sale. Enter them in the cart before checkout.';
+            }
+            if (msg.includes('damage') || msg.includes('broken') || msg.includes('wrong item')) {
+                return 'So sorry to hear that! Please reply with your order number and a photo if possible — we\'ll arrange a free replacement or refund right away, no return shipping cost to you.';
+            }
+            if (msg.includes('cancel')) {
+                return 'You can cancel an order before it ships from "My Orders". If it has already shipped, let us know your order number and we\'ll help arrange a return instead.';
+            }
+            if (msg.includes('hi') || msg.includes('hello') || msg.includes('hey')) {
+                return 'Hi there! 👋 I can help with order tracking, returns, delivery times, payment options, or active discount codes — what do you need?';
+            }
+            if (msg.includes('human') || msg.includes('agent') || msg.includes('call') || msg.includes('phone')) {
+                return 'Of course — you can reach our team directly at +880 1310-880044, or leave your number here and we\'ll call you back within the hour.';
+            }
+
+            return 'Thanks for your message! I can help with order tracking, returns, delivery times, or payment questions — or a team member will follow up here shortly.';
         }
 
         function viewPost(postSlug) {
@@ -4810,6 +4967,144 @@ const API_URL = LIVE_API;
         }
 
 
+        // ========== VENDOR MARKETPLACE ==========
+        // These tiers define how Tu Avec's own catalog share is DISPLAYED as
+        // vendors join — it's a transparency indicator, not something that
+        // auto-hides your products. As real vendors add real listings, the
+        // vendor share grows naturally; you can also choose to slow your own
+        // new listings once a milestone is hit if you want to formalize the
+        // shift toward being a platform operator rather than the main seller.
+        const MARKETPLACE_TIERS = [
+            { maxMerchants: 5,   ownerShare: 80 },  // early stage: you're still the main seller
+            { maxMerchants: 15,  ownerShare: 55 },  // growing marketplace
+            { maxMerchants: 30,  ownerShare: 30 },  // vendor-heavy marketplace
+            { maxMerchants: Infinity, ownerShare: 15 } // mature platform
+        ];
+
+        function getOwnerShareForMerchantCount(count) {
+            const tier = MARKETPLACE_TIERS.find(t => count <= t.maxMerchants);
+            return tier ? tier.ownerShare : 15;
+        }
+
+        function getStoredVendors() {
+            try {
+                const stored = JSON.parse(localStorage.getItem('tuavec_vendors') || 'null');
+                if (stored) return stored;
+            } catch (e) { /* fall through to empty */ }
+            return [];
+        }
+
+        function saveVendorsLocal(list) {
+            localStorage.setItem('tuavec_vendors', JSON.stringify(list));
+        }
+
+        async function loadMarketplaceData() {
+            // Try the real backend first; fall back to local demo data so the
+            // section still works before /api/vendors and /api/marketplace exist.
+            let vendors = null;
+            try {
+                const resp = await fetch(`${API_URL}/vendors`);
+                if (resp.ok) {
+                    const data = await resp.json();
+                    vendors = data.vendors || null;
+                }
+            } catch (e) { /* backend not ready yet — use local fallback below */ }
+
+            if (!vendors) vendors = getStoredVendors();
+
+            renderVendors(vendors);
+            renderMarketplaceStats(vendors.filter(v => v.status === 'approved').length);
+        }
+
+        function renderVendors(vendors) {
+            const container = document.getElementById('vendorList');
+            if (!container) return;
+
+            if (!vendors.length) {
+                container.innerHTML = `<p style="color:var(--text-muted);font-size:13px;text-align:center;padding:20px;">No vendors yet — be the first to apply!</p>`;
+                return;
+            }
+
+            container.innerHTML = vendors.map(v => `
+                <div class="vendor-row">
+                    <div>
+                        <div class="vendor-row-name">${v.name}</div>
+                        <div class="vendor-row-meta">${v.country} · ${v.category || 'General'} · ${v.commissionRate}% commission</div>
+                    </div>
+                    <span class="vendor-status ${v.status}">${v.status}</span>
+                </div>
+            `).join('');
+        }
+
+        function renderMarketplaceStats(merchantCount) {
+            const ownerShare = getOwnerShareForMerchantCount(merchantCount);
+            const vendorShare = 100 - ownerShare;
+
+            const merchantCountStat = document.getElementById('merchantCountStat');
+            const ownerShareStat = document.getElementById('ownerShareStat');
+            const vendorShareStat = document.getElementById('vendorShareStat');
+            const ownerBar = document.getElementById('shareOwnerBar');
+            const vendorBar = document.getElementById('shareVendorBar');
+
+            if (merchantCountStat) merchantCountStat.textContent = merchantCount;
+            if (ownerShareStat) ownerShareStat.textContent = `${ownerShare}%`;
+            if (vendorShareStat) vendorShareStat.textContent = `${vendorShare}%`;
+            if (ownerBar) ownerBar.style.width = `${ownerShare}%`;
+            if (vendorBar) vendorBar.style.width = `${vendorShare}%`;
+        }
+
+        async function submitVendorApplication(event) {
+            event.preventDefault();
+
+            const payload = {
+                name: document.getElementById('vendorName').value.trim(),
+                country: document.getElementById('vendorCountry').value.trim(),
+                email: document.getElementById('vendorEmail').value.trim(),
+                category: document.getElementById('vendorCategory').value.trim(),
+                commissionRate: Number(document.getElementById('commissionRate').value),
+                status: 'pending'
+            };
+
+            if (!payload.name || !payload.country || !payload.email || !payload.category) {
+                showToast('Please fill in all vendor application fields.', 'warning');
+                return;
+            }
+
+            try {
+                showToast('Submitting application...', 'info');
+                const resp = await fetch(`${API_URL}/vendors`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+
+                if (resp.ok) {
+                    showToast(`Thanks ${payload.name} — application received!`, 'success');
+                    document.getElementById('vendorApplicationForm').reset();
+                    loadMarketplaceData();
+                    return;
+                }
+                throw new Error(`Server responded ${resp.status}`);
+            } catch (e) {
+                // Backend not ready yet — save locally so nothing is lost,
+                // and be upfront that this is a temporary local-only save.
+                const list = getStoredVendors();
+                payload.id = 'v' + Date.now();
+                list.push(payload);
+                saveVendorsLocal(list);
+                document.getElementById('vendorApplicationForm').reset();
+                renderVendors(list);
+                renderMarketplaceStats(list.filter(v => v.status === 'approved').length);
+                showToast(`Application saved locally — connect /api/vendors on the backend to make this permanent.`, 'warning');
+            }
+        }
+
+        function scrollToVendorForm() {
+            document.getElementById('vendorFormPanel')?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            document.getElementById('vendorName')?.focus();
+        }
+
+
         // ========== INITIALIZATION ==========
         document.addEventListener('DOMContentLoaded', () => {
             loadData();
@@ -4818,6 +5113,9 @@ const API_URL = LIVE_API;
             initFlashSale();
             startHeroAuto();
             startFlashCountdown();
+            renderNotifications();
+            renderMessages();
+            loadMarketplaceData();
         });
 
         document.addEventListener('keydown', (e) => {

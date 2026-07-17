@@ -1,186 +1,408 @@
-// =====================================================================
-//  Tu Avec — backend/server.js
-//  Place this in: tuavec-complete-final/backend/server.js
-//  Run from:      tuavec-complete-final/backend/   (npm start)
-// =====================================================================
-
-const express   = require('express');
-const mongoose  = require('mongoose');
-const cors      = require('cors');          // ← declared ONCE (was the crash bug)
-const path      = require('path');
-const fs        = require('fs');
+﻿const express = require('express');
+const cors = require('cors');
+const path = require('path');
+const mongoose = require('mongoose');
 require('dotenv').config();
+
+// Import models
+const Vendor = require('./models/Vendor');
+const Product = require('./models/Product');
+const Order = require('./models/Order');
+const PlatformRevenue = require('./models/PlatformRevenue');
+
+// Import routes
+const vendorRoutes = require('./routes/vendors');
 
 const app = express();
 
-// =====================================================================
-//  CORS — accepts file://, localhost variants, LAN, Netlify, Render,
-//  Vercel, and your custom domain
-// =====================================================================
-const allowedOrigins = [
-    // file:// (Live Server / opening index.html directly from disk)
-    'null',
-    // localhost
-    'http://localhost:3000',
-    'http://localhost:5000',
-    'http://localhost:5500',   // VS Code Live Server
-    'http://127.0.0.1:3000',
-    'http://127.0.0.1:5000',
-    'http://127.0.0.1:5500',
-    // LAN (any 192.168.x.x device on port 3000 or 5500)
-    /^http:\/\/192\.168\.\d{1,3}\.\d{1,3}:(3000|5000|5500)$/,
-    // Cloud deploy
-    /\.vercel\.app$/,
-    /\.netlify\.app$/,
-    /\.onrender\.com$/,
-    // Add your custom domain here, e.g.:
-    // 'https://tuavec.com',
-];
+// Middleware
+app.use(cors({ origin: '*' }));
+app.use(express.json({ limit: '2mb' }));
 
-app.use(cors({
-    origin(origin, callback) {
-        // Allow server-to-server / Postman (no origin header)
-        if (!origin) return callback(null, true);
-        const allowed = allowedOrigins.some(o =>
-            o instanceof RegExp ? o.test(origin) : o === origin
-        );
-        if (allowed) return callback(null, true);
-        callback(new Error(`CORS: origin "${origin}" not allowed`));
-    },
-    credentials:    true,
-    methods:        ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
-    allowedHeaders: ['Content-Type', 'Authorization'],
-}));
-
-app.use(express.json({ limit: '10mb' }));
-app.use(express.urlencoded({ extended: true, limit: '10mb' }));
-
-// =====================================================================
-//  STATIC FILES
-// =====================================================================
-
-// Serve uploaded product images
-const uploadsDir = path.join(__dirname, 'uploads');
-if (fs.existsSync(uploadsDir)) {
-    app.use('/uploads', express.static(uploadsDir));
-    console.log('📁 Serving uploads from', uploadsDir);
-}
-
-// Serve the frontend (sibling folder relative to backend/)
 const frontendDir = path.join(__dirname, '..', 'frontend');
-if (fs.existsSync(frontendDir)) {
-    app.use(express.static(frontendDir));
-    console.log('🌐 Serving frontend from', frontendDir);
-}
+app.use(express.static(frontendDir));
 
-// =====================================================================
-//  DATABASE
-// =====================================================================
-const MONGO_URI = process.env.MONGODB_URI || 'mongodb://localhost:27017/tuavec';
-
-mongoose.connect(MONGO_URI)
-    .then(() => {
-        console.log('✅ MongoDB connected —', mongoose.connection.name);
-    })
-    .catch(err => {
-        // Log the error but keep the process alive — routes will return
-        // 503 until the DB comes back.
-        console.error('❌ MongoDB error:', err.message);
+// MongoDB Connection
+const connectDB = async () => {
+  try {
+    const conn = await mongoose.connect(process.env.MONGODB_URI, {
+      useNewUrlParser: true,
+      useUnifiedTopology: true
     });
+    console.log(`MongoDB connected: ${conn.connection.host}`);
+    
+    // Initialize platform revenue if it doesn't exist
+    const platformRevenue = await PlatformRevenue.findOne();
+    if (!platformRevenue) {
+      await PlatformRevenue.create({
+        totalCommissionsEarned: 0,
+        totalOwnerProductSales: 0,
+        totalVendorSales: 0,
+        transactionHistory: []
+      });
+      console.log('Platform revenue initialized');
+    }
+  } catch (error) {
+    console.error('Error connecting to MongoDB:', error);
+    process.exit(1);
+  }
+};
 
-// =====================================================================
-//  HEALTH CHECK
-// =====================================================================
+// Initialize database on startup
+connectDB();
+
+// Routes
+app.use('/api/vendors', vendorRoutes);
+
+// Health check
 app.get('/health', (_req, res) => {
+  res.json({
+    success: true,
+    message: 'Tu Avec marketplace is online',
+    timestamp: new Date().toISOString()
+  });
+});
+
+// Helper: Get marketplace state
+const getMarketplaceState = async () => {
+  try {
+    const vendorCount = await Vendor.countDocuments({ status: 'approved' });
+    const merchantTarget = Number(process.env.MERCHANT_TARGET || 10);
+    const vendorShare = Math.min(70, 40 + vendorCount * 3);
+    const ownerShare = 100 - vendorShare;
+
+    return {
+      merchantTarget,
+      currentMerchants: vendorCount,
+      ownerShare,
+      vendorShare,
+      stage: vendorCount >= merchantTarget ? 'Marketplace-led growth' : 'Owner-led launch',
+      message: vendorCount >= merchantTarget
+        ? 'Your marketplace is now strong enough to shift more of the inventory to merchant partners.'
+        : 'You still lead the store while more merchants join.'
+    };
+  } catch (error) {
+    console.error('Error calculating marketplace state:', error);
+    return {
+      merchantTarget: Number(process.env.MERCHANT_TARGET || 10),
+      currentMerchants: 0,
+      ownerShare: 100,
+      vendorShare: 0,
+      stage: 'Owner-led launch',
+      message: 'Unable to calculate marketplace state'
+    };
+  }
+};
+
+// GET /api/products - Get all products
+app.get('/api/products', async (_req, res) => {
+  try {
+    const products = await Product.find({}).populate('vendorId', 'name category');
+    const marketplace = await getMarketplaceState();
+
     res.json({
-        success:   true,
-        message:   'Tu Avec API is running',
-        database:  mongoose.connection.readyState === 1 ? 'connected' : 'disconnected',
-        timestamp: new Date().toISOString(),
+      success: true,
+      products,
+      marketplace
     });
+  } catch (error) {
+    console.error('Error fetching products:', error);
+    res.status(500).json({
+      success: false,
+      message: 'Error fetching products',
+      error: error.message
+    });
+  }
 });
 
-// =====================================================================
-//  API ROUTES
-// =====================================================================
-const productRoutes  = require('./routes/products');
-const orderRoutes    = require('./routes/orders');
-const logisticsRoutes = require('./routes/logistics');
-const authRoutes     = require('./routes/auth');
-const paymentRoutes  = require('./routes/payment');
+// POST /api/products - Create a new product
+app.post('/api/products', async (req, res) => {
+  try {
+    const {
+      name,
+      category,
+      price,
+      originalPrice,
+      image,
+      description,
+      seller,
+      featured,
+      vendorId,
+      vendorCommissionRate
+    } = req.body;
 
-app.use('/api/products',       productRoutes);
-app.use('/api/orders',         orderRoutes);
-app.use('/api/v1/orders',      orderRoutes);     // legacy alias
-app.use('/api/v1/logistics',   logisticsRoutes);
-app.use('/api/auth',           authRoutes);
-app.use('/api/payment',        paymentRoutes);
-
-// Optional routes — only mount if the file exists (avoids crash on missing file)
-const optionalRoutes = [
-    { path: '/api/cart',   file: './routes/cart'   },
-    { path: '/api/bkash',  file: './routes/bkash'  },
-    { path: '/api/reviews',file: './routes/reviews' },
-    { path: '/api/posts',  file: './routes/posts'   },
-];
-
-optionalRoutes.forEach(({ path: routePath, file }) => {
-    try {
-        app.use(routePath, require(file));
-        console.log(`   ✓ ${routePath}`);
-    } catch {
-        console.warn(`   ⚠  ${routePath} — route file not found, skipping`);
-    }
-});
-
-// =====================================================================
-//  ERROR HANDLER
-// =====================================================================
-// eslint-disable-next-line no-unused-vars
-app.use((err, _req, res, _next) => {
-    console.error('❌ Server error:', err.message);
-    res.status(err.status || 500).json({
+    // Validate required fields
+    if (!name || !category || !price) {
+      return res.status(400).json({
         success: false,
-        error:   err.message || 'Internal Server Error',
-        ...(process.env.NODE_ENV === 'development' && { stack: err.stack }),
-    });
-});
-
-// =====================================================================
-//  SPA FALLBACK / 404
-// =====================================================================
-app.use('*', (req, res) => {
-    if (req.method === 'GET') {
-        const indexFile = path.join(frontendDir, 'index.html');
-        if (fs.existsSync(indexFile)) return res.sendFile(indexFile);
+        message: 'Missing required fields: name, category, price'
+      });
     }
-    res.status(404).json({ success: false, error: 'Route not found', path: req.originalUrl });
+
+    // If vendorId is provided, verify it exists
+    if (vendorId) {
+      const vendor = await Vendor.findById(vendorId);
+      if (!vendor) {
+        return res.status(404).json({
+          success: false,
+          message: 'Vendor not found'
+        });
+      }
+    }
+
+    const product = new Product({
+      name,
+      category,
+      price,
+      originalPrice: originalPrice || price,
+      image: image || null,
+      description: description || '',
+      seller: seller || (vendorId ? 'Vendor' : 'Tu Avec'),
+      featured: featured || false,
+      vendorId: vendorId || null,
+      vendorCommissionRate: vendorCommissionRate || 0
+    });
+
+    await product.save();
+    const marketplace = await getMarketplaceState();
+
+    res.status(201).json({
+      success: true,
+      product,
+      marketplace
+    });
+  } catch (error) {
+    console.error('Error creating product:', error);
+    res.status(500).json({
+      success: false,
+      message: 'Error creating product',
+      error: error.message
+    });
+  }
 });
 
-// =====================================================================
-//  START
-// =====================================================================
+// GET /api/marketplace - Get marketplace stats
+app.get('/api/marketplace', async (_req, res) => {
+  try {
+    const marketplace = await getMarketplaceState();
+    const approvedVendors = await Vendor.countDocuments({ status: 'approved' });
+    const vendorProducts = await Product.countDocuments({ vendorId: { $ne: null } });
+    const ownerProducts = await Product.countDocuments({ vendorId: null });
+    const platformRevenue = await PlatformRevenue.findOne();
+
+    res.json({
+      success: true,
+      marketplace: {
+        ...marketplace,
+        totalVendorProducts: vendorProducts,
+        totalOwnerProducts: ownerProducts,
+        merchantCount: approvedVendors,
+        platformRevenue: platformRevenue ? {
+          totalCommissionsEarned: platformRevenue.totalCommissionsEarned,
+          totalOwnerProductSales: platformRevenue.totalOwnerProductSales,
+          totalVendorSales: platformRevenue.totalVendorSales
+        } : null
+      }
+    });
+  } catch (error) {
+    console.error('Error fetching marketplace stats:', error);
+    res.status(500).json({
+      success: false,
+      message: 'Error fetching marketplace stats',
+      error: error.message
+    });
+  }
+});
+
+// POST /api/orders - Create a new order
+app.post('/api/orders', async (req, res) => {
+  try {
+    const { items, customer, total } = req.body;
+
+    if (!items || !Array.isArray(items) || items.length === 0) {
+      return res.status(400).json({
+        success: false,
+        message: 'Order must contain at least one item'
+      });
+    }
+
+    if (!customer) {
+      return res.status(400).json({
+        success: false,
+        message: 'Customer name is required'
+      });
+    }
+
+    // Validate items and enrich with vendor info
+    const enrichedItems = [];
+    for (const item of items) {
+      const product = await Product.findById(item.productId);
+      if (!product) {
+        return res.status(404).json({
+          success: false,
+          message: `Product ${item.productId} not found`
+        });
+      }
+
+      enrichedItems.push({
+        productId: item.productId,
+        quantity: item.quantity || 1,
+        price: item.price || product.price,
+        vendorId: product.vendorId || null,
+        vendorCommissionRate: product.vendorCommissionRate || 0
+      });
+    }
+
+    const order = new Order({
+      items: enrichedItems,
+      customer,
+      total: total || 0,
+      status: 'pending'
+    });
+
+    await order.save();
+    const marketplace = await getMarketplaceState();
+
+    res.status(201).json({
+      success: true,
+      order,
+      marketplace
+    });
+  } catch (error) {
+    console.error('Error creating order:', error);
+    res.status(500).json({
+      success: false,
+      message: 'Error creating order',
+      error: error.message
+    });
+  }
+});
+
+// GET /api/orders/:id - Get order details
+app.get('/api/orders/:id', async (req, res) => {
+  try {
+    const order = await Order.findById(req.params.id).populate('items.productId').populate('items.vendorId');
+    if (!order) {
+      return res.status(404).json({
+        success: false,
+        message: 'Order not found'
+      });
+    }
+
+    res.json({
+      success: true,
+      order
+    });
+  } catch (error) {
+    console.error('Error fetching order:', error);
+    res.status(500).json({
+      success: false,
+      message: 'Error fetching order',
+      error: error.message
+    });
+  }
+});
+
+// POST /api/orders/:id/complete - Complete an order and calculate commissions
+app.post('/api/orders/:id/complete', async (req, res) => {
+  try {
+    const order = await Order.findById(req.params.id);
+    if (!order) {
+      return res.status(404).json({
+        success: false,
+        message: 'Order not found'
+      });
+    }
+
+    if (order.status === 'completed') {
+      return res.status(400).json({
+        success: false,
+        message: 'Order already completed'
+      });
+    }
+
+    // Get platform revenue
+    let platformRevenue = await PlatformRevenue.findOne();
+    if (!platformRevenue) {
+      platformRevenue = await PlatformRevenue.create({
+        totalCommissionsEarned: 0,
+        totalOwnerProductSales: 0,
+        totalVendorSales: 0,
+        transactionHistory: []
+      });
+    }
+
+    // Process commission for each item
+    for (const item of order.items) {
+      const itemTotal = item.price * item.quantity;
+
+      if (item.vendorId) {
+        // Vendor product - calculate commission
+        const commission = itemTotal * (item.vendorCommissionRate / 100);
+        const vendorRevenue = itemTotal - commission;
+
+        // Update vendor stats
+        await Vendor.findByIdAndUpdate(item.vendorId, {
+          $inc: {
+            totalSales: vendorRevenue,
+            totalCommissionEarned: commission
+          }
+        });
+
+        // Record in platform revenue
+        platformRevenue.totalCommissionsEarned += commission;
+        platformRevenue.totalVendorSales += vendorRevenue;
+        platformRevenue.transactionHistory.push({
+          orderId: order._id,
+          type: 'commission',
+          amount: commission,
+          vendorId: item.vendorId
+        });
+      } else {
+        // Owner product - all revenue goes to Tu Avec
+        platformRevenue.totalOwnerProductSales += itemTotal;
+        platformRevenue.transactionHistory.push({
+          orderId: order._id,
+          type: 'owner_sale',
+          amount: itemTotal
+        });
+      }
+    }
+
+    // Update order status
+    order.status = 'completed';
+    order.completedAt = new Date();
+    await order.save();
+
+    // Save platform revenue
+    await platformRevenue.save();
+
+    res.json({
+      success: true,
+      message: 'Order completed successfully and commissions calculated',
+      order,
+      commissionsSummary: {
+        totalCommissionsEarned: platformRevenue.totalCommissionsEarned,
+        totalOwnerProductSales: platformRevenue.totalOwnerProductSales,
+        totalVendorSales: platformRevenue.totalVendorSales
+      }
+    });
+  } catch (error) {
+    console.error('Error completing order:', error);
+    res.status(500).json({
+      success: false,
+      message: 'Error completing order',
+      error: error.message
+    });
+  }
+});
+
+// Fallback route for SPA
+app.get('*', (_req, res) => {
+  res.sendFile(path.join(frontendDir, 'index.html'));
+});
+
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, '0.0.0.0', () => {
-    console.log(`\n🚀  Tu Avec running on port ${PORT}`);
-    console.log('\n📡  Endpoints:');
-    console.log('   GET   /health');
-    console.log('   GET   /api/products');
-    console.log('   POST  /api/orders');
-    console.log('   POST  /api/auth/login');
-    console.log('   POST  /api/auth/signup');
-    console.log('\n✅  Ready\n');
+  console.log(`Tu Avec marketplace running on port ${PORT}`);
 });
-
-// =====================================================================
-//  GRACEFUL SHUTDOWN
-// =====================================================================
-['SIGTERM', 'SIGINT'].forEach(signal =>
-    process.on(signal, () => {
-        console.log(`\n👋  ${signal} — shutting down…`);
-        mongoose.connection.close(() => {
-            console.log('✅  MongoDB closed');
-            process.exit(0);
-        });
-    })
-);
